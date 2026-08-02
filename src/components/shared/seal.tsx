@@ -14,8 +14,6 @@ export function Seal({
       style={{ width: size, height: size }}
       aria-hidden
     >
-      {/* Rotating dashed gold ring */}
-      <span className="absolute -inset-2.5 animate-spin-slow rounded-full border-2 border-dashed border-amber-400/80" />
       {/* Gold gradient band */}
       <span className="absolute -inset-1 rounded-full bg-gradient-to-br from-yellow-200 via-amber-400 to-yellow-600 p-[3px] shadow-lg shadow-amber-500/30">
         <span className="block h-full w-full rounded-full bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950" />

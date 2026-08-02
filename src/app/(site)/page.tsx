@@ -24,6 +24,7 @@ import {
 import { HeroCarousel } from "@/components/shared/hero-carousel";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { NewsCard, NewsCardSkeleton } from "@/components/shared/news-card";
+import { CardCarousel } from "@/components/shared/card-carousel";
 import { Reveal } from "@/components/shared/reveal";
 import { AnimatedCounter } from "@/components/shared/animated-counter";
 import { Card, CardContent } from "@/components/ui/card";
@@ -345,26 +346,28 @@ export default async function HomePage() {
               description="Explore programs across our colleges — from education and engineering to business and nursing."
             />
           </Reveal>
-          <div className="stagger mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {corporate.map((c) => (
-              <Link key={c.code} href="/academics" className="group">
-                <Card className="h-full border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-md hover:shadow-red-900/10">
-                  <CardContent className="flex items-start gap-4 p-5">
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30 transition-transform group-hover:scale-110">
-                      <c.icon className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="font-mono text-xs font-semibold text-crimson-700">{c.code}</p>
-                      <h3 className="mt-0.5 font-display font-semibold text-slate-900 group-hover:text-crimson-800">
-                        {c.name}
-                      </h3>
-                      <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
+          <Reveal delay={80}>
+            <CardCarousel className="mt-12">
+              {corporate.map((c) => (
+                <Link key={c.code} href="/academics" className="group block h-full">
+                  <Card className="h-full border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-md hover:shadow-red-900/10">
+                    <CardContent className="flex items-start gap-4 p-5">
+                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30 transition-transform group-hover:scale-110">
+                        <c.icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <p className="font-mono text-xs font-semibold text-crimson-700">{c.code}</p>
+                        <h3 className="mt-0.5 font-display font-semibold text-slate-900 group-hover:text-crimson-800">
+                          {c.name}
+                        </h3>
+                        <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </CardCarousel>
+          </Reveal>
           <Reveal delay={100}>
             <div className="mt-10 text-center">
               <Button
@@ -408,7 +411,7 @@ export default async function HomePage() {
             </div>
 
             <TabsContent value="news" className="mt-10">
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <CardCarousel>
                 {news.length > 0
                   ? news.map((item) => (
                       <NewsCard
@@ -422,7 +425,7 @@ export default async function HomePage() {
                       />
                     ))
                   : [0, 1, 2].map((i) => <NewsCardSkeleton key={i} />)}
-              </div>
+              </CardCarousel>
               <div className="mt-10 text-center">
                 <Button
                   variant="outline"
@@ -496,27 +499,29 @@ export default async function HomePage() {
               description="The University of Antique serves the whole province through its main campus in Sibalom and four satellite campuses."
             />
           </Reveal>
-          <div className="stagger mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {campuses.map((campus) => (
-              <a
-                key={campus.name}
-                href={campus.href}
-                {...(campus.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="group flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
-              >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30 transition-transform group-hover:scale-110">
-                  <MapPin className="h-5 w-5" />
-                </span>
-                <div>
-                  <h3 className="font-display font-semibold text-slate-900 group-hover:text-crimson-800">{campus.name}</h3>
-                  <p className="mt-1 text-xs text-slate-500">{campus.location}</p>
-                </div>
-                <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-crimson-700">
-                  Visit campus <ExternalLink className="h-3 w-3" />
-                </span>
-              </a>
-            ))}
-          </div>
+          <Reveal delay={80}>
+            <CardCarousel className="mt-12" itemsPerView="md">
+              {campuses.map((campus) => (
+                <a
+                  key={campus.name}
+                  href={campus.href}
+                  {...(campus.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="group flex h-full flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
+                >
+                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30 transition-transform group-hover:scale-110">
+                    <MapPin className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display font-semibold text-slate-900 group-hover:text-crimson-800">{campus.name}</h3>
+                    <p className="mt-1 text-xs text-slate-500">{campus.location}</p>
+                  </div>
+                  <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-crimson-700">
+                    Visit campus <ExternalLink className="h-3 w-3" />
+                  </span>
+                </a>
+              ))}
+            </CardCarousel>
+          </Reveal>
         </div>
       </section>
 

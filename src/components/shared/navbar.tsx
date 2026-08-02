@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown, ExternalLink, Menu, UserRound, GraduationCap } from "lucide-react";
+import { ChevronDown, ExternalLink, Menu, UserRound, GraduationCap, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -50,37 +50,47 @@ export function Navbar() {
                     <DropdownMenuTrigger asChild>
                       <button
                         className={cn(
-                          "group inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-crimson-700/10 hover:text-crimson-800",
+                          "group inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-crimson-700/10 hover:text-crimson-800",
                           pathname.startsWith(item.href) && "text-crimson-800",
                         )}
                       >
                         {item.label}
-                        <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                        <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-all duration-300 group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-100 group-hover:-translate-y-px" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-[340px] border-slate-200 bg-white p-2 shadow-xl">
+                    <DropdownMenuContent
+                      align="start"
+                      className="w-[340px] border-slate-200 bg-white p-2 shadow-xl data-[state=open]:slide-in-from-top-2"
+                    >
                       <div className="grid grid-cols-1">
                         {item.children.map((child) => (
                           <DropdownMenuItem
                             key={child.href + child.label}
                             asChild
-                            className="cursor-pointer flex-col items-start gap-0.5 rounded-md p-3 text-slate-700 focus:bg-crimson-700/10 focus:text-crimson-800"
+                            className="group/item cursor-pointer flex-col items-start gap-0.5 rounded-md p-3 text-slate-700 transition-colors duration-150 hover:bg-yellow-50 focus:bg-yellow-50 focus:text-crimson-800 data-[highlighted]:bg-yellow-50"
                           >
                             {child.external ? (
                               <a href={child.href} target="_blank" rel="noopener noreferrer">
-                                <span className="inline-flex items-center gap-1.5 text-sm font-medium">
+                                <span className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors group-hover/item:text-crimson-800">
                                   {child.label}
-                                  <ExternalLink className="h-3 w-3 text-amber-500" />
+                                  <ExternalLink className="h-3 w-3 text-amber-500 transition-transform duration-200 group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5" />
                                 </span>
                                 {child.description && (
-                                  <span className="text-xs font-normal text-slate-500">{child.description}</span>
+                                  <span className="text-xs font-normal text-slate-500 transition-colors group-hover/item:text-slate-600">
+                                    {child.description}
+                                  </span>
                                 )}
                               </a>
                             ) : (
                               <Link href={child.href}>
-                                <span className="text-sm font-medium">{child.label}</span>
+                                <span className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors group-hover/item:text-crimson-800">
+                                  {child.label}
+                                  <ArrowRight className="h-3 w-3 -translate-x-1 text-crimson-700 opacity-0 transition-all duration-200 group-hover/item:translate-x-0 group-hover/item:opacity-100" />
+                                </span>
                                 {child.description && (
-                                  <span className="block text-xs font-normal text-slate-500">{child.description}</span>
+                                  <span className="block text-xs font-normal text-slate-500 transition-colors group-hover/item:text-slate-600">
+                                    {child.description}
+                                  </span>
                                 )}
                               </Link>
                             )}
@@ -95,14 +105,19 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "relative inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-crimson-800",
+                      "group relative inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-crimson-800",
                       pathname.startsWith(item.href) && "text-crimson-800",
                     )}
                   >
                     {item.label}
-                    {pathname.startsWith(item.href) && (
-                      <span className="absolute inset-x-3 -bottom-px h-0.5 rounded-full bg-crimson-700" />
-                    )}
+                    <span
+                      className={cn(
+                        "absolute inset-x-3 -bottom-px h-0.5 origin-left rounded-full bg-crimson-700 transition-transform duration-300 ease-out",
+                        pathname.startsWith(item.href)
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover:scale-x-100",
+                      )}
+                    />
                   </Link>
                 </li>
               ),

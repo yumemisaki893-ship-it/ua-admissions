@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FileText, Home, LogOut, Bell, GraduationCap, ChevronDown } from "lucide-react";
+import { LayoutDashboard, FileText, Home, LogOut, Bell, GraduationCap, ChevronDown, UserRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +32,8 @@ export function PortalNav({
   const links = [
     { href: "/portal/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/portal/apply", label: "Application", icon: FileText },
+    { href: "/portal/notifications", label: "Notifications", icon: Bell },
+    { href: "/portal/profile", label: "Profile", icon: UserRound },
   ];
 
   return (
@@ -46,7 +48,7 @@ export function PortalNav({
                   href={link.href}
                   className={cn(
                     "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname.startsWith(link.href) && "bg-sky-50 text-sky-700",
+                    pathname.startsWith(link.href) && "bg-crimson-50 text-crimson-700",
                   )}
                 >
                   <link.icon className="h-4 w-4" />
@@ -59,9 +61,9 @@ export function PortalNav({
 
         <div className="flex items-center gap-2">
           <Link
-            href="/portal/dashboard#notifications"
+            href="/portal/notifications"
             aria-label={`Notifications (${unreadCount} unread)`}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-yellow-50 hover:text-crimson-700"
           >
             <Bell className="h-5 w-5" />
             {unreadCount > 0 && (
@@ -75,7 +77,7 @@ export function PortalNav({
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2 rounded-full py-1 pl-1 pr-2 transition-colors hover:bg-accent">
                 <Avatar className="h-8 w-8">
-                  <AvatarFallback className="bg-sky-600 text-white">{initials}</AvatarFallback>
+                  <AvatarFallback className="bg-gradient-to-br from-crimson-700 to-crimson-900 text-white">{initials}</AvatarFallback>
                 </Avatar>
                 <ChevronDown className="h-4 w-4 text-muted-foreground" />
               </button>
@@ -94,6 +96,16 @@ export function PortalNav({
               <DropdownMenuItem asChild>
                 <Link href="/portal/apply" className="cursor-pointer">
                   <GraduationCap className="h-4 w-4" /> Application
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/portal/notifications" className="cursor-pointer">
+                  <Bell className="h-4 w-4" /> Notifications
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/portal/profile" className="cursor-pointer">
+                  <UserRound className="h-4 w-4" /> Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
@@ -126,7 +138,7 @@ export function PortalNav({
             href={link.href}
             className={cn(
               "flex flex-1 items-center justify-center gap-1.5 py-2.5 text-xs font-medium",
-              pathname.startsWith(link.href) ? "text-sky-700" : "text-muted-foreground",
+              pathname.startsWith(link.href) ? "text-crimson-700" : "text-muted-foreground",
             )}
           >
             <link.icon className="h-4 w-4" />

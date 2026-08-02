@@ -6,12 +6,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getApplicationFee } from "@/lib/paymongo";
+import { getSettings } from "@/lib/actions/admin";
 import { siteConfig } from "@/lib/site-config";
 
 export const dynamic = "force-dynamic";
 
-export default function ApplyPage() {
-  const fee = getApplicationFee();
+export default async function ApplyPage() {
+  const [settings] = await Promise.all([getSettings()]);
+  const fee = settings.applicationFee ?? getApplicationFee();
 
   const requirements = [
     {

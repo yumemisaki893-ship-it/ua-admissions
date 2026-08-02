@@ -195,8 +195,8 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
           <header className="flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4">
             <div>
               <div className="flex items-center gap-2">
-                <Badge className="bg-navy-900 text-sky-400">{college.code}</Badge>
-                <h3 className="font-display font-semibold text-navy-900">{college.name}</h3>
+                <Badge className="bg-crimson-900 text-yellow-300">{college.code}</Badge>
+                <h3 className="font-display font-semibold text-slate-900">{college.name}</h3>
               </div>
               {college.description && (
                 <p className="mt-1 max-w-2xl text-xs text-muted-foreground">{college.description}</p>
@@ -215,8 +215,8 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
             {college.courses.map((course) => (
               <div key={course.id} className="flex items-center justify-between gap-3 px-5 py-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-navy-900">
-                    {course.name} <span className="font-mono text-xs text-sky-600">({course.code})</span>
+                  <p className="text-sm font-medium text-slate-900">
+                    {course.name} <span className="font-mono text-xs text-crimson-700">({course.code})</span>
                   </p>
                   <p className="truncate text-xs text-muted-foreground">
                     {course.description} · {course.durationYears} years
@@ -235,7 +235,7 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
             <button
               type="button"
               onClick={() => openCreateCourse(college.id)}
-              className="w-full px-5 py-3 text-left text-sm font-medium text-sky-600 transition-colors hover:bg-sky-50"
+              className="w-full px-5 py-3 text-left text-sm font-medium text-crimson-700 transition-colors hover:bg-yellow-50"
             >
               + Add course to {college.code}
             </button>

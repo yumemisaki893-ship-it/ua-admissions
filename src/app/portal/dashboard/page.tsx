@@ -54,7 +54,7 @@ export default async function PortalDashboardPage() {
             <h1 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
               Welcome back, {firstName}!
             </h1>
-            <p className="mt-1 text-sm text-navy-100">
+            <p className="mt-1 text-sm text-red-100">
               Track your admission application and receive updates here.
             </p>
           </div>
@@ -82,11 +82,11 @@ export default async function PortalDashboardPage() {
       {!application ? (
         <Card>
           <CardContent className="flex flex-col items-center gap-4 p-10 text-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-sky-50 text-sky-600 ring-1 ring-sky-200">
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-crimson-50 text-crimson-700 ring-1 ring-crimson-200">
               <FileText className="h-8 w-8" />
             </span>
             <div className="space-y-1">
-              <h2 className="font-display text-lg font-semibold text-navy-900">No application yet</h2>
+              <h2 className="font-display text-lg font-semibold text-slate-900">No application yet</h2>
               <p className="max-w-md text-sm text-muted-foreground">
                 You have not started an application. Begin now and complete it in about 10 minutes.
               </p>
@@ -164,7 +164,7 @@ export default async function PortalDashboardPage() {
                             )}
                           </div>
                           <div className={reached ? "pb-6" : "pb-6 opacity-50"}>
-                            <p className="text-sm font-medium text-navy-900">{stepMeta.label}</p>
+                            <p className="text-sm font-medium text-slate-900">{stepMeta.label}</p>
                             <p className="text-xs text-muted-foreground">{stepMeta.description}</p>
                           </div>
                         </li>
@@ -178,24 +178,24 @@ export default async function PortalDashboardPage() {
                 <dl className="grid gap-3 text-sm sm:grid-cols-2">
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">Course</dt>
-                    <dd className="mt-0.5 font-medium text-navy-900">
+                    <dd className="mt-0.5 font-medium text-slate-900">
                       {application.course.name}{" "}
-                      <span className="font-mono text-xs text-sky-600">({application.course.code})</span>
+                      <span className="font-mono text-xs text-crimson-700">({application.course.code})</span>
                     </dd>
                   </div>
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">College</dt>
-                    <dd className="mt-0.5 font-medium text-navy-900">{application.course.college.name}</dd>
+                    <dd className="mt-0.5 font-medium text-slate-900">{application.course.college.name}</dd>
                   </div>
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">Submitted</dt>
-                    <dd className="mt-0.5 font-medium text-navy-900">
+                    <dd className="mt-0.5 font-medium text-slate-900">
                       {application.submittedAt ? formatDate(application.submittedAt) : "Not yet submitted"}
                     </dd>
                   </div>
                   <div>
                     <dt className="text-xs uppercase tracking-wide text-muted-foreground">Last updated</dt>
-                    <dd className="mt-0.5 font-medium text-navy-900">{formatDate(application.updatedAt)}</dd>
+                    <dd className="mt-0.5 font-medium text-slate-900">{formatDate(application.updatedAt)}</dd>
                   </div>
                 </dl>
 
@@ -232,7 +232,7 @@ export default async function PortalDashboardPage() {
                           <FileText className="h-5 w-5 text-muted-foreground/50" />
                         )}
                         <div>
-                          <p className="text-sm font-medium text-navy-900">{label}</p>
+                          <p className="text-sm font-medium text-slate-900">{label}</p>
                           {doc && (
                             <p className="text-xs text-muted-foreground">
                               {doc.fileName} · {formatBytes(doc.sizeBytes)}
@@ -245,7 +245,7 @@ export default async function PortalDashboardPage() {
                           href={doc.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-xs font-medium text-sky-600 hover:underline"
+                          className="text-xs font-medium text-crimson-700 hover:underline"
                         >
                           View
                         </a>
@@ -261,11 +261,11 @@ export default async function PortalDashboardPage() {
           <Card id="notifications" className="scroll-mt-24 h-fit">
             <CardHeader className="flex-row items-center justify-between space-y-0">
               <CardTitle className="flex items-center gap-2 text-lg">
-                <BellRing className="h-5 w-5 text-sky-600" /> Notifications
+                <BellRing className="h-5 w-5 text-crimson-700" /> Notifications
               </CardTitle>
               {items.some((n) => !n.read) && (
                 <form action={markAllNotificationsRead}>
-                  <button className="text-xs font-medium text-sky-600 hover:underline">Mark all read</button>
+                  <button className="text-xs font-medium text-crimson-700 hover:underline">Mark all read</button>
                 </form>
               )}
             </CardHeader>
@@ -281,10 +281,10 @@ export default async function PortalDashboardPage() {
                   <button
                     type="submit"
                     className={`w-full rounded-lg border px-4 py-3 text-left transition-colors hover:bg-muted/50 ${
-                      n.read ? "opacity-60" : "border-sky-200 bg-sky-50/50"
+                      n.read ? "opacity-60" : "border-crimson-200 bg-crimson-50/50"
                     }`}
                   >
-                    <p className="text-sm font-medium text-navy-900">{n.title}</p>
+                    <p className="text-sm font-medium text-slate-900">{n.title}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">{n.message}</p>
                     <p className="mt-1 text-[11px] text-muted-foreground/70">{formatDateTime(n.createdAt)}</p>
                   </button>

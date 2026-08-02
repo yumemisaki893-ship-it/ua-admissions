@@ -35,7 +35,7 @@ export default async function AdminDashboardPage() {
       label: "Total Applicants",
       value: totalApplicants.toLocaleString(),
       icon: Users,
-      tone: "bg-sky-50 text-sky-700 ring-sky-200",
+      tone: "bg-crimson-50 text-crimson-700 ring-crimson-200",
     },
     {
       label: "Qualified",
@@ -53,12 +53,12 @@ export default async function AdminDashboardPage() {
       label: "Revenue (Fees)",
       value: formatCurrency(revenueTotal),
       icon: Wallet,
-      tone: "bg-navy-50 text-navy-800 ring-navy-200",
+      tone: "bg-crimson-50 text-crimson-700 ring-crimson-200",
     },
   ];
 
   const statusData = [
-    { name: "Pending", value: pending, color: "#0284c7" },
+    { name: "Pending", value: pending, color: "#9d0505" },
     { name: "Under Review", value: underReview, color: "#f59e0b" },
     { name: "Qualified", value: accepted, color: "#059669" },
     { name: "Not Qualified", value: rejected, color: "#dc2626" },
@@ -90,7 +90,7 @@ export default async function AdminDashboardPage() {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </p>
-                <p className="mt-1.5 font-display text-2xl font-semibold text-navy-900">{stat.value}</p>
+                <p className="mt-1.5 font-display text-2xl font-semibold text-slate-900">{stat.value}</p>
               </div>
               <span className={`flex h-10 w-10 items-center justify-center rounded-lg ring-1 ${stat.tone}`}>
                 <stat.icon className="h-5 w-5" />
@@ -124,10 +124,10 @@ export default async function AdminDashboardPage() {
               <Link
                 key={app.id}
                 href={`/admin/applicants/${app.id}`}
-                className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 transition-colors hover:border-sky-300"
+                className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 transition-colors hover:border-amber-300"
               >
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-navy-900">
+                  <p className="truncate text-sm font-medium text-slate-900">
                     {app.studentProfile.firstName} {app.studentProfile.lastName}
                   </p>
                   <p className="truncate text-xs text-muted-foreground">

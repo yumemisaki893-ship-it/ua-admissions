@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Check,
   CheckCircle2,
+  Clock,
   CreditCard,
   FileCheck2,
   FileText,
@@ -126,14 +127,21 @@ export function ApplicationWizard({
   initialApplication,
   courses,
   fee,
+  admissionOpen,
 }: {
   initialApplication: WizardApplication | null;
   courses: CourseOption[];
   fee: number;
+  admissionOpen?: boolean;
 }) {
   return (
     <React.Suspense fallback={<WizardLoading />}>
-      <WizardContent initialApplication={initialApplication} courses={courses} fee={fee} />
+      <WizardContent
+        initialApplication={initialApplication}
+        courses={courses}
+        fee={fee}
+        admissionOpen={admissionOpen ?? true}
+      />
     </React.Suspense>
   );
 }
@@ -152,10 +160,12 @@ function WizardContent({
   initialApplication,
   courses,
   fee,
+  admissionOpen,
 }: {
   initialApplication: WizardApplication | null;
   courses: CourseOption[];
   fee: number;
+  admissionOpen: boolean;
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -213,6 +223,30 @@ function WizardContent({
 
   const safeStep = Math.min(step, maxReachable);
 
+  if (!admissionOpen && !application) {
+    return (
+      <div className="mx-auto max-w-2xl">
+        <div className="rounded-2xl border border-amber-300 bg-yellow-50 p-10 text-center shadow-sm">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-crimson-700 text-white">
+            <Clock className="h-8 w-8" />
+          </span>
+          <h1 className="mt-5 font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
+            Applications are currently closed
+          </h1>
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-600">
+            The Office of Admissions is not accepting new applications at this time. Please check
+            back when the next admission period opens.
+          </p>
+          <div className="mt-6">
+            <Button variant="outline" asChild>
+              <Link href="/portal/dashboard">Back to Dashboard</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   async function refreshApplication() {
     await queryClient.invalidateQueries({ queryKey: ["application"] });
   }
@@ -220,13 +254,23 @@ function WizardContent({
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">
+        <h1 className="font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
           Online Application
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Complete all five steps to submit your application. Your progress is saved automatically.
         </p>
       </div>
+
+      {!admissionOpen && (
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-300 bg-yellow-50 p-3.5 text-xs text-crimson-800">
+          <Info className="mt-0.5 h-4 w-4 shrink-0" />
+          <p>
+            Admission is currently closed for new applicants. You may still continue and submit
+            your in-progress application, which will be reviewed by the Admissions Office.
+          </p>
+        </div>
+      )}
 
       {/* Stepper */}
       <div>
@@ -243,13 +287,13 @@ function WizardContent({
                       done
                         ? "border-emerald-500 bg-emerald-500 text-white"
                         : active
-                          ? "border-sky-500 bg-sky-500 text-white"
+                          ? "border-crimson-700 bg-crimson-700 text-white"
                           : "border-muted-foreground/30 text-muted-foreground",
                     )}
                   >
                     {done ? <Check className="h-4 w-4" /> : <s.icon className="h-4 w-4" />}
                   </span>
-                  <span className={cn("hidden text-[11px] font-medium sm:block", active ? "text-sky-700" : "text-muted-foreground")}>
+                  <span className={cn("hidden text-[11px] font-medium sm:block", active ? "text-crimson-700" : "text-muted-foreground")}>
                     {s.label}
                   </span>
                 </div>
@@ -585,8 +629,8 @@ function CourseStep({
       <CardContent className="space-y-8">
         {colleges.map(([collegeId, college]) => (
           <fieldset key={collegeId}>
-            <legend className="mb-3 flex items-center gap-2 text-sm font-semibold text-navy-900">
-              <span className="rounded bg-navy-900 px-2 py-0.5 font-mono text-[11px] font-semibold text-sky-400">
+            <legend className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900">
+              <span className="rounded bg-crimson-900 px-2 py-0.5 font-mono text-[11px] font-semibold text-yellow-300">
                 {college.code}
               </span>
               {college.name}
@@ -600,17 +644,17 @@ function CourseStep({
                   className={cn(
                     "flex items-start justify-between gap-3 rounded-lg border p-4 text-left transition-colors",
                     selected === course.id
-                      ? "border-sky-500 bg-sky-50 ring-1 ring-sky-500"
-                      : "hover:border-sky-300",
+                      ? "border-crimson-700 bg-crimson-50 ring-1 ring-crimson-700"
+                      : "hover:border-amber-300",
                   )}
                   aria-pressed={selected === course.id}
                 >
                   <div>
-                    <p className="font-mono text-xs font-semibold text-sky-700">{course.code}</p>
-                    <p className="mt-1 text-sm font-medium text-navy-900">{course.name}</p>
+                    <p className="font-mono text-xs font-semibold text-crimson-700">{course.code}</p>
+                    <p className="mt-1 text-sm font-medium text-slate-900">{course.name}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{course.durationYears} years</p>
                   </div>
-                  {selected === course.id && <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-600" />}
+                  {selected === course.id && <CheckCircle2 className="h-5 w-5 shrink-0 text-crimson-700" />}
                 </button>
               ))}
             </div>
@@ -680,11 +724,11 @@ function UploadStep({
                     <FileText className="h-6 w-6 shrink-0 text-muted-foreground/60" />
                   )}
                   <div>
-                    <p className="text-sm font-medium text-navy-900">{field.label}</p>
+                    <p className="text-sm font-medium text-slate-900">{field.label}</p>
                     {doc ? (
                       <p className="text-xs text-muted-foreground">
                         {doc.fileName} · {formatBytes(doc.sizeBytes)} ·{" "}
-                        <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-sky-600 hover:underline">
+                        <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-crimson-700 hover:underline">
                           View file
                         </a>
                       </p>
@@ -728,7 +772,7 @@ function UploadStep({
           );
         })}
 
-        <div className="flex items-start gap-2.5 rounded-lg border border-sky-200 bg-sky-50 p-3.5 text-xs text-sky-800">
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-200 bg-yellow-50 p-3.5 text-xs text-crimson-800">
           <Info className="mt-0.5 h-4 w-4 shrink-0" />
           <p>
             Make sure scanned copies are <strong>clear and legible</strong>. Blurry or incomplete documents may
@@ -771,10 +815,10 @@ function PaymentStep({
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
-        <div className="rounded-xl bg-gradient-to-br from-sky-600 to-navy-900 p-6 text-center text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Application Fee</p>
+        <div className="rounded-xl bg-gradient-to-br from-crimson-700 to-crimson-900 p-6 text-center text-white">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Application Fee</p>
           <p className="mt-2 font-display text-4xl font-semibold">PHP {fee.toLocaleString()}</p>
-          <p className="mt-1 text-sm text-sky-100">Paid securely via PayMongo</p>
+          <p className="mt-1 text-sm text-red-100">Paid securely via PayMongo</p>
         </div>
 
         {simulated && (
@@ -790,7 +834,7 @@ function PaymentStep({
         <div className="space-y-2.5 text-sm">
           {["GCash", "Maya", "Credit / Debit Card"].map((method) => (
             <div key={method} className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-              <span className="font-medium text-navy-900">{method}</span>
+              <span className="font-medium text-slate-900">{method}</span>
               <Badge variant="success">Available</Badge>
             </div>
           ))}
@@ -839,11 +883,11 @@ function ReviewStep({
       </CardHeader>
       <CardContent className="space-y-6">
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-navy-900">
-            <UserRound className="h-4 w-4 text-sky-600" /> Applicant
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <UserRound className="h-4 w-4 text-crimson-700" /> Applicant
           </h3>
           <div className="grid gap-x-6 gap-y-1.5 rounded-lg bg-muted/50 p-4 text-sm sm:grid-cols-2">
-            <p><span className="text-muted-foreground">Name:</span> <strong className="text-navy-900">
+            <p><span className="text-muted-foreground">Name:</span> <strong className="text-slate-900">
               {profile?.firstName} {profile?.middleName ?? ""} {profile?.lastName} {profile?.suffix ?? ""}
             </strong></p>
             <p><span className="text-muted-foreground">Gender:</span> {profile?.gender}</p>
@@ -854,20 +898,20 @@ function ReviewStep({
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-navy-900">
-            <GraduationCap className="h-4 w-4 text-sky-600" /> Course
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <GraduationCap className="h-4 w-4 text-crimson-700" /> Course
           </h3>
           <div className="rounded-lg bg-muted/50 p-4 text-sm">
-            <p className="font-medium text-navy-900">
-              {application?.course?.name} <span className="font-mono text-xs text-sky-600">({application?.course?.code})</span>
+            <p className="font-medium text-slate-900">
+              {application?.course?.name} <span className="font-mono text-xs text-crimson-700">({application?.course?.code})</span>
             </p>
             <p className="text-xs text-muted-foreground">{application?.course?.college.name}</p>
           </div>
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-navy-900">
-            <FileText className="h-4 w-4 text-sky-600" /> Documents
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <FileText className="h-4 w-4 text-crimson-700" /> Documents
           </h3>
           <ul className="space-y-1.5 rounded-lg bg-muted/50 p-4 text-sm">
             {(application?.documents ?? []).map((doc) => (
@@ -883,12 +927,12 @@ function ReviewStep({
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-navy-900">
-            <CreditCard className="h-4 w-4 text-sky-600" /> Payment
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <CreditCard className="h-4 w-4 text-crimson-700" /> Payment
           </h3>
           <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4 text-sm">
             <span className="text-muted-foreground">Application fee</span>
-            <span className="flex items-center gap-2 font-medium text-navy-900">
+            <span className="flex items-center gap-2 font-medium text-slate-900">
               PHP {fee.toLocaleString()} <Badge variant="success">Paid</Badge>
             </span>
           </div>
@@ -921,15 +965,15 @@ function SuccessScreen({ referenceNumber }: { referenceNumber: string }) {
           <PartyPopper className="h-8 w-8" />
         </span>
         <div className="space-y-2">
-          <h2 className="font-display text-2xl font-semibold text-navy-900">Application Submitted!</h2>
+          <h2 className="font-display text-2xl font-semibold text-slate-900">Application Submitted!</h2>
           <p className="mx-auto max-w-md text-sm text-muted-foreground">
             Your application has been received. Save your reference number — you will need it for all future
             correspondence.
           </p>
         </div>
-        <div className="rounded-xl border-2 border-dashed border-sky-300 bg-sky-50 px-8 py-4">
-          <p className="text-xs uppercase tracking-widest text-sky-700">Reference Number</p>
-          <p className="mt-1 font-display text-3xl font-bold tracking-wider text-navy-900">
+        <div className="rounded-xl border-2 border-dashed border-amber-300 bg-yellow-50 px-8 py-4">
+          <p className="text-xs uppercase tracking-widest text-crimson-700">Reference Number</p>
+          <p className="mt-1 font-display text-3xl font-bold tracking-wider text-slate-900">
             {referenceNumber}
           </p>
         </div>

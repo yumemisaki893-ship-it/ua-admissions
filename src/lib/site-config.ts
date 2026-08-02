@@ -180,3 +180,6 @@ export const applicationStatusMeta: Record<
     tone: "destructive",
   },
 } as const;
+
+export const SETTING_ADMISSION_OPEN = "admission_open";
+export const SETTING_APPLICATION_FEE = "application_fee";

@@ -32,13 +32,13 @@ export const ictuLinks = [
 ];
 
 export function MobileAdminNav({ isIctu }: { isIctu: boolean }) {
-  const links = isIctu ? ictuLinks : adminLinks;
+  const nav = isIctu ? ictuLinks : adminLinks;
   return (
     <nav
       className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
       aria-label="Admin mobile navigation"
     >
-      {(isIctu ? ictuLinks : adminLinks).map((link) => (
+      {nav.map((link) => (
         <Link
           key={link.href}
           href={link.href}

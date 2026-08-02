@@ -66,11 +66,20 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="font-display text-2xl font-semibold text-navy-900">Admin Dashboard</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Admission overview · applications and fee revenue at a glance.
-        </p>
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-900 via-navy-950 to-crimson-950 p-6 shadow-lg sm:p-8">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: "radial-gradient(circle at 90% 10%, #f2de5e 0, transparent 40%)",
+          }}
+        />
+        <div className="relative">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Admissions Office</p>
+          <h1 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">Admin Dashboard</h1>
+          <p className="mt-1 text-sm text-navy-100">
+            Admission overview · applications and fee revenue at a glance.
+          </p>
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

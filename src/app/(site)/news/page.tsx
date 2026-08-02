@@ -1,18 +1,22 @@
+import Image from "next/image";
+import { Newspaper, Megaphone, CalendarDays, Briefcase } from "lucide-react";
+
 import { prisma } from "@/lib/prisma";
 import { NewsCard, NewsCardSkeleton } from "@/components/shared/news-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
 
 export const dynamic = "force-dynamic";
 
 const tabs = [
-  { value: "ALL", label: "All" },
-  { value: "NEWS", label: "News" },
-  { value: "EVENT", label: "Events" },
-  { value: "ANNOUNCEMENT", label: "Announcements" },
+  { value: "ALL", label: "All", icon: Newspaper },
+  { value: "NEWS", label: "News", icon: Newspaper },
+  { value: "EVENT", label: "Events", icon: CalendarDays },
+  { value: "ANNOUNCEMENT", label: "Announcements", icon: Megaphone },
 ] as const;
 
 async function getNews(category?: string) {
-  return prisma.news.findMany({
+  const items = await prisma.news.findMany({
     where: { published: true, ...(category && category !== "ALL" ? { category: category as "NEWS" } : {}) },
     orderBy: { publishedAt: "desc" },
     select: {
@@ -25,6 +29,7 @@ async function getNews(category?: string) {
       slug: true,
     },
   });
+  return items;
 }
 
 export default async function NewsPage({
@@ -36,12 +41,28 @@ export default async function NewsPage({
   const allNews = await getNews(category);
   const valid = category === "ALL" || tabs.some((t) => t.value === category) ? category : "ALL";
 
+  const countFor = (value: string) =>
+    value === "ALL" ? allNews.length : allNews.filter((n) => n.category === value).length;
+
   return (
     <>
-      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Stay Informed</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">News & Events</h1>
+      <section className="relative overflow-hidden border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 20% 30%, #f2de5e 0, transparent 40%), radial-gradient(circle at 80% 80%, #9d0505 0, transparent 45%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
+          <Image
+            src="/ua/ua-seal.png"
+            alt="University of Antique seal"
+            width={72}
+            height={72}
+            className="mx-auto rounded-full bg-white/10 p-1 ring-1 ring-gold-300/40"
+          />
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Stay Informed</p>
+          <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">News &amp; Events</h1>
           <p className="mt-4 text-navy-100">
             Press releases, announcements, and updates from across the University of Antique.
           </p>
@@ -50,20 +71,41 @@ export default async function NewsPage({
 
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Tabs defaultValue={valid}>
-          <TabsList className="w-full justify-start overflow-x-auto sm:w-auto">
-            {tabs.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value}>
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <TabsList className="w-full justify-start overflow-x-auto border border-white/10 bg-navy-900/70 sm:w-auto">
+              {tabs.map((tab) => (
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className="gap-1.5 data-[state=active]:bg-crimson-700 data-[state=active]:text-white"
+                >
+                  <tab.icon className="h-3.5 w-3.5" />
+                  {tab.label}
+                  <Badge className="ml-0.5 bg-white/10 px-1.5 py-0 text-[10px] text-navy-200 data-[state=active]:bg-gold-300 data-[state=active]:text-navy-950">
+                    {countFor(tab.value)}
+                  </Badge>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+            <p className="flex items-center gap-1.5 text-sm text-navy-300">
+              <Briefcase className="h-4 w-4 text-gold-300" />
+              New to UA? Read the{" "}
+              <a
+                href="/apply"
+                className="font-medium text-gold-300 underline-offset-4 hover:underline"
+              >
+                admission guide
+              </a>
+              .
+            </p>
+          </div>
 
           {tabs.map((tab) => {
             const items = tab.value === "ALL" ? allNews : allNews.filter((n) => n.category === tab.value);
             return (
               <TabsContent key={tab.value} value={tab.value} className="mt-8">
                 {items.length > 0 ? (
-                  <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {items.map((item) => (
                       <NewsCard
                         key={item.id}
@@ -81,7 +123,7 @@ export default async function NewsPage({
                     {[0, 1, 2].map((i) => (
                       <NewsCardSkeleton key={i} />
                     ))}
-                    <p className="col-span-full pt-2 text-center text-sm text-muted-foreground">
+                    <p className="col-span-full pt-2 text-center text-sm text-navy-300">
                       No {tab.label.toLowerCase()} posted yet. Check back soon.
                     </p>
                   </div>

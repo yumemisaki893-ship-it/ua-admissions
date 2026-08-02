@@ -36,23 +36,47 @@ export default async function PortalDashboardPage() {
   const currentIndex = application ? statusOrder.indexOf(application.status) : -1;
   const isTerminal = application?.status === "ACCEPTED" || application?.status === "REJECTED";
   const meta = application ? applicationStatusMeta[application.status] : null;
+  const firstName = session?.user?.name?.split(" ")[0] ?? "Student";
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-        <div>
-          <h1 className="font-display text-2xl font-semibold text-navy-900 sm:text-3xl">Application Dashboard</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Track your admission application and receive updates here.
-          </p>
+      {/* Welcome banner */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-crimson-800 via-crimson-900 to-navy-950 p-6 shadow-lg sm:p-8">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: "radial-gradient(circle at 90% 10%, #f2de5e 0, transparent 40%)",
+          }}
+        />
+        <div className="relative flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Student Portal</p>
+            <h1 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
+              Welcome back, {firstName}!
+            </h1>
+            <p className="mt-1 text-sm text-navy-100">
+              Track your admission application and receive updates here.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            {application?.referenceNumber && (
+              <Badge className="border-gold-300/40 bg-gold-300/10 font-mono text-gold-300">
+                {application.referenceNumber}
+              </Badge>
+            )}
+            {!application && (
+              <Button
+                size="lg"
+                className="bg-white text-crimson-800 shadow-lg hover:bg-gold-300 hover:text-navy-950"
+                asChild
+              >
+                <Link href="/portal/apply">
+                  <FileText className="mr-1 h-4 w-4" /> Start Application
+                </Link>
+              </Button>
+            )}
+          </div>
         </div>
-        {!application && (
-          <Button size="lg" asChild>
-            <Link href="/portal/apply">
-              <FileText className="mr-1 h-4 w-4" /> Start Application
-            </Link>
-          </Button>
-        )}
       </div>
 
       {!application ? (

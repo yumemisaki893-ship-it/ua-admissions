@@ -96,8 +96,8 @@ export default async function CourseDetailPage({ params }: { params: { course: s
             )}
           </div>
 
-          <aside className="space-y-5">
-            <Card className="border-white/10 bg-navy-900/60">
+          <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+            <Card className="border-white/10 bg-navy-900/60 transition-all hover:shadow-lg hover:shadow-crimson-950/40">
               <CardContent className="space-y-4 p-6">
                 <div className="flex items-center gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">

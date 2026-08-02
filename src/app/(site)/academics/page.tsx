@@ -1,5 +1,8 @@
+import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { CourseCard, CourseCardSkeleton } from "@/components/shared/course-card";
+import { Reveal } from "@/components/shared/reveal";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const dynamic = "force-dynamic";
@@ -14,9 +17,22 @@ export default async function AcademicsPage() {
 
   return (
     <>
-      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Academics</p>
+      <section className="relative overflow-hidden border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 25% 25%, #f2de5e 0, transparent 40%), radial-gradient(circle at 80% 70%, #9d0505 0, transparent 45%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
+          <Image
+            src="/ua/ua-seal.png"
+            alt="University of Antique seal"
+            width={72}
+            height={72}
+            className="mx-auto rounded-full bg-white/10 p-1 ring-1 ring-gold-300/40"
+          />
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Academics</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
             Colleges & Degree Programs
           </h1>
@@ -27,22 +43,27 @@ export default async function AcademicsPage() {
       </section>
 
       <div className="mx-auto max-w-7xl space-y-20 px-4 py-16 sm:px-6 lg:px-8">
-        {colleges.map((college) => (
+        {colleges.map((college, ci) => (
           <section key={college.id} id={college.slug} className="scroll-mt-24">
-            <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <span className="font-mono text-sm font-semibold text-gold-300">{college.code}</span>
-                <h2 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
-                  {college.name}
-                </h2>
-                {college.description && (
-                  <p className="mt-2 max-w-2xl text-navy-300">{college.description}</p>
-                )}
+            <Reveal delay={ci % 2 === 0 ? 0 : 60}>
+              <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <span className="font-mono text-sm font-semibold text-gold-300">{college.code}</span>
+                  <h2 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
+                    {college.name}
+                  </h2>
+                  {college.description && (
+                    <p className="mt-2 max-w-2xl text-navy-300">{college.description}</p>
+                  )}
+                </div>
+                <Badge className="w-fit bg-crimson-700/40 text-gold-300 ring-1 ring-crimson-700/60">
+                  {college.courses.length} program{college.courses.length === 1 ? "" : "s"}
+                </Badge>
               </div>
-            </div>
+            </Reveal>
 
             {college.courses.length > 0 ? (
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {college.courses.map((course) => (
                   <CourseCard
                     key={course.id}
@@ -72,7 +93,8 @@ export default async function AcademicsPage() {
           </div>
         )}
 
-        <section id="graduate-school" className="scroll-mt-24 rounded-2xl border border-gold-300/20 bg-gradient-to-br from-crimson-900/60 via-navy-900 to-navy-950 p-8 sm:p-12">
+        <Reveal>
+          <section id="graduate-school" className="scroll-mt-24 rounded-2xl border border-gold-300/20 bg-gradient-to-br from-crimson-900/60 via-navy-900 to-navy-950 p-8 sm:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
             <div className="space-y-4">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Graduate School</p>
@@ -97,7 +119,8 @@ export default async function AcademicsPage() {
               </CardContent>
             </Card>
           </div>
-        </section>
+          </section>
+        </Reveal>
       </div>
     </>
   );

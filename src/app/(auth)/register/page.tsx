@@ -48,10 +48,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <Card className="border-white/10 bg-white shadow-2xl">
+    <Card className="animate-scale-in border-white/10 bg-navy-900/90 shadow-2xl shadow-crimson-950/40 backdrop-blur">
       <CardHeader className="text-center">
-        <CardTitle className="font-display text-2xl text-navy-900">Create Your Account</CardTitle>
-        <CardDescription>
+        <CardTitle className="font-display text-2xl text-white">Create Your Account</CardTitle>
+        <CardDescription className="text-navy-300">
           Step 1 of 6 — you will fill out your details after signing in.
         </CardDescription>
       </CardHeader>
@@ -63,9 +63,14 @@ export default function RegisterPage() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel className="text-navy-100">Full Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Juan Dela Cruz" autoComplete="name" {...field} />
+                    <Input
+                      placeholder="Juan Dela Cruz"
+                      autoComplete="name"
+                      className="border-white/15 bg-white/5 text-white placeholder:text-navy-400 focus:border-gold-300/60"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -76,9 +81,15 @@ export default function RegisterPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email Address</FormLabel>
+                  <FormLabel className="text-navy-100">Email Address</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="you@example.com" autoComplete="email" {...field} />
+                    <Input
+                      type="email"
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                      className="border-white/15 bg-white/5 text-white placeholder:text-navy-400 focus:border-gold-300/60"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -89,9 +100,15 @@ export default function RegisterPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-navy-100">Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="At least 8 characters" autoComplete="new-password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="At least 8 characters"
+                      autoComplete="new-password"
+                      className="border-white/15 bg-white/5 text-white placeholder:text-navy-400 focus:border-gold-300/60"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -102,24 +119,35 @@ export default function RegisterPage() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel className="text-navy-100">Confirm Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="Repeat your password" autoComplete="new-password" {...field} />
+                    <Input
+                      type="password"
+                      placeholder="Repeat your password"
+                      autoComplete="new-password"
+                      className="border-white/15 bg-white/5 text-white placeholder:text-navy-400 focus:border-gold-300/60"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={pending} className="w-full" size="lg">
+            <Button
+              type="submit"
+              disabled={pending}
+              size="lg"
+              className="w-full bg-crimson-700 text-white shadow-lg shadow-crimson-950/50 hover:bg-gold-300 hover:text-navy-950"
+            >
               {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <UserPlus className="h-4 w-4" />}
               Create Account
             </Button>
           </form>
         </Form>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+        <p className="mt-6 text-center text-sm text-navy-300">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-sky-600 hover:underline">
+          <Link href="/login" className="font-medium text-gold-300 hover:underline">
             Sign in
           </Link>
         </p>

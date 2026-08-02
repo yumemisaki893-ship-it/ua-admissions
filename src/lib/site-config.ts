@@ -1,7 +1,7 @@
 export interface NavItem {
   label: string;
   href: string;
-  children?: { label: string; href: string; external?: boolean }[];
+  children?: { label: string; href: string; external?: boolean; description?: string }[];
 }
 
 export const siteConfig = {
@@ -78,52 +78,52 @@ export const siteConfig = {
       label: "About",
       href: "/about",
       children: [
-        { label: "Mandates & VMGO", href: "/about#vision-mission" },
-        { label: "History", href: "/about#history" },
-        { label: "The UA Hymn", href: "/about#hymn" },
-        { label: "University Seal", href: "/about#seal" },
-        { label: "Transparency Seal", href: "https://antiquespride.edu.ph/ua-transparency-seal/", external: true },
-        { label: "Privacy Policy", href: "https://www.antiquespride.edu.ph/privacy-policy/", external: true },
+        { label: "Mandates & VMGO", href: "/about#vision-mission", description: "Vision, mission, goals and objectives of the University." },
+        { label: "History", href: "/about#history", description: "From Sibalom Municipal College to state university." },
+        { label: "The UA Hymn", href: "/about#hymn", description: "The official anthem of the University of Antique." },
+        { label: "University Seal", href: "/about#seal", description: "The symbols and story behind the UA seal." },
+        { label: "Transparency Seal", href: "https://antiquespride.edu.ph/ua-transparency-seal/", external: true, description: "Open access to official documents and finances." },
+        { label: "Privacy Policy", href: "https://www.antiquespride.edu.ph/privacy-policy/", external: true, description: "How the University protects your data." },
       ],
     },
     {
       label: "Academics",
       href: "/academics",
       children: [
-        { label: "Program Offerings", href: "/academics" },
-        { label: "Colleges", href: "/academics" },
-        { label: "Graduate School", href: "/academics#graduate-school" },
+        { label: "Program Offerings", href: "/academics", description: "All degree programs across colleges." },
+        { label: "Colleges", href: "/academics", description: "Six colleges delivering UA programs." },
+        { label: "Graduate School", href: "/academics#graduate-school", description: "Advanced degrees and research." },
       ],
     },
     {
       label: "Admission",
       href: "/apply",
       children: [
-        { label: "How to Apply", href: "/apply" },
-        { label: "Requirements", href: "/apply#requirements" },
-        { label: "Application Fee", href: "/apply#fee" },
-        { label: "Admission Portal", href: "https://sims.antiquespride.edu.ph/aims/application/", external: true },
-        { label: "Check Application Status", href: "/login" },
+        { label: "How to Apply", href: "/apply", description: "Step-by-step online application guide." },
+        { label: "Requirements", href: "/apply#requirements", description: "Documents needed for enrollment." },
+        { label: "Application Fee", href: "/apply#fee", description: "Fee details and payment channels." },
+        { label: "Admission Portal", href: "https://sims.antiquespride.edu.ph/aims/application/", external: true, description: "Apply through the official AIMS portal." },
+        { label: "Check Application Status", href: "/login", description: "Track your application in the portal." },
       ],
     },
     {
       label: "Student Services",
       href: "/services",
       children: [
-        { label: "Health Services", href: "https://www.antiquespride.edu.ph/health-services/", external: true },
-        { label: "Scholarships", href: "https://www.antiquespride.edu.ph/scholarship-and-financial-assistance-unit/", external: true },
-        { label: "Student Affairs & Services", href: "https://www.antiquespride.edu.ph/student-affairs-services-2/", external: true },
-        { label: "Library Services", href: "https://www.antiquespride.edu.ph/library-services/", external: true },
+        { label: "Health Services", href: "https://www.antiquespride.edu.ph/health-services/", external: true, description: "Medical and dental care for students." },
+        { label: "Scholarships", href: "https://www.antiquespride.edu.ph/scholarship-and-financial-assistance-unit/", external: true, description: "Financial assistance and scholarship programs." },
+        { label: "Student Affairs & Services", href: "https://www.antiquespride.edu.ph/student-affairs-services-2/", external: true, description: "Guidance, discipline and student welfare." },
+        { label: "Library Services", href: "https://www.antiquespride.edu.ph/library-services/", external: true, description: "Learning resources and e-library access." },
       ],
     },
     {
       label: "Campuses",
       href: "/campuses",
       children: [
-        { label: "Tario Lim Memorial Campus", href: "https://tlmc.antiquespride.edu.ph", external: true },
-        { label: "Libertad Campus", href: "https://lc.antiquespride.edu.ph", external: true },
-        { label: "Caluya Campus", href: "https://www.antiquespride.edu.ph", external: true },
-        { label: "Hamtic Campus", href: "https://hc.antiquespride.edu.ph", external: true },
+        { label: "Tario Lim Memorial Campus", href: "https://tlmc.antiquespride.edu.ph", external: true, description: "Tobias Fornier, Antique." },
+        { label: "Libertad Campus", href: "https://lc.antiquespride.edu.ph", external: true, description: "Libertad, Antique." },
+        { label: "Caluya Campus", href: "https://www.antiquespride.edu.ph", external: true, description: "Caluya, Antique." },
+        { label: "Hamtic Campus", href: "https://hc.antiquespride.edu.ph", external: true, description: "Hamtic, Antique." },
       ],
     },
     { label: "News & Events", href: "/news" },

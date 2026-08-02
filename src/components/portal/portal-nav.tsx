@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, FileText, Home, LogOut, Bell, GraduationCap, ChevronDown, UserRound } from "lucide-react";
@@ -28,6 +29,8 @@ export function PortalNav({
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const listRef = React.useRef<HTMLUListElement>(null);
+  const [pill, setPill] = React.useState<{ left: number; width: number } | null>(null);
 
   const links = [
     { href: "/portal/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -36,19 +39,52 @@ export function PortalNav({
     { href: "/portal/profile", label: "Profile", icon: UserRound },
   ];
 
+  React.useEffect(() => {
+    const active = listRef.current?.querySelector<HTMLLIElement>("li[data-active='true']");
+    if (active) setPill({ left: active.offsetLeft, width: active.offsetWidth });
+  }, [pathname]);
+
+  function handleHover(e: React.MouseEvent<HTMLUListElement>) {
+    const li = (e.target as HTMLElement).closest("li");
+    if (li && li.parentElement === listRef.current) {
+      setPill({ left: li.offsetLeft, width: li.offsetWidth });
+    }
+  }
+
+  function handleLeave() {
+    const active = listRef.current?.querySelector<HTMLLIElement>("li[data-active='true']");
+    if (active) setPill({ left: active.offsetLeft, width: active.offsetWidth });
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b bg-white/95 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6" aria-label="Portal navigation">
         <div className="flex items-center gap-6">
           <Logo />
-          <ul className="hidden items-center gap-1 sm:flex">
+          <ul
+            ref={listRef}
+            onMouseMove={handleHover}
+            onMouseLeave={handleLeave}
+            className="relative hidden items-center gap-1 sm:flex"
+          >
+            <span
+              className={cn(
+                "pointer-events-none absolute inset-y-0 rounded-md bg-crimson-50 ring-1 ring-crimson-700/20 transition-all duration-300 ease-out",
+                pill ? "opacity-100" : "opacity-0",
+              )}
+              style={pill ? { left: pill.left, width: pill.width } : undefined}
+            />
             {links.map((link) => (
-              <li key={link.href}>
+              <li
+                key={link.href}
+                data-active={pathname.startsWith(link.href) ? "true" : "false"}
+                className="relative"
+              >
                 <Link
                   href={link.href}
                   className={cn(
-                    "inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname.startsWith(link.href) && "bg-crimson-50 text-crimson-700",
+                    "relative inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200",
+                    pathname.startsWith(link.href) ? "text-crimson-800" : "text-slate-600 hover:text-crimson-800",
                   )}
                 >
                   <link.icon className="h-4 w-4" />

@@ -1,47 +1,36 @@
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site-config";
+import { Seal } from "@/components/shared/seal";
 
 export function Logo({
   className,
   light = false,
   iconOnly = false,
+  compact = false,
 }: {
   className?: string;
   light?: boolean;
   iconOnly?: boolean;
+  compact?: boolean;
 }) {
   return (
-    <Link href="/" className={cn("flex items-center gap-3", className)} aria-label="University of Antique - Home">
-      <span
-        className={cn(
-          "relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full ring-2",
-          light ? "ring-yellow-300/70" : "ring-crimson-800/60",
-        )}
-      >
-        <Image
-          src="/ua/ua-logo.png"
-          alt="University of Antique seal"
-          width={44}
-          height={44}
-          priority
-          className="h-full w-full object-cover"
-        />
-      </span>
+    <Link href="/" className={cn("group flex items-center gap-3", className)} aria-label="University of Antique - Home">
+      <Seal size={compact ? 40 : 46} className="transition-transform duration-300 group-hover:rotate-6" />
       {!iconOnly && (
         <span className="flex flex-col leading-tight">
           <span
             className={cn(
-              "font-display text-base font-semibold tracking-tight",
-              light ? "text-white" : "text-slate-900",
+              "font-display font-semibold tracking-tight transition-colors duration-300 group-hover:text-crimson-700",
+              light ? "text-white group-hover:text-yellow-200" : "text-slate-900",
+              compact ? "text-sm" : "text-base",
             )}
           >
             University of Antique
           </span>
           <span
             className={cn(
-              "text-[10px] uppercase tracking-[0.22em]",
+              "text-[10px] font-semibold uppercase tracking-[0.22em]",
               light ? "text-yellow-100" : "text-crimson-700",
             )}
           >

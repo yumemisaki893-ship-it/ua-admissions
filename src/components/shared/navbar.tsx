@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink, Menu, UserRound, GraduationCap, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,8 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const listRef = useRef<HTMLUListElement>(null);
+  const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -28,6 +30,30 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Snap the sliding pill to the active item on mount/navigation.
+  useEffect(() => {
+    const active = listRef.current?.querySelector<HTMLLIElement>("li[data-active='true']");
+    if (active) {
+      setPill({ left: active.offsetLeft, width: active.offsetWidth });
+    }
+  }, [pathname]);
+
+  function handleHover(e: React.MouseEvent<HTMLUListElement>) {
+    const li = (e.target as HTMLElement).closest("li");
+    if (li && li.parentElement === listRef.current) {
+      setPill({ left: li.offsetLeft, width: li.offsetWidth });
+    }
+  }
+
+  function handleLeave() {
+    const active = listRef.current?.querySelector<HTMLLIElement>("li[data-active='true']");
+    if (active) {
+      setPill({ left: active.offsetLeft, width: active.offsetWidth });
+    } else {
+      setPill(null);
+    }
+  }
 
   return (
     <header className="sticky top-0 z-40">
@@ -42,15 +68,32 @@ export function Navbar() {
           <Logo />
 
           {/* Desktop nav */}
-          <ul className="hidden items-center gap-0.5 lg:flex">
+          <ul
+            ref={listRef}
+            onMouseMove={handleHover}
+            onMouseLeave={handleLeave}
+            className="relative hidden items-center gap-0.5 lg:flex"
+          >
+            {/* Sliding hover pill */}
+            <span
+              className={cn(
+                "pointer-events-none absolute -bottom-0 top-0 rounded-md bg-crimson-700/10 ring-1 ring-crimson-700/20 transition-all duration-300 ease-out",
+                pill ? "opacity-100" : "opacity-0",
+              )}
+              style={pill ? { left: pill.left, width: pill.width } : undefined}
+            />
             {siteConfig.nav.map((item) =>
               item.children ? (
-                <li key={item.label}>
+                <li
+                  key={item.label}
+                  data-active={pathname.startsWith(item.href) ? "true" : "false"}
+                  className="relative"
+                >
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <button
                         className={cn(
-                          "group inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-all duration-200 hover:bg-crimson-700/10 hover:text-crimson-800",
+                          "group inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-crimson-800",
                           pathname.startsWith(item.href) && "text-crimson-800",
                         )}
                       >
@@ -60,7 +103,7 @@ export function Navbar() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="start"
-                      className="w-[340px] border-slate-200 bg-white p-2 shadow-xl data-[state=open]:slide-in-from-top-2"
+                      className="w-[340px] border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur data-[state=open]:slide-in-from-top-2"
                     >
                       <div className="grid grid-cols-1">
                         {item.children.map((child) => (
@@ -101,7 +144,11 @@ export function Navbar() {
                   </DropdownMenu>
                 </li>
               ) : (
-                <li key={item.label}>
+                <li
+                  key={item.label}
+                  data-active={pathname.startsWith(item.href) ? "true" : "false"}
+                  className="relative"
+                >
                   <Link
                     href={item.href}
                     className={cn(

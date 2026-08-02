@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { Newspaper, Megaphone, CalendarDays, Briefcase } from "lucide-react";
 
 import { prisma } from "@/lib/prisma";
 import { NewsCard, NewsCardSkeleton } from "@/components/shared/news-card";
+import { Seal } from "@/components/shared/seal";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 
@@ -54,13 +54,12 @@ export default async function NewsPage({
           }}
         />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
-          <Image
-            src="/ua/ua-seal.png"
-            alt="University of Antique seal"
-            width={72}
-            height={72}
-            className="mx-auto rounded-full bg-white/10 p-1 ring-1 ring-yellow-300/60"
-          />
+          <div className="relative inline-block">
+            <Seal size={80} className="animate-float" />
+            <span className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-300 to-amber-400 text-crimson-900 shadow-lg shadow-amber-500/40 ring-2 ring-white">
+              <Newspaper className="h-3.5 w-3.5" />
+            </span>
+          </div>
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Stay Informed</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">News &amp; Events</h1>
           <p className="mt-4 text-red-50">
@@ -72,7 +71,7 @@ export default async function NewsPage({
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Tabs defaultValue={valid}>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <TabsList className="w-full justify-start overflow-x-auto border border-slate-200 bg-slate-100 sm:w-auto">
+            <TabsList className="w-full justify-start overflow-x-auto border border-slate-200 bg-white shadow-sm sm:w-auto">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}

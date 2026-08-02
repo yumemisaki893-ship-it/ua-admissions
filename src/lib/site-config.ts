@@ -79,7 +79,7 @@ export const siteConfig = {
       href: "/about",
       children: [
         { label: "Mandates & VMGO", href: "/about#vision-mission", description: "Vision, mission, goals and objectives of the University." },
-        { label: "History", href: "/about#history", description: "From Sibalom Municipal College to state university." },
+        { label: "History", href: "/about#history", description: "From the Antique School of Arts and Trades to a state university." },
         { label: "The UA Hymn", href: "/about#hymn", description: "The official anthem of the University of Antique." },
         { label: "University Seal", href: "/about#seal", description: "The symbols and story behind the UA seal." },
         { label: "Transparency Seal", href: "https://antiquespride.edu.ph/ua-transparency-seal/", external: true, description: "Open access to official documents and finances." },

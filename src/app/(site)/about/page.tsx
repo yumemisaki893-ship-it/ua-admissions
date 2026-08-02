@@ -13,34 +13,24 @@ export const dynamic = "force-dynamic";
 
 const milestones = [
   {
-    year: "1945",
-    title: "Sibalom Municipal College",
-    desc: "The University traces its roots to the post-war era educational institutions of Sibalom.",
-  },
-  {
     year: "1954",
-    title: "School of Arts and Trades",
-    desc: "Established as a vocational-technical school, the seed of today's university.",
+    title: "Antique School of Arts and Trades",
+    desc: "Established on January 19, 1954 by virtue of Republic Act No. 851 through the efforts of Cong. Tobias A. Fornier. First classes opened on July 1, 1954 with 188 Secondary Trade and 53 Trade-Technical Education students.",
   },
   {
-    year: "1963",
-    title: "National College of Agriculture and Technology",
-    desc: "Expanded into agricultural and technological education for the province.",
-  },
-  {
-    year: "1995",
+    year: "1982",
     title: "Polytechnic State College of Antique",
-    desc: "Became a chartered polytechnic state college serving the whole province.",
+    desc: "Converted from a trade school into a state college on November 14, 1982 by Batas Pambansa Blg. 281, with Dr. Godofredo E. Gallega as its first president.",
   },
   {
-    year: "2010",
+    year: "2009",
     title: "University of Antique",
-    desc: "Converted into a state university by Republic Act 10082, growing into a Level IV institution.",
+    desc: "Converted into a state university on November 10, 2009 by virtue of Republic Act No. 9746 signed by President Gloria Macapagal-Arroyo.",
   },
   {
     year: "Today",
     title: "Five Campuses & 25,000+ Students",
-    desc: "Serving Antique from Sibalom, Tobias Fornier, Libertad, Caluya and Hamtic.",
+    desc: "Serving Antique from the main campus in Sibalom and campuses in Tibiao, Hamtic, Libertad, and Caluya.",
   },
 ];
 
@@ -114,7 +104,7 @@ export default async function AboutPage() {
           <SectionHeading
             eyebrow="Our Story"
             title="History of the University"
-            description="A century of service through every chapter of our growth."
+            description="From a school of arts and trades in 1954 to the University of Antique today."
           />
         </Reveal>
 
@@ -150,7 +140,7 @@ export default async function AboutPage() {
             <Card className="mt-14 border-slate-200 bg-white shadow-sm">
               <CardContent className="p-8">
                 <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-crimson-700">
-                  <CalendarCheck className="h-5 w-5" /> A Closer Look
+                  <CalendarCheck className="h-5 w-5" /> The Full Story
                 </h3>
                 <div className="rich-text mt-4" dangerouslySetInnerHTML={{ __html: history }} />
               </CardContent>

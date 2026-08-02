@@ -4,15 +4,55 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  LayoutDashboard,
+  Users,
+  FileText,
+  Settings,
+  Link2,
+  Fingerprint,
   LogOut,
   Home,
   ShieldCheck,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import type { AdminNavLink } from "@/components/admin/admin-links";
 
-export function AdminSidebar({ role, links }: { role: string; links: AdminNavLink[] }) {
+export const adminLinks = [
+  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/applicants", label: "Applicants", icon: Users },
+  { href: "/admin/content", label: "Content", icon: FileText },
+  { href: "/admin/links", label: "Links", icon: Link2 },
+  { href: "/admin/settings", label: "Settings", icon: Settings },
+];
+
+export const ictuLinks = [
+  { href: "/admin", label: "Oversight", icon: LayoutDashboard },
+  { href: "/admin/ictu/registrars", label: "Registrars", icon: Users },
+  { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
+];
+
+export function MobileAdminNav({ isIctu }: { isIctu: boolean }) {
+  const links = isIctu ? ictuLinks : adminLinks;
+  return (
+    <nav
+      className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
+      aria-label="Admin mobile navigation"
+    >
+      {(isIctu ? ictuLinks : adminLinks).map((link) => (
+        <Link
+          key={link.href}
+          href={link.href}
+          className="flex min-w-20 flex-1 flex-col items-center gap-1 py-2.5 text-xs font-medium text-slate-500"
+        >
+          <link.icon className="h-4 w-4" />
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
+
+export function AdminSidebar({ role }: { role: string }) {
   const pathname = usePathname();
   const listRef = React.useRef<HTMLDivElement>(null);
   const [pill, setPill] = React.useState<{ top: number; height: number } | null>(null);
@@ -50,7 +90,7 @@ export function AdminSidebar({ role, links }: { role: string; links: AdminNavLin
       <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
         {role === "ICTU" ? "ICTU Oversight" : "Administration"}
       </p>
-      {links.map((link) => (
+      {(role === "ICTU" ? ictuLinks : adminLinks).map((link) => (
         <Link
           key={link.href}
           href={link.href}

@@ -4,8 +4,7 @@ import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import { Logo } from "@/components/shared/logo";
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
-import { adminLinks, ictuLinks } from "@/components/admin/admin-links";
+import { AdminSidebar, MobileAdminNav } from "@/components/admin/admin-sidebar";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +18,6 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   if (!role || !ADMIN_ROLES.includes(role)) redirect("/portal/dashboard");
 
   const isIctu = role === "ICTU";
-  const navLinks = isIctu ? ictuLinks : adminLinks;
 
   const initials = (session.user.name ?? "A")
     .split(" ")
@@ -35,7 +33,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="flex h-16 items-center border-b border-slate-100 px-5">
           <Logo compact />
         </div>
-        <AdminSidebar role={role} links={navLinks} />
+        <AdminSidebar role={role} />
       </aside>
 
       <div className="flex-1 lg:pl-60">
@@ -60,22 +58,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </div>
         </header>
 
-        {/* Mobile nav */}
-        <nav
-          className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
-          aria-label="Admin mobile navigation"
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="flex min-w-20 flex-1 flex-col items-center gap-1 py-2.5 text-xs font-medium text-slate-500"
-            >
-              <link.icon className="h-4 w-4" />
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <MobileAdminNav isIctu={isIctu} />
 
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>
       </div>

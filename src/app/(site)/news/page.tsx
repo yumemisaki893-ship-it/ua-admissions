@@ -42,8 +42,8 @@ export default async function NewsPage({
             backgroundImage: "radial-gradient(circle at 20% 30%, #dfae19 0, transparent 40%), radial-gradient(circle at 80% 80%, #3f0608 0, transparent 45%)",
           }}
         />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:px-8">
-          <div>
+        <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-8 px-4 text-center sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8 lg:text-left">
+          <div className="lg:mr-auto">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Stay Informed</p>
             <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
               News &amp; Events
@@ -51,7 +51,7 @@ export default async function NewsPage({
             <p className="mt-4 max-w-xl text-red-50">
               Press releases, announcements, and updates from across the University of Antique.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap justify-center gap-3 lg:justify-start">
               {[
                 { value: countFor("NEWS"), label: "News stories" },
                 { value: countFor("EVENT"), label: "Upcoming events" },
@@ -67,7 +67,7 @@ export default async function NewsPage({
               ))}
             </div>
           </div>
-          <Seal size={104} className="animate-float hidden lg:block" />
+          <Seal className="animate-float h-20 w-20 shrink-0 sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
         </div>
       </section>
 

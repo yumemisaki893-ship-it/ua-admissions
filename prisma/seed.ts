@@ -12,269 +12,271 @@ const teacherPassword = process.env.SEED_TEACHER_PASSWORD ?? "Teacher12345!";
 const studentEmail = process.env.SEED_STUDENT_EMAIL ?? "student@universityofantique.edu.ph";
 const studentPassword = process.env.SEED_STUDENT_PASSWORD ?? "Student12345!";
 
-const colleges = [
+function slugifyName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[–—]/g, "-")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+type SeedCourse = {
+  code: string;
+  name: string;
+  slug: string;
+  durationYears: number;
+  description: string;
+  careerOpportunities: string[];
+};
+
+type SeedCollege = {
+  code: string;
+  name: string;
+  slug: string;
+  sortOrder: number;
+  description: string;
+  courses: SeedCourse[];
+};
+
+function course(code: string, name: string, opts?: { slug?: string; durationYears?: number; description?: string; careers?: string[] }): SeedCourse {
+  return {
+    code,
+    name,
+    slug: opts?.slug ?? slugifyName(name),
+    durationYears: opts?.durationYears ?? 4,
+    description: opts?.description ?? `${name} — a program offered by the University of Antique.`,
+    careerOpportunities: opts?.careers ?? [],
+  };
+}
+
+const colleges: SeedCollege[] = [
   {
     code: "CAS",
     name: "College of Arts and Sciences",
     slug: "college-of-arts-and-sciences",
     sortOrder: 1,
     description:
-      "The CAS offers liberal arts, humanities, social sciences and natural sciences programs that build critical thinking and communication skills.",
+      "The CAS offers liberal arts, communication, language, and community development programs that build critical thinking and communication skills.",
     courses: [
-      {
-        code: "BA-COMM",
-        name: "Bachelor of Arts in Communication",
-        slug: "ba-communication",
-        durationYears: 4,
-        description:
-          "A program that develops competent communicators for media, corporate communication, and public relations careers.",
-        careerOpportunities: [
-          "Journalist / Reporter",
-          "Public Relations Officer",
-          "Corporate Communication Specialist",
-          "Broadcast Producer",
-          "Social Media Manager",
-        ],
-      },
-      {
-        code: "BS-PSYCH",
-        name: "Bachelor of Science in Psychology",
-        slug: "bs-psychology",
-        durationYears: 4,
-        description:
-          "Prepares students for careers in human services, organizational psychology, and graduate study in psychology.",
-        careerOpportunities: [
-          "HR Specialist",
-          "Guidance Assistant",
-          "Psychometrician (with licensure)",
-          "Case Manager",
-          "Research Assistant",
-        ],
-      },
-      {
-        code: "BS-BIO",
-        name: "Bachelor of Science in Biology",
-        slug: "bs-biology",
-        durationYears: 4,
-        description:
-          "A strong science foundation for careers in health professions, research, and environmental science.",
-        careerOpportunities: [
-          "Medical / Allied Health Professional (with further study)",
-          "Microbiologist",
-          "Environmental Analyst",
-          "Science Teacher",
-          "Research Scientist",
-        ],
-      },
+      course("BA-PSYCH", "Bachelor of Arts in Psychology"),
+      course("BA-COMM", "Bachelor of Arts in Communication"),
+      course("BA-ELS", "Bachelor of Arts in English Language Studies"),
+      course("BS-COMMDEV", "Bachelor of Science in Community Development"),
     ],
   },
   {
-    code: "CBA",
-    name: "College of Business and Accountancy",
-    slug: "college-of-business-and-accountancy",
+    code: "CMG",
+    name: "College of Management and Governance",
+    slug: "college-of-management-and-governance",
     sortOrder: 2,
     description:
-      "CBA produces ethical business leaders and accountants through its Accountancy and Business Administration programs.",
+      "The CMG produces ethical business leaders, accountants, hospitality and tourism professionals, and public administrators.",
     courses: [
-      {
-        code: "BSA",
-        name: "Bachelor of Science in Accountancy",
-        slug: "bs-accountancy",
-        durationYears: 4,
-        description:
-          "A rigorous program that prepares students for the Certified Public Accountant (CPA) licensure examination.",
-        careerOpportunities: [
-          "Certified Public Accountant",
-          "External / Internal Auditor",
-          "Financial Analyst",
-          "Tax Consultant",
-          "Chief Financial Officer",
-        ],
-      },
-      {
-        code: "BSBA-MKT",
-        name: "BS in Business Administration major in Marketing Management",
-        slug: "bsba-marketing",
-        durationYears: 4,
-        description:
-          "Focuses on marketing strategy, consumer behavior, digital marketing, and brand management.",
-        careerOpportunities: [
-          "Marketing Manager",
-          "Brand Strategist",
-          "Sales Director",
-          "Digital Marketing Specialist",
-          "Entrepreneur",
-        ],
-      },
-      {
-        code: "BSBA-FIN",
-        name: "BS in Business Administration major in Financial Management",
-        slug: "bsba-finance",
-        durationYears: 4,
-        description:
-          "Equips students with corporate finance, investment, and banking skills.",
-        careerOpportunities: [
-          "Financial Analyst",
-          "Investment Banker",
-          "Bank Officer",
-          "Credit Analyst",
-          "Treasury Specialist",
-        ],
-      },
-      {
-        code: "BSAIS",
-        name: "Bachelor of Science in Accounting Information Systems",
-        slug: "bs-accounting-information-systems",
-        durationYears: 4,
-        description:
-          "The intersection of accounting, information systems, and data analytics.",
-        careerOpportunities: [
-          "Systems Auditor",
-          "IT Consultant",
-          "Data Analyst",
-          "ERP Specialist",
-          "Cybersecurity Analyst",
-        ],
-      },
+      course("BSA", "Bachelor of Science in Accountancy", { careers: ["Certified Public Accountant", "External / Internal Auditor", "Financial Analyst", "Tax Consultant"] }),
+      course("BSMA", "Bachelor of Science in Management Accounting"),
+      course("BSHM", "Bachelor of Science in Hospitality Management"),
+      course("BSTM", "Bachelor of Science in Tourism Management"),
+      course("BSBA-MM", "Bachelor of Science in Business Administration major in Marketing Management"),
+      course("BSOA", "Bachelor of Science in Office Administration"),
+      course("BSENTREP", "Bachelor of Science in Entrepreneurship"),
+      course("BSCM", "Bachelor of Science in Cooperatives Management"),
+      course("DPA", "Doctor of Public Administration", { durationYears: 3 }),
+      course("MBA", "Master of Business Administration", { durationYears: 2 }),
+      course("MPA", "Master of Public Administration", { durationYears: 2 }),
     ],
   },
   {
-    code: "COE",
-    name: "College of Education",
-    slug: "college-of-education",
+    code: "CMS",
+    name: "College of Maritime Studies",
+    slug: "college-of-maritime-studies",
     sortOrder: 3,
     description:
-      "The COE trains future teachers who shape the next generation of Filipino learners.",
+      "The CMS trains licensed marine officers and engineers for the global maritime industry.",
     courses: [
-      {
-        code: "BEED",
-        name: "Bachelor of Elementary Education",
-        slug: "beed",
-        durationYears: 4,
-        description:
-          "Prepares students to teach in elementary schools with strong pedagogical foundations.",
-        careerOpportunities: [
-          "Elementary School Teacher",
-          "Learning Facilitator",
-          "Curriculum Developer",
-          "Special Education Teacher (with specialization)",
-          "School Administrator",
-        ],
-      },
-      {
-        code: "BSED-ENG",
-        name: "BS Secondary Education major in English",
-        slug: "bsed-english",
-        durationYears: 4,
-        description:
-          "Develops secondary school English teachers with mastery of language and literature.",
-        careerOpportunities: [
-          "Secondary School Teacher",
-          "ESL Instructor",
-          "Language Editor",
-          "Instructional Designer",
-          "Education Program Supervisor",
-        ],
-      },
-      {
-        code: "BSED-MATH",
-        name: "BS Secondary Education major in Mathematics",
-        slug: "bsed-math",
-        durationYears: 4,
-        description:
-          "Trains future mathematics educators for secondary education.",
-        careerOpportunities: [
-          "Secondary Math Teacher",
-          "Academic Coach",
-          "Educational Statistician",
-          "Curriculum Specialist",
-          "Tutorial Center Manager",
-        ],
-      },
+      course("BSMARE", "Bachelor of Science in Marine Engineering"),
+      course("BSMT", "Bachelor of Science in Marine Transportation"),
     ],
   },
   {
-    code: "COED",
-    name: "College of Engineering and Design",
-    slug: "college-of-engineering-and-design",
+    code: "CIT",
+    name: "College of Industrial Technology",
+    slug: "college-of-industrial-technology",
     sortOrder: 4,
     description:
-      "COED offers engineering and technology programs that answer the demands of industry and infrastructure.",
+      "The CIT develops skilled technologists in automotive, electrical, electronics, drafting, food service, and related trades.",
     courses: [
-      {
-        code: "BSIT",
-        name: "Bachelor of Science in Information Technology",
-        slug: "bsit",
-        durationYears: 4,
-        description:
-          "A program covering software development, networking, cybersecurity, and database systems.",
-        careerOpportunities: [
-          "Software Engineer",
-          "Web Developer",
-          "Network Administrator",
-          "Cybersecurity Analyst",
-          "Database Administrator",
-          "IT Project Manager",
-        ],
-      },
-      {
-        code: "BSCE",
-        name: "Bachelor of Science in Civil Engineering",
-        slug: "bs-civil-engineering",
-        durationYears: 5,
-        description:
-          "Designs and manages infrastructure: roads, bridges, buildings, and water systems.",
-        careerOpportunities: [
-          "Civil Engineer",
-          "Structural Engineer",
-          "Project Manager",
-          "Construction Supervisor",
-          "Urban Planner",
-        ],
-      },
-      {
-        code: "BSECE",
-        name: "Bachelor of Science in Electronics Engineering",
-        slug: "bs-electronics-engineering",
-        durationYears: 5,
-        description:
-          "Focuses on electronic systems, communications, and embedded technologies.",
-        careerOpportunities: [
-          "Electronics Engineer",
-          "Telecommunications Engineer",
-          "Embedded Systems Developer",
-          "RF Engineer",
-          "Semiconductor Engineer",
-        ],
-      },
+      course("BIT-AT", "Bachelor in Industrial Technology – Automotive Technology"),
+      course("BIT-ET", "Bachelor in Industrial Technology – Electrical Technology"),
+      course("BIT-ECT", "Bachelor in Industrial Technology – Electronics Technology"),
+      course("BIT-FDAT", "Bachelor in Industrial Technology – Fashion Design and Apparel Technology"),
+      course("BIT-FST", "Bachelor in Industrial Technology – Food Service Technology"),
+      course("BIT-HVACR", "Bachelor in Industrial Technology – Heating, Ventilating, Air Conditioning and Refrigeration Technology"),
+      course("BIT-DT", "Bachelor in Industrial Technology – Drafting Technology"),
+      course("BIT-CCT", "Bachelor in Industrial Technology – Civil and Construction Technology"),
+      course("TESDA-ELEC", "TESDA Leverage Program Electricity", { durationYears: 2 }),
     ],
   },
   {
-    code: "CON",
-    name: "College of Nursing",
-    slug: "college-of-nursing",
+    code: "LHS",
+    name: "Laboratory High School",
+    slug: "laboratory-high-school",
     sortOrder: 5,
     description:
-      "CON forms compassionate and competent professional nurses for local and international healthcare.",
+      "The University of Antique Laboratory High School offers junior high school education, including the Science, Technology and Engineering (STE) curriculum.",
     courses: [
-      {
-        code: "BSN",
-        name: "Bachelor of Science in Nursing",
-        slug: "bsn",
-        durationYears: 4,
-        description:
-          "A program that integrates nursing science, clinical practice, and community health.",
-        careerOpportunities: [
-          "Registered Nurse",
-          "Clinical Nurse Specialist (with further study)",
-          "Nurse Educator",
-          "Public Health Nurse",
-          "Overseas Nurse",
-        ],
-      },
+      course("JHS-REG", "Junior High School – Regular", { durationYears: 4 }),
+      course("JHS-STE", "Junior High School – STE", { durationYears: 4 }),
+    ],
+  },
+  {
+    code: "CCJE",
+    name: "College of Criminal Justice and Education",
+    slug: "college-of-criminal-justice-and-education",
+    sortOrder: 6,
+    description:
+      "The CCJE prepares students for careers in law enforcement, criminology, and industrial security management.",
+    courses: [
+      course("BSCRIM", "Bachelor of Science in Criminology", { careers: ["Criminologist", "Police Officer", "Correctional Officer", "Security Management Professional"] }),
+      course("BSISM", "Bachelor of Science in Industrial Security Management"),
+    ],
+  },
+  {
+    code: "COEA",
+    name: "College of Engineering and Architecture",
+    slug: "college-of-engineering-and-architecture",
+    sortOrder: 7,
+    description:
+      "The COEA offers accredited engineering and architecture programs that answer the demands of industry and infrastructure.",
+    courses: [
+      course("BSCE", "Bachelor of Science in Civil Engineering", { durationYears: 5, careers: ["Civil Engineer", "Structural Engineer", "Project Manager", "Construction Supervisor"] }),
+      course("BSME", "Bachelor of Science in Mechanical Engineering", { durationYears: 5 }),
+      course("BSEE", "Bachelor of Science in Electrical Engineering", { durationYears: 5 }),
+      course("BSECE", "Bachelor of Science in Electronics Engineering", { durationYears: 5 }),
+      course("BSCPE", "Bachelor of Science in Computer Engineering", { durationYears: 5 }),
+      course("BSARCH", "Bachelor of Science in Architecture", { durationYears: 5 }),
+    ],
+  },
+  {
+    code: "CCIS",
+    name: "College of Computing and Information Sciences",
+    slug: "college-of-computing-and-information-sciences",
+    sortOrder: 8,
+    description:
+      "The CCIS offers computing programs covering software development, networking, cybersecurity, and library information science.",
+    courses: [
+      course("BSCS", "Bachelor of Science in Computer Science", { careers: ["Software Engineer", "Systems Analyst", "Data Scientist", "Cybersecurity Analyst"] }),
+      course("BLIS", "Bachelor in Library and Information Science"),
+      course("BSIT", "Bachelor of Science in Information Technology", { careers: ["Software Engineer", "Web Developer", "Network Administrator", "IT Project Manager"] }),
+    ],
+  },
+  {
+    code: "CTE",
+    name: "College of Teacher Education",
+    slug: "college-of-teacher-education",
+    sortOrder: 9,
+    description:
+      "The CTE forms competent teachers and technical-vocational educators for elementary, secondary, and special needs education.",
+    courses: [
+      course("BEED", "Bachelor of Elementary Education"),
+      course("BECED", "Bachelor in Early Childhood Education"),
+      course("BPED", "Bachelor of Physical Education"),
+      course("BSED-ENG", "Bachelor of Secondary Education – English"),
+      course("BSED-FIL", "Bachelor of Secondary Education – Filipino"),
+      course("BSED-SCI", "Bachelor of Secondary Education – Science"),
+      course("BSED-SS", "Bachelor of Secondary Education – Social Studies"),
+      course("BSED-MATH", "Bachelor of Secondary Education – Mathematics"),
+      course("BSNED-GEN", "Bachelor of Special Needs Education – Generalist"),
+      course("BTVTED-AT", "Bachelor of Technical-Vocational Teacher Education – Automotive Technology"),
+      course("BTVTED-ET", "Bachelor of Technical-Vocational Teacher Education – Electrical Technology"),
+      course("BTVTED-ECT", "Bachelor of Technical-Vocational Teacher Education – Electronics Technology"),
+      course("BTVTED-FSM", "Bachelor of Technical-Vocational Teacher Education – Food and Service Management"),
+      course("BTVTED-GFD", "Bachelor of Technical-Vocational Teacher Education – Garments, Fashion and Design"),
+      course("BTVTED-HVAC", "Bachelor of Technical-Vocational Teacher Education – Heating, Ventilation, and Air-Conditioning Technology"),
+      course("BTVTED-DT", "Bachelor of Technical-Vocational Teacher Education – Drafting Technology"),
+      course("BTVTED-CCT", "Bachelor of Technical-Vocational Teacher Education – Civil Construction Technology"),
+      course("DIP-TEACH", "Diploma in Teaching", { durationYears: 2 }),
+      course("CERT-TEACH", "Certificate in Teaching", { durationYears: 2 }),
+      course("PHD-EDM", "Doctor of Philosophy – Educational Management", { durationYears: 3 }),
+      course("MAED-ENG", "Master of Arts in Education – English", { durationYears: 2 }),
+      course("MAED-FIL", "Master of Arts in Education – Filipino", { durationYears: 2 }),
+      course("MAED-SS", "Master of Arts in Education – Social Studies", { durationYears: 2 }),
+      course("MAED-MATH", "Master of Arts in Education – Mathematics", { durationYears: 2 }),
+      course("MAED-SCI", "Master of Arts in Education – Science", { durationYears: 2 }),
+      course("MAED-CI", "Master of Arts in Education – Curriculum Instruction", { durationYears: 2 }),
+      course("MED-EDM", "Master in Education – Educational Management", { durationYears: 2 }),
+      course("MED-CD", "Master in Education – Curriculum Development", { durationYears: 2 }),
+    ],
+  },
+  {
+    code: "HAMTIC",
+    name: "UA Hamtic Campus",
+    slug: "ua-hamtic-campus",
+    sortOrder: 10,
+    description:
+      "The UA Hamtic Campus offers agriculture, forestry, food technology, and teacher education programs.",
+    courses: [
+      course("BSED-ENG-H", "Bachelor of Secondary Education – English", { slug: "bsed-english-hamtic" }),
+      course("BSCS-H", "Bachelor of Science in Computer Science", { slug: "bs-cs-hamtic" }),
+      course("BSAG-AS", "Bachelor of Science in Agriculture – Animal Science", { slug: "bs-agriculture-animal-science" }),
+      course("BSAG-CS", "Bachelor of Science in Agriculture – Crop Science", { slug: "bs-agriculture-crop-science" }),
+      course("BSFT", "Bachelor of Science in Food Technology", { slug: "bs-food-technology" }),
+      course("BSF", "Bachelor of Science in Forestry", { slug: "bs-forestry" }),
+      course("BTLED-HE", "Bachelor of Technology and Livelihood Education – Home Economics"),
+      course("BTLED-AFA", "Bachelor of Technology and Livelihood Education – Agri-Fishery Arts"),
+      course("BSDT", "Bachelor of Dairy Technology", { slug: "bs-dairy-technology" }),
+    ],
+  },
+  {
+    code: "TLMC",
+    name: "UA TLMC Campus",
+    slug: "ua-tlmc-campus",
+    sortOrder: 11,
+    description:
+      "The UA Tario Lim Memorial Campus offers business, computing, teacher education, fisheries, and environmental management programs.",
+    courses: [
+      course("BSENTREP-T", "Bachelor of Science in Entrepreneurship (CBM)", { slug: "bs-entrepreneurship-tlmc" }),
+      course("BSHM-T", "Bachelor of Science in Hospitality Management (CBM)", { slug: "bs-hospitality-tlmc" }),
+      course("BSCS-T", "Bachelor of Science in Computer Science (CCS)", { slug: "bs-cs-tlmc" }),
+      course("BSIT-T", "Bachelor of Science in Information Technology (CCS)", { slug: "bsit-tlmc" }),
+      course("BSIS-T", "Bachelor of Science in Information System (CCS)", { slug: "bs-information-systems-tlmc" }),
+      course("BEED-T", "Bachelor of Elementary Education (CTE)", { slug: "beed-tlmc" }),
+      course("BSED-ENG-T", "Bachelor of Secondary Education – English (CTE)", { slug: "bsed-english-tlmc" }),
+      course("BSED-MATH-T", "Bachelor of Secondary Education – Mathematics (CTE)", { slug: "bsed-math-tlmc" }),
+      course("BSED-SCI-T", "Bachelor of Secondary Education – Science (CTE)", { slug: "bsed-science-tlmc" }),
+      course("BSLGA-EM", "Bachelor of Local Government Administration – Environmental Management"),
+      course("BSFISH-T", "Bachelor of Science in Fisheries (CFE)", { slug: "bs-fisheries-tlmc" }),
+      course("CERT-TEACH-T", "Certificate in Teaching (CTE)", { slug: "certificate-teaching-tlmc", durationYears: 2 }),
+      course("MED-EDM-T", "Master in Education – Educational Management (CTE)", { slug: "med-edm-tlmc", durationYears: 2 }),
+    ],
+  },
+  {
+    code: "LIBERTAD",
+    name: "UA Libertad Campus",
+    slug: "ua-libertad-campus",
+    sortOrder: 12,
+    description:
+      "The UA Libertad Campus offers information technology and hospitality management programs.",
+    courses: [
+      course("BSIT-L", "Bachelor of Science in Information Technology", { slug: "bsit-libertad" }),
+      course("BSHM-L", "Bachelor of Science in Hospitality Management", { slug: "bshm-libertad" }),
+    ],
+  },
+  {
+    code: "CALUYA",
+    name: "UA Caluya Campus",
+    slug: "ua-caluya-campus",
+    sortOrder: 13,
+    description:
+      "The UA Caluya Campus offers entrepreneurship, hospitality management, and industrial technology programs.",
+    courses: [
+      course("BSENTREP-C", "Bachelor of Science in Entrepreneurship", { slug: "bs-entrep-caluya" }),
+      course("BSHM-C", "Bachelor of Science in Hospitality Management", { slug: "bshm-caluya" }),
+      course("BIT-ET-C", "Bachelor in Industrial Technology – Electrical Technology", { slug: "bit-electrical-caluya" }),
+      course("BIT-FST-C", "Bachelor in Industrial Technology – Food Service Technology", { slug: "bit-food-service-caluya" }),
     ],
   },
 ];
+
 
 const news = [
   {

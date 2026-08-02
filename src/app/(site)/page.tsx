@@ -18,6 +18,9 @@ import {
   PlayCircle,
   MonitorCheck,
   MessagesSquare,
+  Ship,
+  Wrench,
+  School,
 } from "lucide-react";
 
 import { HeroCarousel } from "@/components/shared/hero-carousel";
@@ -68,12 +71,15 @@ async function getHeroSlides() {
 }
 
 const corporate = [
-  { icon: Landmark, name: "College of Arts and Sciences", code: "CAS", desc: "Communication, Psychology, Biology and more." },
-  { icon: Users, name: "College of Management and Governance", code: "CMG", desc: "Business, Accountancy, Hospitality Management." },
-  { icon: GraduationCap, name: "College of Teacher Education", code: "CTE", desc: "Elementary and Secondary Education majors." },
-  { icon: Globe2, name: "College of Engineering & Architecture", code: "COEA", desc: "Information Technology, Civil, Electronics." },
-  { icon: FlaskConical, name: "College of Computing & Information Sciences", code: "CCIS", desc: "Computer Science, Information Systems." },
-  { icon: Briefcase, name: "College of Criminal Justice Education", code: "CCJE", desc: "Bachelor of Science in Criminology." },
+  { icon: Landmark, name: "College of Arts and Sciences", code: "CAS", desc: "Psychology, Communication, English Language Studies, Community Development." },
+  { icon: Users, name: "College of Management and Governance", code: "CMG", desc: "Accountancy, Business, Hospitality, Tourism, Public Administration." },
+  { icon: GraduationCap, name: "College of Teacher Education", code: "CTE", desc: "Elementary, Secondary, Special Needs, Tech-Voc Teacher Education." },
+  { icon: Globe2, name: "College of Engineering & Architecture", code: "COEA", desc: "Civil, Mechanical, Electrical, Electronics, Computer, Architecture." },
+  { icon: FlaskConical, name: "College of Computing & Information Sciences", code: "CCIS", desc: "Computer Science, Information Technology, Library Science." },
+  { icon: Briefcase, name: "College of Criminal Justice and Education", code: "CCJE", desc: "Criminology, Industrial Security Management." },
+  { icon: Ship, name: "College of Maritime Studies", code: "CMS", desc: "Marine Engineering, Marine Transportation." },
+  { icon: Wrench, name: "College of Industrial Technology", code: "CIT", desc: "Automotive, Electrical, Electronics, Drafting, Food Service." },
+  { icon: School, name: "Laboratory High School", code: "LHS", desc: "Junior High School — Regular and STE." },
 ];
 
 const quickLinkKeys = ["admission", "student", "faculty", "other"] as const;

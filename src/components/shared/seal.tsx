@@ -14,9 +14,11 @@ export function Seal({
       style={{ width: size, height: size }}
       aria-hidden
     >
-      {/* Gold gradient band */}
-      <span className="absolute -inset-1 rounded-full bg-gradient-to-br from-yellow-200 via-amber-400 to-yellow-600 p-[3px] shadow-lg shadow-amber-500/30">
-        <span className="block h-full w-full rounded-full bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950" />
+      <span
+        className="absolute -inset-0.5 rounded-full bg-gradient-to-br from-crimson-800 to-crimson-950 p-[2px] shadow-lg shadow-crimson-950/40"
+        aria-hidden
+      >
+        <span className="block h-full w-full rounded-full bg-crimson-900" />
       </span>
       {/* Seal image */}
       <span className="absolute inset-[3px] overflow-hidden rounded-full bg-white shadow-inner ring-1 ring-crimson-900/10">

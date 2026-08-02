@@ -46,11 +46,11 @@ export default async function NewsPage({
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
+      <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          className="pointer-events-none absolute inset-0 opacity-[0.08]"
           style={{
-            backgroundImage: "radial-gradient(circle at 20% 30%, #f2de5e 0, transparent 40%), radial-gradient(circle at 80% 80%, #9d0505 0, transparent 45%)",
+            backgroundImage: "radial-gradient(circle at 20% 30%, #dfae19 0, transparent 40%), radial-gradient(circle at 80% 80%, #3f0608 0, transparent 45%)",
           }}
         />
         <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
@@ -59,11 +59,11 @@ export default async function NewsPage({
             alt="University of Antique seal"
             width={72}
             height={72}
-            className="mx-auto rounded-full bg-white/10 p-1 ring-1 ring-gold-300/40"
+            className="mx-auto rounded-full bg-white/10 p-1 ring-1 ring-yellow-300/60"
           />
-          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Stay Informed</p>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Stay Informed</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">News &amp; Events</h1>
-          <p className="mt-4 text-navy-100">
+          <p className="mt-4 text-red-50">
             Press releases, announcements, and updates from across the University of Antique.
           </p>
         </div>
@@ -72,7 +72,7 @@ export default async function NewsPage({
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Tabs defaultValue={valid}>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <TabsList className="w-full justify-start overflow-x-auto border border-white/10 bg-navy-900/70 sm:w-auto">
+            <TabsList className="w-full justify-start overflow-x-auto border border-slate-200 bg-slate-100 sm:w-auto">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -81,18 +81,18 @@ export default async function NewsPage({
                 >
                   <tab.icon className="h-3.5 w-3.5" />
                   {tab.label}
-                  <Badge className="ml-0.5 bg-white/10 px-1.5 py-0 text-[10px] text-navy-200 data-[state=active]:bg-gold-300 data-[state=active]:text-navy-950">
+                  <Badge className="ml-0.5 bg-slate-200 px-1.5 py-0 text-[10px] text-slate-600 data-[state=active]:bg-yellow-300 data-[state=active]:text-crimson-900">
                     {countFor(tab.value)}
                   </Badge>
                 </TabsTrigger>
               ))}
             </TabsList>
-            <p className="flex items-center gap-1.5 text-sm text-navy-300">
-              <Briefcase className="h-4 w-4 text-gold-300" />
+            <p className="flex items-center gap-1.5 text-sm text-slate-500">
+              <Briefcase className="h-4 w-4 text-amber-500" />
               New to UA? Read the{" "}
               <a
                 href="/apply"
-                className="font-medium text-gold-300 underline-offset-4 hover:underline"
+                className="font-medium text-crimson-700 underline-offset-4 hover:underline"
               >
                 admission guide
               </a>
@@ -123,7 +123,7 @@ export default async function NewsPage({
                     {[0, 1, 2].map((i) => (
                       <NewsCardSkeleton key={i} />
                     ))}
-                    <p className="col-span-full pt-2 text-center text-sm text-navy-300">
+                    <p className="col-span-full pt-2 text-center text-sm text-slate-500">
                       No {tab.label.toLowerCase()} posted yet. Check back soon.
                     </p>
                   </div>

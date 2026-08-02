@@ -21,29 +21,35 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Get in Touch</p>
+      <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 25% 25%, #dfae19 0, transparent 40%), radial-gradient(circle at 80% 70%, #3f0608 0, transparent 45%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Get in Touch</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">Contact Us</h1>
-          <p className="mt-4 text-navy-100">
+          <p className="mt-4 text-red-50">
             Questions about admissions, enrollment, or campus life? We are here to help.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {contactCards.map((card) => (
-            <Card key={card.label} className="border-white/10 bg-navy-900/60">
+            <Card key={card.label} className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
               <CardContent className="flex items-start gap-4 p-6">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
                   <card.icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-navy-400">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
                     {card.label}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-white">{card.value}</p>
+                  <p className="mt-1 text-sm font-medium text-slate-900">{card.value}</p>
                 </div>
               </CardContent>
             </Card>
@@ -64,7 +70,7 @@ export default function ContactPage() {
           </div>
 
           <div className="space-y-5">
-            <div className="overflow-hidden rounded-xl border shadow-sm">
+            <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
               <iframe
                 src={mapUrl}
                 title="University of Antique map"
@@ -76,12 +82,12 @@ export default function ContactPage() {
                 allowFullScreen
               />
             </div>
-            <Card className="border border-gold-300/20 bg-navy-900/80">
-              <CardContent className="p-6 text-sm leading-relaxed text-navy-200">
-                <p className="font-display text-base font-semibold text-gold-300">Office of Admissions</p>
+            <Card className="border border-amber-300 bg-yellow-50">
+              <CardContent className="p-6 text-sm leading-relaxed text-slate-600">
+                <p className="font-display text-base font-semibold text-crimson-700">Office of Admissions</p>
                 <p className="mt-2">
                   For application-related concerns, email{" "}
-                  <span className="text-gold-300">admissions@universityofantique.edu.ph</span> or visit the
+                  <span className="text-crimson-700">admissions@universityofantique.edu.ph</span> or visit the
                   Admissions Office at the Main Campus, Sibalom, Antique.
                 </p>
               </CardContent>

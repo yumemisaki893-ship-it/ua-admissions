@@ -17,7 +17,7 @@ export function Logo({
       <span
         className={cn(
           "relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full ring-2",
-          light ? "ring-gold-300/70" : "ring-crimson-800/60",
+          light ? "ring-yellow-300/70" : "ring-crimson-800/60",
         )}
       >
         <Image
@@ -33,22 +33,17 @@ export function Logo({
         <span className="flex flex-col leading-tight">
           <span
             className={cn(
-              "text-[11px] font-semibold uppercase tracking-[0.18em]",
-              light ? "text-gold-300" : "text-gold-600",
-            )}
-          >
-            Republic of the Philippines
-          </span>
-          <span
-            className={cn(
               "font-display text-base font-semibold tracking-tight",
-              light ? "text-white" : "text-navy-900",
+              light ? "text-white" : "text-slate-900",
             )}
           >
             University of Antique
           </span>
           <span
-            className={cn("text-[10px] uppercase tracking-[0.22em]", light ? "text-navy-200" : "text-muted-foreground")}
+            className={cn(
+              "text-[10px] uppercase tracking-[0.22em]",
+              light ? "text-yellow-100" : "text-crimson-700",
+            )}
           >
             {siteConfig.tagline}
           </span>

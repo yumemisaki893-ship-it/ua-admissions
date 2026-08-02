@@ -13,9 +13,9 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-crimson-900/40 bg-navy-950 text-navy-100">
+    <footer className="border-t border-slate-200 bg-white text-slate-600">
       {/* Masthead strip */}
-      <div className="border-b border-white/10 bg-gradient-to-r from-crimson-900 via-crimson-950 to-navy-950">
+      <div className="border-b border-amber-200 bg-gradient-to-r from-crimson-700 via-crimson-800 to-crimson-900">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-10 sm:px-6 md:flex-row md:justify-between lg:px-8">
           <div className="flex items-center gap-4">
             <Image
@@ -23,17 +23,15 @@ export function Footer() {
               alt="University of Antique seal"
               width={72}
               height={72}
-              className="h-[4.5rem] w-[4.5rem] rounded-full bg-white/10 p-1 ring-1 ring-gold-300/40"
+              className="h-[4.5rem] w-[4.5rem] rounded-full bg-white/10 p-1 ring-1 ring-yellow-300/60"
             />
             <div>
-              <p className="font-display text-lg font-semibold text-white">
-                Republic of the Philippines · {siteConfig.name}
-              </p>
-              <p className="font-display text-sm italic text-gold-300">{siteConfig.tagline}</p>
+              <p className="font-display text-lg font-semibold text-white">{siteConfig.name}</p>
+              <p className="font-display text-sm italic text-yellow-200">{siteConfig.tagline}</p>
             </div>
           </div>
           <div className="w-full max-w-md space-y-2 md:w-80">
-            <p className="text-sm font-medium text-navy-100">Stay updated with UA news &amp; announcements</p>
+            <p className="text-sm font-medium text-red-50">Stay updated with UA news &amp; announcements</p>
             <NewsletterForm />
           </div>
         </div>
@@ -41,7 +39,7 @@ export function Footer() {
 
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="space-y-4">
-          <p className="text-sm leading-relaxed text-navy-300">{siteConfig.description}</p>
+          <p className="text-sm leading-relaxed text-slate-500">{siteConfig.description}</p>
           <div className="flex gap-3">
             {socialLinks.map((s) => (
               <a
@@ -50,7 +48,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="rounded-full bg-white/10 p-2 transition-all hover:-translate-y-0.5 hover:bg-gold-300 hover:text-navy-950"
+                className="rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:bg-yellow-300 hover:text-slate-900"
               >
                 <s.icon className="h-4 w-4" />
               </a>
@@ -63,9 +61,9 @@ export function Footer() {
                   href={seal.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-white/10 px-2.5 py-1 text-[11px] text-navy-300 transition-colors hover:border-gold-300/50 hover:text-gold-300"
+                  className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] text-slate-500 transition-colors hover:border-amber-400 hover:text-crimson-700"
                 >
-                  <ShieldCheck className="h-3 w-3 text-gold-300/70" />
+                  <ShieldCheck className="h-3 w-3 text-amber-500" />
                   {seal.label}
                 </a>
               </li>
@@ -74,22 +72,22 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-gold-300">Quick Links</h3>
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Quick Links</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {siteConfig.nav.slice(0, 6).map((item) => (
               <li key={item.label}>
-                <Link href={item.href} className="text-navy-300 transition-colors hover:text-gold-300">
+                <Link href={item.href} className="text-slate-500 transition-colors hover:text-crimson-700">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/register" className="text-navy-300 transition-colors hover:text-gold-300">
+              <Link href="/register" className="text-slate-500 transition-colors hover:text-crimson-700">
                 Apply Online
               </Link>
             </li>
             <li>
-              <Link href="/login" className="text-navy-300 transition-colors hover:text-gold-300">
+              <Link href="/login" className="text-slate-500 transition-colors hover:text-crimson-700">
                 Student Portal
               </Link>
             </li>
@@ -97,7 +95,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-gold-300">Online Services</h3>
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Online Services</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {Object.entries(siteConfig.quickLinks).map(([, group]) =>
               group.items.slice(0, 1).map((item) => (
@@ -106,7 +104,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-navy-300 transition-colors hover:text-gold-300"
+                    className="text-slate-500 transition-colors hover:text-crimson-700"
                   >
                     {item.label}
                   </a>
@@ -118,7 +116,7 @@ export function Footer() {
                 href="https://antiquespride.edu.ph/ua-transparency-seal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-navy-300 transition-colors hover:text-gold-300"
+                className="text-slate-500 transition-colors hover:text-crimson-700"
               >
                 Transparency Seal
               </a>
@@ -127,27 +125,27 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-gold-300">Contact</h3>
-          <ul className="mt-4 space-y-3 text-sm text-navy-300">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Contact</h3>
+          <ul className="mt-4 space-y-3 text-sm text-slate-500">
             <li className="flex gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               University of Antique Main Campus Sibalom, Antique 5713, Philippines
             </li>
             <li className="flex gap-2.5">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               {siteConfig.phone}
             </li>
             <li className="flex gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               {siteConfig.email}
             </li>
             <li className="flex gap-2.5">
-              <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
+              <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
               <a
                 href={siteConfig.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-gold-300"
+                className="transition-colors hover:text-crimson-700"
               >
                 www.antiquespride.edu.ph
               </a>
@@ -156,8 +154,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-navy-400 sm:flex-row sm:px-6 lg:px-8">
+      <div className="border-t border-slate-200">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:px-6 lg:px-8">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
@@ -166,7 +164,7 @@ export function Footer() {
               href={siteConfig.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-gold-300"
+              className="transition-colors hover:text-crimson-700"
             >
               antiquespride.edu.ph
             </Link>{" "}

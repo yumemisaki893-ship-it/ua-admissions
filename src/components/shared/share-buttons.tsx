@@ -32,13 +32,13 @@ export function ShareButtons({ title }: { title: string }) {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-navy-200">
-        <Share2 className="h-4 w-4 text-gold-300" /> Share:
+      <span className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600">
+        <Share2 className="h-4 w-4 text-crimson-700" /> Share:
       </span>
       <Button
         variant="outline"
         size="sm"
-        className="border-white/15 text-navy-100 hover:border-gold-300/50 hover:text-gold-300"
+        className="border-slate-300 text-slate-600 hover:border-amber-400 hover:text-crimson-700"
         onClick={shareFacebook}
       >
         Facebook
@@ -46,7 +46,7 @@ export function ShareButtons({ title }: { title: string }) {
       <Button
         variant="outline"
         size="sm"
-        className="border-white/15 text-navy-100 hover:border-gold-300/50 hover:text-gold-300"
+        className="border-slate-300 text-slate-600 hover:border-amber-400 hover:text-crimson-700"
         onClick={shareTwitter}
       >
         X
@@ -54,10 +54,10 @@ export function ShareButtons({ title }: { title: string }) {
       <Button
         variant="outline"
         size="sm"
-        className="border-white/15 text-navy-100 hover:border-gold-300/50 hover:text-gold-300"
+        className="border-slate-300 text-slate-600 hover:border-amber-400 hover:text-crimson-700"
         onClick={() => void copyLink()}
       >
-        {copied ? <Check className="h-4 w-4 text-emerald-400" /> : null}
+        {copied ? <Check className="h-4 w-4 text-emerald-600" /> : null}
         {copied ? "Copied!" : "Copy Link"}
       </Button>
     </div>

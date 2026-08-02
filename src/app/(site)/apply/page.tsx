@@ -42,21 +42,27 @@ export default function ApplyPage() {
 
   return (
     <>
-      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Admission</p>
+      <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 25% 25%, #dfae19 0, transparent 40%), radial-gradient(circle at 80% 70%, #3f0608 0, transparent 45%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Admission</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">How to Apply</h1>
-          <p className="mt-4 text-navy-100">
+          <p className="mt-4 text-red-50">
             Your journey to becoming a University of Antique student starts here — entirely online.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button size="lg" className="bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950" asChild>
+            <Button size="lg" className="bg-yellow-300 text-crimson-900 shadow-lg hover:bg-white" asChild>
               <Link href="/register">Start Your Application</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white/25 text-white hover:bg-gold-300 hover:text-navy-950"
+              className="border-white/40 text-white hover:bg-yellow-300 hover:text-crimson-900"
               asChild
             >
               <Link href="/login">Track Your Application</Link>
@@ -71,14 +77,14 @@ export default function ApplyPage() {
           title="Six Simple Steps"
           description="The entire application is handled online through the UA Student Portal."
         />
-        <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ol className="stagger mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
             <li key={step.num}>
-              <Card className="h-full border-white/10 bg-navy-900/60">
+              <Card className="h-full border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
                 <CardContent className="p-6">
-                  <span className="font-display text-4xl font-bold text-gold-300/40">{step.num}</span>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-white">{step.title}</h3>
-                  <p className="mt-1.5 text-sm text-navy-300">{step.desc}</p>
+                  <span className="font-display text-4xl font-bold text-amber-300">{step.num}</span>
+                  <h3 className="mt-3 font-display text-lg font-semibold text-slate-900">{step.title}</h3>
+                  <p className="mt-1.5 text-sm text-slate-500">{step.desc}</p>
                 </CardContent>
               </Card>
             </li>
@@ -86,32 +92,32 @@ export default function ApplyPage() {
         </ol>
       </section>
 
-      <section id="requirements" className="scroll-mt-24 border-y border-white/10 bg-navy-900/40 py-16">
+      <section id="requirements" className="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Prepare These"
             title="Application Requirements"
             description="Scan or take clear photos of these documents before starting your application."
           />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="stagger mt-12 grid gap-6 md:grid-cols-3">
             {requirements.map((req) => (
-              <Card key={req.title} className="border-white/10 bg-navy-900/60">
+              <Card key={req.title} className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
                 <CardContent className="flex items-start gap-4 p-6">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
                     <req.icon className="h-5 w-5" />
                   </span>
                   <div>
-                    <h3 className="font-display font-semibold text-white">{req.title}</h3>
-                    <p className="mt-1 text-sm text-navy-300">{req.note}</p>
+                    <h3 className="font-display font-semibold text-slate-900">{req.title}</h3>
+                    <p className="mt-1 text-sm text-slate-500">{req.note}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="mt-8 flex items-center gap-3 rounded-lg border border-gold-300/30 bg-gold-300/10 p-4 text-sm text-gold-200">
-            <Info className="h-5 w-5 shrink-0" />
-            Files must be in <strong>PDF, PNG, or JPEG</strong> format and no larger than{" "}
-            <strong>5 MB</strong> each. Accepted file types are strictly enforced.
+          <div className="mt-8 flex items-center gap-3 rounded-lg border border-amber-300 bg-yellow-50 p-4 text-sm text-slate-600">
+            <Info className="h-5 w-5 shrink-0 text-amber-500" />
+            Files must be in <strong className="text-slate-900">PDF, PNG, or JPEG</strong> format and no larger than{" "}
+            <strong className="text-slate-900">5 MB</strong> each. Accepted file types are strictly enforced.
           </div>
         </div>
       </section>
@@ -132,33 +138,33 @@ export default function ApplyPage() {
                 { icon: ClipboardList, text: "Your payment is verified automatically after checkout" },
               ].map((item) => (
                 <li key={item.text} className="flex items-start gap-3 text-sm">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold-300/15 text-gold-300 ring-1 ring-gold-300/30">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-yellow-100 text-amber-600 ring-1 ring-amber-200">
                     <item.icon className="h-5 w-5" />
                   </span>
-                  <p className="pt-1.5 text-navy-300">{item.text}</p>
+                  <p className="pt-1.5 text-slate-500">{item.text}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <Card className="border-white/10 overflow-hidden bg-navy-900/60">
-            <div className="bg-gradient-to-br from-crimson-800 to-navy-950 p-8 text-center text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Application Fee</p>
+          <Card className="overflow-hidden border-slate-200 bg-white shadow-xl shadow-red-900/10">
+            <div className="bg-gradient-to-br from-crimson-700 to-crimson-900 p-8 text-center text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Application Fee</p>
               <p className="mt-3 font-display text-5xl font-semibold">PHP {fee.toLocaleString()}</p>
-              <p className="mt-2 text-sm text-navy-100">Non-refundable · Payable online</p>
+              <p className="mt-2 text-sm text-red-50">Non-refundable · Payable online</p>
             </div>
             <CardContent className="p-8">
               <div className="space-y-3 text-sm">
                 {["GCash", "Maya", "Credit / Debit Card"].map((m) => (
-                  <div key={m} className="flex items-center justify-between rounded-lg border border-white/10 bg-navy-950/60 px-4 py-3">
-                    <span className="font-medium text-white">{m}</span>
+                  <div key={m} className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                    <span className="font-medium text-slate-900">{m}</span>
                     <Badge variant="success">Available</Badge>
                   </div>
                 ))}
               </div>
-              <Button size="lg" className="mt-6 w-full bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950" asChild>
+              <Button size="lg" className="mt-6 w-full bg-crimson-700 text-white hover:bg-yellow-400 hover:text-slate-900" asChild>
                 <Link href="/register">Proceed with Application</Link>
               </Button>
-              <p className="mt-3 text-center text-xs text-navy-400">
+              <p className="mt-3 text-center text-xs text-slate-400">
                 For fee concerns, contact {siteConfig.email}
               </p>
             </CardContent>

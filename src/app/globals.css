@@ -54,25 +54,25 @@
   }
 
   .dark {
-    --background: 226 55% 7%;
-    --foreground: 220 20% 96%;
-    --card: 226 45% 9%;
-    --card-foreground: 220 20% 96%;
-    --popover: 226 45% 9%;
-    --popover-foreground: 220 20% 96%;
-    --primary: 0 88% 40%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 0 72% 39%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 226 30% 15%;
-    --secondary-foreground: 220 20% 90%;
-    --muted: 226 30% 15%;
-    --muted-foreground: 220 15% 68%;
-    --accent: 0 55% 18%;
-    --accent-foreground: 0 55% 90%;
-    --destructive: 0 62% 45%;
+    --secondary: 48 92% 93%;
+    --secondary-foreground: 36 60% 30%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 0 70% 96%;
+    --accent-foreground: 0 72% 35%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
-    --border: 226 35% 19%;
-    --input: 226 35% 19%;
-    --ring: 0 70% 45%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 0 72% 39%;
   }
 }
 
@@ -211,12 +211,12 @@
 
   /* Rich text rendering (TipTap JSON) */
   .rich-text {
-    @apply text-[15px] leading-relaxed text-foreground/90;
+    @apply text-[15px] leading-relaxed text-slate-700;
   }
   .rich-text h1,
   .rich-text h2,
   .rich-text h3 {
-    @apply font-display font-semibold text-navy-900 dark:text-white mt-6 mb-3;
+    @apply font-display font-semibold text-slate-900 mt-6 mb-3;
   }
   .rich-text h1 {
     @apply text-2xl;
@@ -237,10 +237,10 @@
     @apply list-decimal pl-6 my-3 space-y-1;
   }
   .rich-text a {
-    @apply text-sky-600 dark:text-gold-300 underline underline-offset-2;
+    @apply text-crimson-700 underline underline-offset-2;
   }
   .rich-text blockquote {
-    @apply border-l-4 border-sky-300 dark:border-gold-300 pl-4 my-4 italic text-muted-foreground;
+    @apply border-l-4 border-amber-300 pl-4 my-4 italic text-muted-foreground;
   }
   .rich-text img {
     @apply rounded-lg my-4 max-w-full;

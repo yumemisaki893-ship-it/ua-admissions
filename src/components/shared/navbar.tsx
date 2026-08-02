@@ -6,12 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ExternalLink, Menu, UserRound, GraduationCap, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
 import { siteConfig } from "@/lib/site-config";
@@ -23,8 +17,6 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const listRef = useRef<HTMLUListElement>(null);
   const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
-  const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -40,27 +32,6 @@ export function Navbar() {
       setPill({ left: active.offsetLeft, width: active.offsetWidth });
     }
   }, [pathname]);
-
-  useEffect(() => () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-  }, []);
-
-  // Hover-open the mega menu, with a short grace period so the cursor can
-  // travel from the trigger into the dropdown panel without closing it.
-  function openOnHover(label: string) {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpenMenu(label);
-  }
-
-  function closeSoon() {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 160);
-  }
-
-  function closeNow() {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setOpenMenu(null);
-  }
 
   function handleHover(e: React.MouseEvent<HTMLUListElement>) {
     const li = (e.target as HTMLElement).closest("li");
@@ -110,40 +81,35 @@ export function Navbar() {
                 <li
                   key={item.label}
                   data-active={pathname.startsWith(item.href) ? "true" : "false"}
-                  className="relative"
-                  onMouseEnter={() => openOnHover(item.label)}
-                  onMouseLeave={closeSoon}
+                  className="group relative"
                 >
-                  <DropdownMenu
-                    open={openMenu === item.label}
-                    onOpenChange={(next) => (next ? openOnHover(item.label) : closeNow())}
+                  <button
+                    type="button"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    className={cn(
+                      "inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-crimson-800 group-focus-within:text-crimson-800",
+                      pathname.startsWith(item.href) && "text-crimson-800",
+                    )}
                   >
-                    <DropdownMenuTrigger asChild>
-                      <button
-                        className={cn(
-                          "group inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-crimson-800",
-                          pathname.startsWith(item.href) && "text-crimson-800",
-                        )}
-                      >
-                        {item.label}
-                        <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-all duration-300 group-data-[state=open]:rotate-180 group-data-[state=open]:opacity-100 group-hover:-translate-y-px" />
-                      </button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent
-                      align="start"
-                      onMouseEnter={() => openOnHover(item.label)}
-                      onMouseLeave={closeSoon}
-                      className="w-[340px] border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur data-[state=open]:slide-in-from-top-2"
-                    >
+                    {item.label}
+                    <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-all duration-300 group-hover:rotate-180 group-hover:opacity-100 group-hover:-translate-y-px" />
+                  </button>
+                  <div className="invisible absolute left-0 top-full z-50 -translate-y-1 pt-2 opacity-0 transition-all duration-200 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    <div className="w-[340px] rounded-xl border border-slate-200 bg-white/95 p-2 shadow-xl shadow-slate-900/10 backdrop-blur">
                       <div className="grid grid-cols-1">
                         {item.children.map((child) => (
-                          <DropdownMenuItem
+                          <div
                             key={child.href + child.label}
-                            asChild
-                            className="group/item cursor-pointer flex-col items-start gap-0.5 rounded-md p-3 text-slate-700 transition-colors duration-150 hover:bg-yellow-50 focus:bg-yellow-50 focus:text-crimson-800 data-[highlighted]:bg-yellow-50"
+                            className="group/item cursor-pointer rounded-md p-3 transition-colors duration-150 hover:bg-yellow-50"
                           >
                             {child.external ? (
-                              <a href={child.href} target="_blank" rel="noopener noreferrer">
+                              <a
+                                href={child.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex flex-col gap-0.5 text-slate-700"
+                              >
                                 <span className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors group-hover/item:text-crimson-800">
                                   {child.label}
                                   <ExternalLink className="h-3 w-3 text-amber-500 transition-transform duration-200 group-hover/item:-translate-y-0.5 group-hover/item:translate-x-0.5" />
@@ -155,7 +121,10 @@ export function Navbar() {
                                 )}
                               </a>
                             ) : (
-                              <Link href={child.href}>
+                              <Link
+                                href={child.href}
+                                className="flex flex-col gap-0.5 text-slate-700"
+                              >
                                 <span className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors group-hover/item:text-crimson-800">
                                   {child.label}
                                   <ArrowRight className="h-3 w-3 -translate-x-1 text-crimson-700 opacity-0 transition-all duration-200 group-hover/item:translate-x-0 group-hover/item:opacity-100" />
@@ -167,11 +136,11 @@ export function Navbar() {
                                 )}
                               </Link>
                             )}
-                          </DropdownMenuItem>
+                          </div>
                         ))}
                       </div>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                    </div>
+                  </div>
                 </li>
               ) : (
                 <li

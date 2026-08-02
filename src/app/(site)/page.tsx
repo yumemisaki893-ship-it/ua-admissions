@@ -18,7 +18,6 @@ import {
   PlayCircle,
   MonitorCheck,
   MessagesSquare,
-  Sparkles,
 } from "lucide-react";
 
 import { HeroCarousel } from "@/components/shared/hero-carousel";
@@ -175,12 +174,7 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-10">
             <Reveal className="shrink-0">
-              <div className="relative">
-                <Seal size={128} className="animate-float" />
-                <span className="absolute -right-3 -top-3 flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-300 to-amber-400 text-crimson-900 shadow-lg shadow-amber-500/40 ring-2 ring-white">
-                  <Sparkles className="h-4 w-4" />
-                </span>
-              </div>
+              <Seal size={128} className="animate-float" />
             </Reveal>
             <Reveal delay={100} className="text-center lg:text-left">
               <Badge className="border-amber-300 bg-yellow-50 text-crimson-700 ring-1 ring-amber-300">

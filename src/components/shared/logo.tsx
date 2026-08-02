@@ -16,7 +16,7 @@ export function Logo({
 }) {
   return (
     <Link href="/" className={cn("group flex items-center gap-3", className)} aria-label="University of Antique - Home">
-      <Seal size={compact ? 40 : 46} className="transition-transform duration-300 group-hover:rotate-6" />
+      <Seal size={compact ? 40 : 46} />
       {!iconOnly && (
         <span className="flex flex-col leading-tight">
           <span

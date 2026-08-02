@@ -35,7 +35,7 @@ export default function LoginPage() {
     setPending(true);
     const result = await loginWithCredentials(values);
     setPending(false);
-    if (result.error) {
+    if (result?.error) {
       toast.error("Sign in failed", { description: result.error });
     } else {
       router.push("/portal/dashboard");

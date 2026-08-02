@@ -27,7 +27,7 @@ export async function Footer() {
               alt="University of Antique seal"
               width={72}
               height={72}
-              className="h-[4.5rem] w-[4.5rem] rounded-full bg-white/10 p-1 ring-1 ring-yellow-300/60"
+              className="h-[4.5rem] w-[4.5rem] rounded-full bg-white/10 p-1"
             />
             <div>
               <p className="font-display text-lg font-semibold text-white">{siteConfig.name}</p>

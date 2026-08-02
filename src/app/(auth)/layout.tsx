@@ -33,7 +33,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             alt="University of Antique seal"
             width={96}
             height={96}
-            className="rounded-full bg-white/10 p-1.5 ring-2 ring-yellow-300/70"
+            className="rounded-full bg-white/10 p-1.5"
           />
           <div className="space-y-3">
             <h1 className="font-display text-4xl font-semibold leading-tight text-white">

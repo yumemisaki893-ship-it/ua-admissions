@@ -240,7 +240,7 @@ export default async function AboutPage() {
           </Reveal>
           <Reveal delay={80}>
             <div className="mx-auto mt-10 flex max-w-md flex-col items-center gap-6">
-              <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-amber-300 to-crimson-700 shadow-xl ring-8 ring-amber-100 transition-transform duration-300 hover:scale-105">
+              <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-white shadow-xl transition-transform duration-300 hover:scale-105">
                 <Image
                   src="/ua/ua-seal.png"
                   alt="The University of Antique official seal"

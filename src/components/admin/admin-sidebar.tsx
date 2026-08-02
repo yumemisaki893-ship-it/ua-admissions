@@ -17,15 +17,12 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { isIctuRole } from "@/lib/roles";
+import { isContentManager, isIctuRole } from "@/lib/roles";
 
 export const adminLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/applicants", label: "Applicants", icon: Users },
   { href: "/admin/academics", label: "Academics", icon: BookOpen },
-  { href: "/admin/content", label: "Content", icon: FileText },
-  { href: "/admin/links", label: "Links", icon: Link2 },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
 export const ictuLinks = [
@@ -35,8 +32,14 @@ export const ictuLinks = [
   { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
 ];
 
-export function MobileAdminNav({ isIctu }: { isIctu: boolean }) {
-  const nav = isIctu ? ictuLinks : adminLinks;
+export const contentLinks = [
+  { href: "/admin/content", label: "Content", icon: FileText },
+  { href: "/admin/links", label: "Links", icon: Link2 },
+  { href: "/admin/settings", label: "Settings", icon: Settings },
+];
+
+export function MobileAdminNav({ isIctu, showContent }: { isIctu: boolean; showContent: boolean }) {
+  const nav = [...(isIctu ? ictuLinks : adminLinks), ...(showContent ? contentLinks : [])];
   return (
     <nav
       className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
@@ -94,7 +97,7 @@ export function AdminSidebar({ role }: { role: string }) {
       <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
         {isIctuRole(role) ? "ICTU Oversight" : "Administration"}
       </p>
-      {(isIctuRole(role) ? ictuLinks : adminLinks).map((link) => (
+      {[...(isIctuRole(role) ? ictuLinks : adminLinks), ...(isContentManager(role) ? contentLinks : [])].map((link) => (
         <Link
           key={link.href}
           href={link.href}

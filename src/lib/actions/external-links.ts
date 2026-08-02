@@ -6,8 +6,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { recordAudit } from "@/lib/audit";
 import { defaultExternalLinks, externalLinkCategories } from "@/lib/external-links";
-
-const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER"] as const;
+import { isContentManager } from "@/lib/roles";
 
 type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -21,11 +20,10 @@ const linkSchema = z.object({
   active: z.coerce.boolean().default(true),
 });
 
-async function requireAdmin(): Promise<void> {
+async function requireContentManager(): Promise<void> {
   const session = await auth();
-  const role = session?.user?.role;
-  if (!role || !(ADMIN_ROLES as readonly string[]).includes(role)) {
-    throw new Error("You are not authorized to perform this action.");
+  if (!isContentManager(session?.user?.role)) {
+    throw new Error("Only ICTU staff and the administrator may edit site links.");
   }
 }
 
@@ -44,7 +42,7 @@ async function run(action: () => Promise<void>): Promise<ActionResult> {
 }
 
 export async function listExternalLinks() {
-  await requireAdmin();
+  await requireContentManager();
   return prisma.externalLink.findMany({
     orderBy: [{ category: "asc" }, { order: "asc" }],
     select: {
@@ -61,7 +59,7 @@ export async function listExternalLinks() {
 }
 
 export async function createExternalLink(input: unknown): Promise<ActionResult> {
-  await requireAdmin();
+  await requireContentManager();
   const data = linkSchema.parse(input);
   return run(async () => {
     await prisma.externalLink.create({ data });
@@ -70,7 +68,7 @@ export async function createExternalLink(input: unknown): Promise<ActionResult> 
 }
 
 export async function updateExternalLink(id: string, input: unknown): Promise<ActionResult> {
-  await requireAdmin();
+  await requireContentManager();
   const data = linkSchema.parse(input);
   return run(async () => {
     await prisma.externalLink.update({ where: { id }, data });
@@ -79,7 +77,7 @@ export async function updateExternalLink(id: string, input: unknown): Promise<Ac
 }
 
 export async function deleteExternalLink(id: string): Promise<ActionResult> {
-  await requireAdmin();
+  await requireContentManager();
   return run(async () => {
     await prisma.externalLink.delete({ where: { id } });
     await recordAudit({ action: "EXTERNAL_LINK_DELETE", entity: "ExternalLink", entityId: id, details: { id } });
@@ -87,7 +85,7 @@ export async function deleteExternalLink(id: string): Promise<ActionResult> {
 }
 
 export async function restoreDefaultLinks(): Promise<ActionResult> {
-  await requireAdmin();
+  await requireContentManager();
   return run(async () => {
     await prisma.externalLink.deleteMany();
     await prisma.externalLink.createMany({ data: defaultExternalLinks() });

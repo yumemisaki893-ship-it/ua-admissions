@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import { Logo } from "@/components/shared/logo";
 import { AdminSidebar, MobileAdminNav } from "@/components/admin/admin-sidebar";
-import { ADMIN_ROLES, isIctuRole } from "@/lib/roles";
+import { ADMIN_ROLES, isContentManager, isIctuRole } from "@/lib/roles";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +56,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           </div>
         </header>
 
-        <MobileAdminNav isIctu={isIctu} />
+        <MobileAdminNav isIctu={isIctu} showContent={isContentManager(role)} />
 
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>
       </div>

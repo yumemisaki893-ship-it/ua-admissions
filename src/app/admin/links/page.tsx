@@ -1,11 +1,17 @@
 import { Link2 } from "lucide-react";
+import { redirect } from "next/navigation";
 
 import { ExternalLinksManager } from "@/components/admin/external-links-manager";
 import { listExternalLinks } from "@/lib/actions/external-links";
+import { auth } from "@/lib/auth";
+import { isContentManager } from "@/lib/roles";
 
 export const dynamic = "force-dynamic";
 
 export default async function LinksPage() {
+  const session = await auth();
+  if (!session?.user?.id || !isContentManager(session.user.role)) redirect("/admin");
+
   const links = await listExternalLinks();
 
   return (

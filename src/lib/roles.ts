@@ -10,8 +10,14 @@ export const ICTU_ROLES = ["ICTU_SUPERVISOR", "ICTU_STAFF"] as const;
 
 export const ACCOUNT_MANAGER_ROLES = ["ICTU_SUPERVISOR", "ICTU_STAFF"] as const;
 
+export const CONTENT_ROLES = ["SUPER_ADMIN", "ICTU_SUPERVISOR", "ICTU_STAFF"] as const;
+
 export function isIctuRole(role?: string) {
   return role === "ICTU_SUPERVISOR" || role === "ICTU_STAFF";
+}
+
+export function isContentManager(role?: string) {
+  return Boolean(role && (CONTENT_ROLES as readonly string[]).includes(role));
 }
 
 export function isAdminRole(role?: string) {

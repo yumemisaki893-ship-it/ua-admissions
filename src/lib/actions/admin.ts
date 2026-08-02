@@ -12,6 +12,7 @@ import { revalidatePath } from "next/cache";
 import { slugify } from "@/lib/utils";
 import { recordAudit } from "@/lib/audit";
 import { SETTING_ADMISSION_OPEN, SETTING_APPLICATION_FEE } from "@/lib/site-config";
+import { isContentManager } from "@/lib/roles";
 import type { Prisma } from "@prisma/client";
 
 const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER"] as const;
@@ -25,6 +26,13 @@ async function requireAdmin(): Promise<string> {
     throw new Error("You are not authorized to perform this action.");
   }
   return session!.user!.id;
+}
+
+async function requireContentManager(): Promise<void> {
+  const session = await auth();
+  if (!isContentManager(session?.user?.role)) {
+    throw new Error("Only ICTU staff and the administrator may edit site contents.");
+  }
 }
 
 async function run(
@@ -88,7 +96,7 @@ export async function createNews(input: unknown): Promise<ActionResult> {
   return run(
     "NEWS_CREATE",
     async () => {
-      await requireAdmin();
+      await requireContentManager();
       const parsed = newsSchema.parse(input);
       const slug = slugify(parsed.title);
       await prisma.news.create({
@@ -113,7 +121,7 @@ export async function updateNews(id: string, input: unknown): Promise<ActionResu
   return run(
     "NEWS_UPDATE",
     async () => {
-      await requireAdmin();
+      await requireContentManager();
       const parsed = newsSchema.parse(input);
       await prisma.news.update({
         where: { id },
@@ -135,14 +143,14 @@ export async function updateNews(id: string, input: unknown): Promise<ActionResu
 
 export async function deleteNews(id: string): Promise<ActionResult> {
   return run("NEWS_DELETE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     await prisma.news.delete({ where: { id } });
   }, "/news", { id });
 }
 
 export async function updateSiteContent(key: string, content: unknown): Promise<ActionResult> {
   return run("SITE_CONTENT_UPDATE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     const record = await prisma.siteContent.findUnique({ where: { key } });
     if (record) {
       await prisma.siteContent.update({ where: { key }, data: { content: content as object } });
@@ -154,7 +162,7 @@ export async function updateSiteContent(key: string, content: unknown): Promise<
 
 export async function createCollege(input: unknown): Promise<ActionResult> {
   return run("COLLEGE_CREATE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     const parsed = collegeSchema.parse(input);
     await prisma.college.create({
       data: {
@@ -169,7 +177,7 @@ export async function createCollege(input: unknown): Promise<ActionResult> {
 
 export async function updateCollege(id: string, input: unknown): Promise<ActionResult> {
   return run("COLLEGE_UPDATE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     const parsed = collegeSchema.parse(input);
     await prisma.college.update({
       where: { id },
@@ -185,14 +193,14 @@ export async function updateCollege(id: string, input: unknown): Promise<ActionR
 
 export async function deleteCollege(id: string): Promise<ActionResult> {
   return run("COLLEGE_DELETE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     await prisma.college.delete({ where: { id } });
   }, "/academics", { id });
 }
 
 export async function createCourse(input: unknown): Promise<ActionResult> {
   return run("COURSE_CREATE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     const parsed = courseSchema.parse(input);
     await prisma.course.create({
       data: {
@@ -210,7 +218,7 @@ export async function createCourse(input: unknown): Promise<ActionResult> {
 
 export async function updateCourse(id: string, input: unknown): Promise<ActionResult> {
   return run("COURSE_UPDATE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     const parsed = courseSchema.parse(input);
     await prisma.course.update({
       where: { id },
@@ -228,7 +236,7 @@ export async function updateCourse(id: string, input: unknown): Promise<ActionRe
 
 export async function deleteCourse(id: string): Promise<ActionResult> {
   return run("COURSE_DELETE", async () => {
-    await requireAdmin();
+      await requireContentManager();
     await prisma.course.delete({ where: { id } });
   }, "/academics", { id });
 }
@@ -271,7 +279,7 @@ export async function updateSettings(input: {
   applicationFee: string;
 }): Promise<ActionResult> {
   return run("SETTINGS_UPDATE", async () => {
-    await requireAdmin();
+    await requireContentManager();
     const fee = Number(input.applicationFee);
     if (!Number.isFinite(fee) || fee <= 0) {
       throw new Error("Please enter a valid application fee in Philippine Pesos.");

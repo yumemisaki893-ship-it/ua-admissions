@@ -1,7 +1,10 @@
 import dynamicImport from "next/dynamic";
+import { redirect } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { isContentManager } from "@/lib/roles";
 
 export const dynamic = "force-dynamic";
 
@@ -24,6 +27,9 @@ const CollegesManager = dynamicImport(
 );
 
 export default async function ContentPage() {
+  const session = await auth();
+  if (!session?.user?.id || !isContentManager(session.user.role)) redirect("/admin");
+
   const [news, contentBlocks, colleges] = await Promise.all([
     prisma.news.findMany({
       orderBy: { updatedAt: "desc" },

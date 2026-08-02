@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDate } from "@/lib/utils";
+import { isPosterImage } from "@/lib/image-type";
 
 interface NewsCardProps {
   slug: string;
@@ -20,14 +21,16 @@ export function NewsCard({ slug, title, excerpt, imageUrl, category, publishedAt
   return (
     <Card className="group flex h-full flex-col overflow-hidden border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
       <Link href={`/news/${slug}`} className="flex h-full flex-col">
-        <div className="relative h-48 w-full overflow-hidden bg-slate-100">
+        <div className={`relative h-48 w-full overflow-hidden ${isPosterImage(imageUrl) ? "bg-white" : "bg-slate-100"}`}>
           {imageUrl ? (
             <Image
               src={imageUrl}
               alt={title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className={`transition-transform duration-300 group-hover:scale-105 ${
+                isPosterImage(imageUrl) ? "inset-0 object-contain p-3" : "object-cover"
+              }`}
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-crimson-700 to-crimson-900">

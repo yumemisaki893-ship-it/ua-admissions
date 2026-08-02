@@ -10,6 +10,7 @@ import { ShareButtons } from "@/components/shared/share-buttons";
 import { prisma } from "@/lib/prisma";
 import { renderRichText } from "@/lib/rich-text";
 import { formatDate } from "@/lib/utils";
+import { isPosterImage } from "@/lib/image-type";
 
 export const dynamic = "force-dynamic";
 
@@ -83,19 +84,31 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
         {item.excerpt && <p className="mt-4 text-lg text-slate-500">{item.excerpt}</p>}
       </header>
 
-      {/* Hero image */}
-      {item.imageUrl && (
-        <div className="relative mt-8 aspect-[21/9] w-full overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-red-900/10">
-          <Image
-            src={item.imageUrl}
-            alt={item.title}
-            fill
-            sizes="(max-width: 896px) 100vw, 896px"
-            className="object-cover"
-            priority
-          />
-        </div>
-      )}
+      {/* Hero image — photos get a wide crop; graphic posters get a contained frame */}
+      {item.imageUrl &&
+        (isPosterImage(item.imageUrl) ? (
+          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-lg shadow-red-900/10">
+            <Image
+              src={item.imageUrl}
+              alt={item.title}
+              width={1600}
+              height={1200}
+              sizes="(max-width: 896px) 100vw, 768px"
+              className="h-auto w-full rounded-xl object-contain"
+            />
+          </div>
+        ) : (
+          <div className="relative mt-8 aspect-[21/9] w-full overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-red-900/10">
+            <Image
+              src={item.imageUrl}
+              alt={item.title}
+              fill
+              sizes="(max-width: 896px) 100vw, 896px"
+              className="object-cover"
+              priority
+            />
+          </div>
+        ))}
 
       {/* Share */}
       <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-slate-200 pb-6">

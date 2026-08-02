@@ -18,6 +18,7 @@ interface Slide {
   publishedAt: Date | null;
   href: string;
   gradient: string;
+  poster?: boolean;
 }
 
 const AUTOPLAY_MS = 6000;
@@ -65,7 +66,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
           {slides.map((slide, index) => (
             <CarouselItem key={slide.id}>
               <div className="relative flex min-h-[440px] items-center overflow-hidden sm:min-h-[540px]">
-                {slide.imageUrl ? (
+                {slide.imageUrl && !slide.poster ? (
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}
@@ -78,6 +79,21 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
                   <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient ?? fallbackGradients[index % fallbackGradients.length]}`} />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-r from-crimson-950/95 via-crimson-950/70 to-crimson-950/30" />
+
+                {slide.poster && slide.imageUrl && (
+                  <div className="absolute inset-y-0 right-0 z-10 hidden w-2/5 items-center justify-center pr-10 lg:flex lg:pr-14">
+                    <div className="max-h-[75%] overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-3 shadow-2xl shadow-crimson-950/40 backdrop-blur-md">
+                      <Image
+                        src={slide.imageUrl}
+                        alt={slide.title}
+                        width={900}
+                        height={1100}
+                        sizes="(max-width: 1536px) 40vw, 40vw"
+                        className="max-h-[50vh] w-auto object-contain"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 {/* Glass content panel */}
                 <div className="relative mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">

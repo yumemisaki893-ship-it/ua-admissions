@@ -37,6 +37,7 @@ import { siteConfig } from "@/lib/site-config";
 import { formatDate, slugify } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { getExternalLinkRows, getExternalLinks } from "@/lib/external-links";
+import { isPosterImage } from "@/lib/image-type";
 
 export const dynamic = "force-dynamic";
 
@@ -65,6 +66,7 @@ async function getHeroSlides() {
     publishedAt: item.publishedAt,
     href: `/news/${item.slug}`,
     gradient: "from-crimson-700 via-crimson-800 to-crimson-950",
+    poster: isPosterImage(item.imageUrl),
   }));
 }
 

@@ -30,7 +30,7 @@ export default async function AcademicsPage() {
             alt="University of Antique seal"
             width={72}
             height={72}
-            className="mx-auto rounded-full bg-white/10 p-1"
+            className="mx-auto h-[4.5rem] w-[4.5rem] object-contain"
           />
           <p className="mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Academics</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">

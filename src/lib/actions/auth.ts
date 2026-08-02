@@ -33,6 +33,12 @@ export async function registerUser(input: unknown) {
   return { ok: true };
 }
 
+function redirectForRole(role: string): string {
+  if (role === "STUDENT") return "/portal/dashboard";
+  if (role === "TEACHER") return "/teacher/dashboard";
+  return "/admin";
+}
+
 export async function loginWithCredentials(input: unknown) {
   const parsed = z
     .object({ email: z.string().email(), password: z.string().min(1) })
@@ -54,11 +60,13 @@ export async function loginWithCredentials(input: unknown) {
     details: { email: user.email, method: "credentials", role: user.role },
   });
 
+  const destination = redirectForRole(user.role);
+
   try {
     await signIn("credentials", {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: user.role === "STUDENT" ? "/portal/dashboard" : "/admin",
+      redirectTo: destination,
     });
   } catch (error) {
     if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
@@ -66,7 +74,7 @@ export async function loginWithCredentials(input: unknown) {
     }
     return { error: "Invalid email or password." };
   }
-  return { ok: true, redirectTo: user.role === "STUDENT" ? "/portal/dashboard" : "/admin" };
+  return { ok: true, redirectTo: destination };
 }
 
 export async function getCurrentUser() {

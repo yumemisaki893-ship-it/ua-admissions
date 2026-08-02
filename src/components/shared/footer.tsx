@@ -96,7 +96,7 @@ export async function Footer() {
             </li>
             <li>
               <Link href="/login" className="text-slate-500 transition-colors hover:text-crimson-700">
-                Student Portal
+                Sign In
               </Link>
             </li>
           </ul>

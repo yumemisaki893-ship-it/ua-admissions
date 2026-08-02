@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { formatDate } from "@/lib/utils";
-import { createRegistrarAccount, setRegistrarActive } from "@/lib/actions/ictu";
+import { createAccount, setAccountActive } from "@/lib/actions/ictu";
 
 export type RegistrarRow = {
   id: string;
@@ -32,7 +32,7 @@ export function RegistrarsManager({ registrars }: { registrars: RegistrarRow[] }
 
   async function handleCreate() {
     setCreating(true);
-    const result = await createRegistrarAccount(form);
+    const result = await createAccount({ ...form, role: "REGISTRAR" });
     setCreating(false);
     if (!result.ok) {
       toast.error("Could not create account", { description: result.error });
@@ -45,7 +45,7 @@ export function RegistrarsManager({ registrars }: { registrars: RegistrarRow[] }
 
   async function handleToggle(row: RegistrarRow) {
     setToggling(row.id);
-    const result = await setRegistrarActive(row.id, !row.isActive);
+    const result = await setAccountActive(row.id, !row.isActive);
     setToggling(null);
     if (!result.ok) {
       toast.error("Update failed", { description: result.error });

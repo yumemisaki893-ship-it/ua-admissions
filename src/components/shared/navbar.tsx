@@ -178,7 +178,7 @@ export function Navbar({ links = {} }: { links?: Record<string, string> }) {
               asChild
             >
               <Link href="/login">
-                <UserRound className="mr-1 h-4 w-4" /> Student Portal
+                <UserRound className="mr-1 h-4 w-4" /> Sign In
               </Link>
             </Button>
             <Button
@@ -257,7 +257,7 @@ export function Navbar({ links = {} }: { links?: Record<string, string> }) {
                     </Button>
                     <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-100" asChild>
                       <Link href="/login" onClick={() => setOpen(false)}>
-                        <UserRound className="mr-1 h-4 w-4" /> Student Portal
+                        <UserRound className="mr-1 h-4 w-4" /> Sign In
                       </Link>
                     </Button>
                   </div>

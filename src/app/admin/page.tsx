@@ -13,7 +13,9 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
   const session = await auth();
-  if (session?.user?.role === "ICTU") return <IctuDashboard />;
+  if (session?.user?.role === "ICTU_SUPERVISOR" || session?.user?.role === "ICTU_STAFF") {
+    return <IctuDashboard />;
+  }
 
   const [totalApplicants, pending, underReview, accepted, rejected, revenue, recent] = await Promise.all([
     prisma.application.count({ where: { status: { not: "DRAFT" } } }),

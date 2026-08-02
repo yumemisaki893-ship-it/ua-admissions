@@ -14,7 +14,9 @@ enum Role {
   SUPER_ADMIN
   REGISTRAR
   ADMISSIONS_OFFICER
-  ICTU
+  ICTU_SUPERVISOR
+  ICTU_STAFF
+  TEACHER
   STUDENT
 }
 
@@ -54,6 +56,7 @@ model User {
   applications   Application[]
   notifications  Notification[]
   auditLogs      AuditLog[]
+  classes        Class[]
 
   @@index([role])
 }
@@ -79,29 +82,83 @@ model AuditLog {
 }
 
 model StudentProfile {
-  id              String   @id @default(cuid())
-  userId          String   @unique
-  firstName       String
-  middleName      String?
-  lastName        String
-  suffix          String?
-  gender          String
-  birthDate       DateTime
-  birthplace      String?
-  address         String
-  city            String
-  province        String
-  zipCode         String?
-  contactNumber   String
-  guardianName    String
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  studentNumber String?
+  firstName     String
+  middleName    String?
+  lastName      String
+  suffix        String?
+  gender        String
+  birthDate     DateTime
+  birthplace    String?
+  address       String
+  city          String
+  province      String
+  zipCode       String?
+  contactNumber String
+  guardianName  String
   guardianContact String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   applications Application[]
+  enrollments  Enrollment[]
 
   @@index([lastName])
+  @@index([studentNumber])
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  code      String   @unique
+  title     String
+  units     Int      @default(3)
+  collegeId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  college College? @relation(fields: [collegeId], references: [id], onDelete: SetNull)
+  classes Class[]
+
+  @@index([code])
+}
+
+model Class {
+  id           String   @id @default(cuid())
+  subjectId    String
+  teacherId    String
+  section      String
+  semester     String
+  academicYear String
+  schedule     String?
+  room         String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  subject      Subject       @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  teacher      User          @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  enrollments  Enrollment[]
+
+  @@unique([subjectId, teacherId, section, semester, academicYear])
+  @@index([teacherId])
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  classId   String
+  studentProfileId String
+  grade     Int?
+  remarks   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  class     Class         @relation(fields: [classId], references: [id], onDelete: Cascade)
+  studentProfile StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, studentProfileId])
+  @@index([studentProfileId])
 }
 
 model College {
@@ -116,6 +173,7 @@ model College {
   updatedAt   DateTime @updatedAt
 
   courses Course[]
+  subjects Subject[]
 
   @@index([slug])
 }

@@ -50,7 +50,7 @@ export default async function PortalDashboardPage() {
         />
         <div className="relative flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Student Portal</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Student Services</p>
             <h1 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
               Welcome back, {firstName}!
             </h1>

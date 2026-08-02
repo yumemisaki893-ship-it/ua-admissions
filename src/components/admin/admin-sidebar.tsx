@@ -10,16 +10,19 @@ import {
   Settings,
   Link2,
   Fingerprint,
+  BookOpen,
   LogOut,
   Home,
   ShieldCheck,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { isIctuRole } from "@/lib/roles";
 
 export const adminLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/applicants", label: "Applicants", icon: Users },
+  { href: "/admin/academics", label: "Academics", icon: BookOpen },
   { href: "/admin/content", label: "Content", icon: FileText },
   { href: "/admin/links", label: "Links", icon: Link2 },
   { href: "/admin/settings", label: "Settings", icon: Settings },
@@ -27,7 +30,8 @@ export const adminLinks = [
 
 export const ictuLinks = [
   { href: "/admin", label: "Oversight", icon: LayoutDashboard },
-  { href: "/admin/ictu/registrars", label: "Registrars", icon: Users },
+  { href: "/admin/ictu/accounts", label: "Accounts", icon: Users },
+  { href: "/admin/ictu/registrars", label: "Registrars", icon: FileText },
   { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
 ];
 
@@ -88,9 +92,9 @@ export function AdminSidebar({ role }: { role: string }) {
         style={pill ? { top: pill.top, height: pill.height } : undefined}
       />
       <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-        {role === "ICTU" ? "ICTU Oversight" : "Administration"}
+        {isIctuRole(role) ? "ICTU Oversight" : "Administration"}
       </p>
-      {(role === "ICTU" ? ictuLinks : adminLinks).map((link) => (
+      {(isIctuRole(role) ? ictuLinks : adminLinks).map((link) => (
         <Link
           key={link.href}
           href={link.href}

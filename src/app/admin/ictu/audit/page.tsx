@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { isIctuRole } from "@/lib/roles";
 import { formatDateTime } from "@/lib/utils";
 import { actionLabel } from "@/components/admin/ictu/ictu-dashboard";
 import { AuditFilters } from "@/components/admin/ictu/audit-filters";
@@ -20,7 +21,7 @@ export default async function AuditTrailPage({
   searchParams: { userId?: string; action?: string; page?: string };
 }) {
   const session = await auth();
-  if (session?.user?.role !== "ICTU") notFound();
+  if (!isIctuRole(session?.user?.role)) notFound();
 
   const userId = searchParams.userId;
   const action = searchParams.action;
@@ -50,7 +51,7 @@ export default async function AuditTrailPage({
     }),
     prisma.auditLog.count({ where }),
     prisma.user.findMany({
-      where: { role: { in: ["REGISTRAR", "SUPER_ADMIN", "ADMISSIONS_OFFICER", "ICTU"] } },
+      where: { role: { in: ["REGISTRAR", "SUPER_ADMIN", "ADMISSIONS_OFFICER", "ICTU_SUPERVISOR", "ICTU_STAFF"] } },
       orderBy: { name: "asc" },
       select: { id: true, name: true, email: true, role: true },
     }),

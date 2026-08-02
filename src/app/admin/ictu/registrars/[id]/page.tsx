@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { isIctuRole } from "@/lib/roles";
 import { formatDate, formatDateTime } from "@/lib/utils";
 import { actionLabel } from "@/components/admin/ictu/ictu-dashboard";
 
@@ -17,7 +18,7 @@ export default async function RegistrarFootprintPage({
   params: { id: string };
 }) {
   const session = await auth();
-  if (session?.user?.role !== "ICTU") notFound();
+  if (!isIctuRole(session?.user?.role)) notFound();
 
   const registrar = await prisma.user.findUnique({
     where: { id: params.id },

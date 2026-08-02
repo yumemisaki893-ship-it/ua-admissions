@@ -2,13 +2,14 @@ import { notFound } from "next/navigation";
 
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
+import { isIctuRole } from "@/lib/roles";
 import { RegistrarsManager } from "@/components/admin/ictu/registrars-manager";
 
 export const dynamic = "force-dynamic";
 
 export default async function RegistrarsPage() {
   const session = await auth();
-  if (session?.user?.role !== "ICTU") notFound();
+  if (!isIctuRole(session?.user?.role)) notFound();
 
   const registrars = await prisma.user.findMany({
     where: { role: "REGISTRAR" },

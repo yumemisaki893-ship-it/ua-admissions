@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Loader2, LogIn } from "lucide-react";
+import { Loader2, LogIn, UserRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,9 +46,12 @@ export default function LoginPage() {
     <Suspense fallback={null}>
       <Card className="animate-scale-in border-slate-200 bg-white shadow-2xl shadow-red-900/10">
         <CardHeader className="text-center">
+          <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-full border border-crimson-700/20 bg-crimson-50 shadow-inner">
+            <UserRound className="h-8 w-8 text-crimson-700" strokeWidth={1.75} />
+          </div>
           <CardTitle className="font-display text-2xl text-slate-900">Sign In</CardTitle>
           <CardDescription className="text-slate-500">
-            Access your student portal or the university admin console.
+            Access your student services, faculty portal, or the admin console.
           </CardDescription>
         </CardHeader>
         <CardContent>

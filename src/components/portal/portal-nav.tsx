@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, FileText, Home, LogOut, Bell, GraduationCap, ChevronDown, UserRound } from "lucide-react";
+import { LayoutDashboard, FileText, Home, LogOut, Bell, GraduationCap, ChevronDown, UserRound, BookOpenCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +34,7 @@ export function PortalNav({
 
   const links = [
     { href: "/portal/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/portal/grades", label: "My Grades", icon: BookOpenCheck },
     { href: "/portal/apply", label: "Application", icon: FileText },
     { href: "/portal/notifications", label: "Notifications", icon: Bell },
     { href: "/portal/profile", label: "Profile", icon: UserRound },
@@ -132,6 +133,11 @@ export function PortalNav({
               <DropdownMenuItem asChild>
                 <Link href="/portal/apply" className="cursor-pointer">
                   <GraduationCap className="h-4 w-4" /> Application
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/portal/grades" className="cursor-pointer">
+                  <BookOpenCheck className="h-4 w-4" /> My Grades
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>

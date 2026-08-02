@@ -1,10 +1,9 @@
 import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
 import { authConfig } from "@/lib/auth.config";
+import { ADMIN_ROLES as ADMIN_ROLE_SET, ICTU_ROLES as ICTU_ROLE_SET } from "@/lib/roles";
 
 const { auth } = NextAuth(authConfig);
-
-const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER", "ICTU"];
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -16,7 +15,24 @@ export default auth((req) => {
     if (!isLoggedIn) {
       return NextResponse.redirect(new URL("/login", nextUrl));
     }
-    if (!role || !ADMIN_ROLES.includes(role)) {
+    if (!role || !ADMIN_ROLE_SET.includes(role as typeof ADMIN_ROLE_SET[number])) {
+      return NextResponse.redirect(new URL("/portal/dashboard", nextUrl));
+    }
+  }
+
+  // ICTU oversight area
+  if (nextUrl.pathname.startsWith("/admin/ictu")) {
+    if (!role || !ICTU_ROLE_SET.includes(role as typeof ICTU_ROLE_SET[number])) {
+      return NextResponse.redirect(new URL("/admin", nextUrl));
+    }
+  }
+
+  // Teacher area
+  if (nextUrl.pathname.startsWith("/teacher")) {
+    if (!isLoggedIn) {
+      return NextResponse.redirect(new URL("/login", nextUrl));
+    }
+    if (role !== "TEACHER") {
       return NextResponse.redirect(new URL("/portal/dashboard", nextUrl));
     }
   }
@@ -31,7 +47,7 @@ export default auth((req) => {
   // Already-authenticated users should not see auth pages
   if (nextUrl.pathname.startsWith("/login") || nextUrl.pathname.startsWith("/register")) {
     if (isLoggedIn) {
-      const dest = role && ADMIN_ROLES.includes(role) ? "/admin" : "/portal/dashboard";
+      const dest = role === "STUDENT" ? "/portal/dashboard" : role === "TEACHER" ? "/teacher/dashboard" : role && ADMIN_ROLE_SET.includes(role as typeof ADMIN_ROLE_SET[number]) ? "/admin" : "/portal/dashboard";
       return NextResponse.redirect(new URL(dest, nextUrl));
     }
   }
@@ -40,5 +56,5 @@ export default auth((req) => {
 });
 
 export const config = {
-  matcher: ["/admin/:path*", "/portal/:path*", "/login", "/register"],
+  matcher: ["/admin/:path*", "/teacher/:path*", "/portal/:path*", "/login", "/register"],
 };

@@ -7,6 +7,10 @@ const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@universityofantique.ed
 const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "Admin12345!";
 const ictuEmail = process.env.SEED_ICTU_EMAIL ?? "ictu@universityofantique.edu.ph";
 const ictuPassword = process.env.SEED_ICTU_PASSWORD ?? "Ictu12345!";
+const teacherEmail = process.env.SEED_TEACHER_EMAIL ?? "teacher@universityofantique.edu.ph";
+const teacherPassword = process.env.SEED_TEACHER_PASSWORD ?? "Teacher12345!";
+const studentEmail = process.env.SEED_STUDENT_EMAIL ?? "student@universityofantique.edu.ph";
+const studentPassword = process.env.SEED_STUDENT_PASSWORD ?? "Student12345!";
 
 const colleges = [
   {
@@ -579,12 +583,110 @@ async function main() {
         email: ictuEmail,
         passwordHash: await bcrypt.hash(ictuPassword, 12),
         name: "ICTU Administrator",
-        role: Role.ICTU,
+        role: Role.ICTU_SUPERVISOR,
         isVerified: true,
         isActive: true,
       },
     });
     console.log(`Created ICTU user: ${ictuEmail}`);
+  }
+
+  const teacherExists = await prisma.user.findUnique({ where: { email: teacherEmail } });
+  if (!teacherExists) {
+    await prisma.user.create({
+      data: {
+        email: teacherEmail,
+        passwordHash: await bcrypt.hash(teacherPassword, 12),
+        name: "Demo Faculty",
+        role: Role.TEACHER,
+        isVerified: true,
+        isActive: true,
+      },
+    });
+    console.log(`Created teacher user: ${teacherEmail}`);
+  }
+
+  const studentExists = await prisma.user.findUnique({ where: { email: studentEmail } });
+  let studentProfile: { id: string; userId: string } | null = null;
+  if (!studentExists) {
+    const created = await prisma.user.create({
+      data: {
+        email: studentEmail,
+        passwordHash: await bcrypt.hash(studentPassword, 12),
+        name: "Demo Student",
+        role: Role.STUDENT,
+        isVerified: true,
+        isActive: true,
+        studentProfile: {
+          create: {
+            studentNumber: "UA-2026-0001",
+            firstName: "Demo",
+            lastName: "Student",
+            gender: "Prefer not to say",
+            birthDate: new Date("2004-01-01"),
+            address: "Sibalom, Antique",
+            city: "Sibalom",
+            province: "Antique",
+            contactNumber: "09123456789",
+            guardianName: "Demo Guardian",
+          },
+        },
+      },
+    });
+    studentProfile = await prisma.studentProfile.findUnique({
+      where: { userId: created.id },
+      select: { id: true, userId: true },
+    });
+    console.log(`Created student user: ${studentEmail}`);
+  } else {
+    studentProfile = await prisma.studentProfile.findUnique({
+      where: { userId: studentExists.id },
+      select: { id: true, userId: true },
+    });
+  }
+
+  const firstCollege = await prisma.college.findFirst();
+  if (firstCollege) {
+    const subjects: { code: string; title: string; units: number }[] = [
+      { code: "CC101", title: "Programming Fundamentals", units: 3 },
+      { code: "MATH101", title: "College Algebra", units: 3 },
+    ];
+    for (const s of subjects) {
+      const exists = await prisma.subject.findUnique({ where: { code: s.code } });
+      if (!exists) {
+        await prisma.subject.create({
+          data: { code: s.code, title: s.title, units: s.units, collegeId: firstCollege.id },
+        });
+        console.log(`Created subject: ${s.code}`);
+      }
+    }
+
+    const teacher = await prisma.user.findUnique({ where: { email: teacherEmail } });
+    if (teacher && studentProfile) {
+      const math = await prisma.subject.findUnique({ where: { code: "MATH101" } });
+      if (math) {
+        const existingClass = await prisma.class.findFirst({
+          where: { teacherId: teacher.id, subjectId: math.id, section: "BSIT-1A", academicYear: "2026-2027", semester: "1st Semester" },
+        });
+        if (!existingClass) {
+          const created = await prisma.class.create({
+            data: {
+              subjectId: math.id,
+              teacherId: teacher.id,
+              section: "BSIT-1A",
+              semester: "1st Semester",
+              academicYear: "2026-2027",
+              schedule: "MWF 9:00–10:30 AM",
+              room: "Rm. 204",
+            },
+          });
+          await prisma.enrollment.create({
+            data: { classId: created.id, studentProfileId: studentProfile.id },
+          });
+          console.log("Created demo class + enrolled demo student");
+        }
+      }
+    }
   }
 
   for (const college of colleges) {

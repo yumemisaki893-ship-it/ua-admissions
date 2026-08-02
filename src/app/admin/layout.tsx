@@ -4,19 +4,18 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import { Logo } from "@/components/shared/logo";
 import { AdminSidebar, MobileAdminNav } from "@/components/admin/admin-sidebar";
+import { ADMIN_ROLES, isIctuRole } from "@/lib/roles";
 
 export const dynamic = "force-dynamic";
-
-const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER", "ICTU"];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
   const role = session?.user?.role;
 
   if (!session?.user) redirect("/login");
-  if (!role || !ADMIN_ROLES.includes(role)) redirect("/portal/dashboard");
+  if (!role || !(ADMIN_ROLES as readonly string[]).includes(role)) redirect("/portal/dashboard");
 
-  const isIctu = role === "ICTU";
+  const isIctu = isIctuRole(role);
 
   const initials = (session.user.name ?? "A")
     .split(" ")

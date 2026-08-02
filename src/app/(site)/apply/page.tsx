@@ -77,7 +77,7 @@ export default async function ApplyPage() {
         <SectionHeading
           eyebrow="The Process"
           title="Six Simple Steps"
-          description="The entire application is handled online through the UA Student Portal."
+          description="The entire application is handled online through your UA student account."
         />
         <ol className="stagger mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (

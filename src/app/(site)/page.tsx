@@ -1,8 +1,6 @@
 import Link from "next/link";
 import {
   GraduationCap,
-  ClipboardCheck,
-  FileCheck2,
   ArrowRight,
   Landmark,
   Users,
@@ -339,68 +337,6 @@ export default async function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
-
-      {/* How to apply */}
-      <section className="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
-        <Reveal>
-          <SectionHeading
-            eyebrow="Admission"
-            title="Apply Online in Four Easy Steps"
-            description="Our streamlined online application makes it easier than ever to become a University of Antique student."
-          />
-        </Reveal>
-        <div className="stagger mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              icon: GraduationCap,
-              title: "Create an Account",
-              description: "Sign up with your email and password to start your application.",
-            },
-            {
-              icon: ClipboardCheck,
-              title: "Fill Out & Upload",
-              description: "Complete your personal information, pick a course, and upload requirements.",
-            },
-            {
-              icon: FileCheck2,
-              title: "Pay the Fee",
-              description: "Settle the non-refundable application fee securely via GCash, Maya, or card.",
-            },
-            {
-              icon: ArrowRight,
-              title: "Track & Get Accepted",
-              description: "Receive a reference number and monitor your status in real time.",
-            },
-          ].map((step, i) => (
-            <Card
-              key={step.title}
-              className="group relative overflow-hidden border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
-            >
-              <CardContent className="space-y-4 p-6">
-                <span className="pointer-events-none absolute -right-5 -top-5 font-display text-6xl font-bold text-slate-100/80 transition-colors duration-300 group-hover:text-yellow-100">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <IconTile icon={step.icon} className="transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="font-display text-lg font-semibold text-slate-900">{step.title}</h3>
-                <p className="text-sm text-slate-500">{step.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <Reveal delay={100}>
-          <div className="mt-10 text-center">
-            <Button
-              size="lg"
-              className="bg-crimson-700 text-white shadow-lg shadow-crimson-900/20 hover:bg-yellow-400 hover:text-slate-900"
-              asChild
-            >
-              <Link href="/register">
-                Start Your Application <ArrowRight className="ml-1 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </Reveal>
       </section>
 
       {/* Programs preview */}

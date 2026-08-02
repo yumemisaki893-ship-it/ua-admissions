@@ -15,12 +15,21 @@ async function requireTeacher() {
   return session.user;
 }
 
-function run(action: string, fn: () => Promise<void>): Promise<ActionResult> {
+type AuditEntry = {
+  action: string;
+  entity?: string;
+  entityId?: string;
+  details?: unknown;
+};
+
+function run(entries: AuditEntry[] | ((actorId: string) => Promise<AuditEntry[]>), fn: (actorId: string) => Promise<void>): Promise<ActionResult> {
   return auth()
     .then(async (session) => {
-      await fn();
-      if (session?.user) {
-        await recordAudit({ action, entity: "class", entityId: "teacher", details: { by: session.user.email } }).catch(() => {});
+      if (!session?.user) throw new Error("Not signed in.");
+      await fn(session.user.id);
+      const auditEntries = typeof entries === "function" ? await entries(session.user.id) : entries;
+      for (const entry of auditEntries) {
+        await recordAudit({ ...entry, details: { ...(entry.details ?? {}), by: session.user.email } }).catch(() => {});
       }
       return { ok: true as const };
     })
@@ -77,33 +86,73 @@ export async function searchStudents(query: string) {
 }
 
 export async function enrollStudent(classId: string, studentProfileId: string): Promise<ActionResult> {
-  return run("CLASS_ENROLL_STUDENT", async () => {
-    await requireTeacher();
-    const classRow = await prisma.class.findFirst({ where: { id: classId } });
+  return run(async () => {
+    const teacher = await requireTeacher();
+    const [classRow, studentProfile] = await Promise.all([
+      prisma.class.findFirst({ where: { id: classId }, include: { subject: true } }),
+      prisma.studentProfile.findUnique({
+        where: { id: studentProfileId },
+        include: { user: { select: { name: true } } },
+      }),
+    ]);
     if (!classRow) throw new Error("Class not found.");
-    const session = await auth();
-    if (classRow.teacherId !== session?.user?.id) throw new Error("You do not teach this class.");
+    if (!studentProfile) throw new Error("Student not found.");
+    if (classRow.teacherId !== teacher.id) throw new Error("You do not teach this class.");
 
-    await prisma.enrollment.create({
+    const enrollment = await prisma.enrollment.create({
       data: { classId, studentProfileId },
     }).catch(() => {
       throw new Error("This student is already enrolled in the class.");
     });
-  });
+
+    return [{
+      action: "CLASS_ENROLL_STUDENT",
+      entity: "enrollment",
+      entityId: enrollment.id,
+      details: {
+        studentName: studentProfile.user.name ?? "Unnamed student",
+        studentNumber: studentProfile.studentNumber,
+        subjectCode: classRow.subject.code,
+        subjectTitle: classRow.subject.title,
+        section: classRow.section,
+        semester: classRow.semester,
+        academicYear: classRow.academicYear,
+      },
+    }];
+  }, async () => {});
 }
 
 export async function unenrollStudent(enrollmentId: string): Promise<ActionResult> {
-  return run("CLASS_UNENROLL_STUDENT", async () => {
-    await requireTeacher();
+  return run(async () => {
+    const teacher = await requireTeacher();
     const enrollment = await prisma.enrollment.findUnique({
       where: { id: enrollmentId },
-      include: { class: true },
+      include: {
+        class: { include: { subject: true } },
+        studentProfile: { include: { user: { select: { name: true } } } },
+      },
     });
     if (!enrollment) throw new Error("Enrollment not found.");
-    const session = await auth();
-    if (enrollment.class.teacherId !== session?.user?.id) throw new Error("You do not teach this class.");
+    if (enrollment.class.teacherId !== teacher.id) throw new Error("You do not teach this class.");
+
+    const { class: classRow, studentProfile } = enrollment;
     await prisma.enrollment.delete({ where: { id: enrollmentId } });
-  });
+
+    return [{
+      action: "CLASS_UNENROLL_STUDENT",
+      entity: "enrollment",
+      entityId: enrollmentId,
+      details: {
+        studentName: studentProfile.user.name ?? "Unnamed student",
+        studentNumber: studentProfile.studentNumber,
+        subjectCode: classRow.subject.code,
+        subjectTitle: classRow.subject.title,
+        section: classRow.section,
+        semester: classRow.semester,
+        academicYear: classRow.academicYear,
+      },
+    }];
+  }, async () => {});
 }
 
 const gradeSchema = z.object({
@@ -119,19 +168,21 @@ export async function saveGrades(input: unknown): Promise<ActionResult> {
     return { ok: false, error: "Grade data mismatch." };
   }
 
-  return run("GRADE_SUBMIT", async () => {
-    await requireTeacher();
-    const session = await auth();
+  return run(async () => {
+    const teacher = await requireTeacher();
     const ids = parsed.data.enrollmentIds;
     const enrollments = await prisma.enrollment.findMany({
       where: { id: { in: ids } },
-      include: { class: true },
+      include: {
+        class: { include: { subject: true } },
+        studentProfile: { include: { user: { select: { name: true } } } },
+      },
     });
     if (enrollments.length !== ids.length) throw new Error("Some enrollments no longer exist.");
 
     await prisma.$transaction(
       enrollments.map((enrollment, i) => {
-        if (enrollment.class.teacherId !== session?.user?.id) {
+        if (enrollment.class.teacherId !== teacher.id) {
           throw new Error("You do not teach this class.");
         }
         return prisma.enrollment.update({
@@ -140,5 +191,22 @@ export async function saveGrades(input: unknown): Promise<ActionResult> {
         });
       })
     );
-  });
+
+    return enrollments.map((enrollment, i) => ({
+      action: "GRADE_SUBMIT",
+      entity: "enrollment",
+      entityId: enrollment.id,
+      details: {
+        studentName: enrollment.studentProfile.user.name ?? "Unnamed student",
+        studentNumber: enrollment.studentProfile.studentNumber,
+        subjectCode: enrollment.class.subject.code,
+        subjectTitle: enrollment.class.subject.title,
+        section: enrollment.class.section,
+        semester: enrollment.class.semester,
+        academicYear: enrollment.class.academicYear,
+        oldGrade: enrollment.grade ?? null,
+        newGrade: parsed.data.grades[i],
+      },
+    }));
+  }, async () => {});
 }

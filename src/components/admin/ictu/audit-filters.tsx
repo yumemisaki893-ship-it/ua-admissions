@@ -16,11 +16,13 @@ import {
 } from "@/components/ui/select";
 
 export function AuditFilters({
+  basePath = "/admin/audit",
   users,
   actions,
   selectedUserId,
   selectedAction,
 }: {
+  basePath?: string;
   users: { id: string; name: string }[];
   actions: { value: string; label: string }[];
   selectedUserId?: string;
@@ -34,13 +36,13 @@ export function AuditFilters({
     const params = new URLSearchParams();
     if (userId && userId !== "all") params.set("userId", userId);
     if (action && action !== "all") params.set("action", action);
-    router.push(`/admin/ictu/audit?${params.toString()}`);
+    router.push(`${basePath}?${params.toString()}`);
   }
 
   function clear() {
     setUserId("all");
     setAction("all");
-    router.push("/admin/ictu/audit");
+    router.push(basePath);
   }
 
   return (

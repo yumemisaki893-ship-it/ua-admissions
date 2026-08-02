@@ -12,35 +12,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/lib/prisma";
 import { formatDateTime } from "@/lib/utils";
+import { actionLabel, describeAudit } from "@/lib/audit-display";
 
 export const dynamic = "force-dynamic";
 
-const ACTION_LABELS: Record<string, string> = {
-  AUTH_LOGIN: "Sign in",
-  NEWS_CREATE: "Created news",
-  NEWS_UPDATE: "Updated news",
-  NEWS_DELETE: "Deleted news",
-  APPLICATION_STATUS_UPDATE: "Application status change",
-  COLLEGE_CREATE: "Created college",
-  COLLEGE_UPDATE: "Updated college",
-  COLLEGE_DELETE: "Deleted college",
-  COURSE_CREATE: "Created course",
-  COURSE_UPDATE: "Updated course",
-  COURSE_DELETE: "Deleted course",
-  SITE_CONTENT_UPDATE: "Edited site content",
-  SETTINGS_UPDATE: "Updated settings",
-  ANNOUNCEMENT_SEND: "Sent announcement",
-  EXTERNAL_LINK_CREATE: "Added link",
-  EXTERNAL_LINK_UPDATE: "Updated link",
-  EXTERNAL_LINK_DELETE: "Deleted link",
-  EXTERNAL_LINK_RESTORE_DEFAULTS: "Restored default links",
-  ADMIN_ACCOUNT_CREATE: "Created admin account",
-  ADMIN_ACCOUNT_TOGGLE_ACTIVE: "Changed account status",
-};
-
-export function actionLabel(action: string) {
-  return ACTION_LABELS[action] ?? action.replaceAll("_", " ").toLowerCase();
-}
+export { actionLabel };
 
 export async function IctuDashboard() {
   const now = new Date();
@@ -64,6 +40,7 @@ export async function IctuDashboard() {
           userRole: true,
           entity: true,
           entityId: true,
+          details: true,
           ip: true,
           createdAt: true,
         },
@@ -115,21 +92,21 @@ export async function IctuDashboard() {
       label: "Total Footprint Entries",
       value: totalActions.toLocaleString(),
       icon: Fingerprint,
-      href: "/admin/ictu/audit",
+      href: "/admin/audit",
       tone: "bg-yellow-50 text-amber-700 ring-amber-200",
     },
     {
       label: "Actions Today",
       value: actionsToday.toLocaleString(),
       icon: Activity,
-      href: "/admin/ictu/audit",
+      href: "/admin/audit",
       tone: "bg-emerald-50 text-emerald-700 ring-emerald-200",
     },
     {
       label: "Actions This Week",
       value: actionsThisWeek.toLocaleString(),
       icon: CalendarDays,
-      href: "/admin/ictu/audit",
+      href: "/admin/audit",
       tone: "bg-sky-50 text-sky-700 ring-sky-200",
     },
   ];
@@ -166,7 +143,7 @@ export async function IctuDashboard() {
           <CardHeader className="flex-row items-center justify-between">
             <CardTitle className="text-base">Recent Activity</CardTitle>
             <Link
-              href="/admin/ictu/audit"
+              href="/admin/audit"
               className="flex items-center gap-1 text-xs font-medium text-crimson-700 hover:underline"
             >
               Full audit trail <ArrowUpRight className="h-3.5 w-3.5" />
@@ -193,7 +170,7 @@ export async function IctuDashboard() {
                       <span className="font-normal text-muted-foreground">{actionLabel(log.action)}</span>
                     </p>
                     <p className="truncate text-xs text-muted-foreground">
-                      {log.entity ?? "system"} · {formatDateTime(log.createdAt)}
+                      {describeAudit(log)} · {formatDateTime(log.createdAt)}
                       {log.ip ? ` · ${log.ip}` : ""}
                     </p>
                   </div>

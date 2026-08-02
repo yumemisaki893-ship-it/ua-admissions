@@ -23,13 +23,14 @@ export const adminLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/applicants", label: "Applicants", icon: Users },
   { href: "/admin/academics", label: "Academics", icon: BookOpen },
+  { href: "/admin/audit", label: "Audit Trail", icon: Fingerprint },
 ];
 
 export const ictuLinks = [
   { href: "/admin", label: "Oversight", icon: LayoutDashboard },
   { href: "/admin/ictu/accounts", label: "Accounts", icon: Users },
   { href: "/admin/ictu/registrars", label: "Registrars", icon: FileText },
-  { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
+  { href: "/admin/audit", label: "Audit Trail", icon: Fingerprint },
 ];
 
 export const contentLinks = [

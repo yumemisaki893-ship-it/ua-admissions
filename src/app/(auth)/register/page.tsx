@@ -48,10 +48,10 @@ export default function RegisterPage() {
   }
 
   return (
-    <Card className="animate-scale-in border-slate-200 bg-white shadow-2xl shadow-red-900/10">
+    <Card className="animate-scale-in border-white/10 bg-white/[0.05] shadow-2xl shadow-black/40">
       <CardHeader className="text-center">
-        <CardTitle className="font-display text-2xl text-slate-900">Create Your Account</CardTitle>
-        <CardDescription className="text-slate-500">
+        <CardTitle className="font-display text-2xl text-white">Create Your Account</CardTitle>
+        <CardDescription className="text-slate-400">
           Step 1 of 6 — you will fill out your details after signing in.
         </CardDescription>
       </CardHeader>
@@ -63,12 +63,12 @@ export default function RegisterPage() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Full Name</FormLabel>
+                  <FormLabel className="text-slate-200">Full Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Juan Dela Cruz"
                       autoComplete="name"
-                      className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                      className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                       {...field}
                     />
                   </FormControl>
@@ -81,13 +81,13 @@ export default function RegisterPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Email Address</FormLabel>
+                  <FormLabel className="text-slate-200">Email Address</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
                       placeholder="you@example.com"
                       autoComplete="email"
-                      className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                      className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                       {...field}
                     />
                   </FormControl>
@@ -100,13 +100,13 @@ export default function RegisterPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Password</FormLabel>
+                  <FormLabel className="text-slate-200">Password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="At least 8 characters"
                       autoComplete="new-password"
-                      className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                      className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                       {...field}
                     />
                   </FormControl>
@@ -119,13 +119,13 @@ export default function RegisterPage() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Confirm Password</FormLabel>
+                  <FormLabel className="text-slate-200">Confirm Password</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
                       placeholder="Repeat your password"
                       autoComplete="new-password"
-                      className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                      className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                       {...field}
                     />
                   </FormControl>
@@ -137,7 +137,7 @@ export default function RegisterPage() {
               type="submit"
               disabled={pending}
               size="lg"
-              className="w-full bg-crimson-700 text-white shadow-lg shadow-crimson-900/20 hover:bg-yellow-400 hover:text-slate-900"
+              className="w-full bg-crimson-700 text-white shadow-lg shadow-black/30 hover:bg-yellow-400 hover:text-slate-900"
             >
               {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <UserPlus className="h-4 w-4" />}
               Create Account
@@ -145,9 +145,9 @@ export default function RegisterPage() {
           </form>
         </Form>
 
-        <p className="mt-6 text-center text-sm text-slate-500">
+        <p className="mt-6 text-center text-sm text-slate-400">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-crimson-700 hover:underline">
+          <Link href="/login" className="font-medium text-crimson-300 hover:underline">
             Sign in
           </Link>
         </p>

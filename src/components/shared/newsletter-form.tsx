@@ -18,7 +18,7 @@ export function NewsletterForm() {
 
   if (done) {
     return (
-      <p className="flex items-center gap-2 rounded-lg border border-amber-300 bg-yellow-50 px-4 py-3 text-sm text-crimson-800">
+      <p className="flex items-center gap-2 rounded-lg border border-amber-400/50 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
         <Check className="h-4 w-4 shrink-0" />
         Thank you! You are now subscribed to UA updates.
       </p>
@@ -33,7 +33,7 @@ export function NewsletterForm() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Enter your email address"
-        className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+        className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
       />
       <Button
         type="submit"

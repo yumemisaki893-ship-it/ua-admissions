@@ -41,13 +41,13 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
         <div>
           <Link
             href="/admin/applicants"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-crimson-700 hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-crimson-300 hover:underline"
           >
             <ArrowLeft className="h-4 w-4" /> All Applicants
           </Link>
-          <h1 className="mt-2 font-display text-2xl font-semibold text-slate-900">{name}</h1>
+          <h1 className="mt-2 font-display text-2xl font-semibold text-white">{name}</h1>
           <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-xs font-semibold text-crimson-700">
+            <span className="font-mono text-xs font-semibold text-crimson-300">
               {application.referenceNumber ?? "No reference yet"}
             </span>
             <Badge variant={application.status === "ACCEPTED" ? "success" : application.status === "REJECTED" ? "destructive" : application.status === "UNDER_REVIEW" ? "warning" : "secondary"}>
@@ -69,16 +69,16 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
               <p className="flex items-center gap-2">
                 <CalendarDays className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Birth date:</span>{" "}
-                <span className="font-medium text-slate-900">{formatDate(application.studentProfile.birthDate)}</span>
+                <span className="font-medium text-white">{formatDate(application.studentProfile.birthDate)}</span>
               </p>
               <p>
                 <span className="text-muted-foreground">Gender:</span>{" "}
-                <span className="font-medium text-slate-900">{application.studentProfile.gender}</span>
+                <span className="font-medium text-white">{application.studentProfile.gender}</span>
               </p>
               <p className="flex items-center gap-2 sm:col-span-2">
                 <MapPin className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Address:</span>{" "}
-                <span className="font-medium text-slate-900">
+                <span className="font-medium text-white">
                   {application.studentProfile.address}, {application.studentProfile.city},{" "}
                   {application.studentProfile.province}
                 </span>
@@ -86,16 +86,16 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
               <p className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Contact:</span>{" "}
-                <span className="font-medium text-slate-900">{application.studentProfile.contactNumber}</span>
+                <span className="font-medium text-white">{application.studentProfile.contactNumber}</span>
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-muted-foreground" />
                 <span className="text-muted-foreground">Email:</span>{" "}
-                <span className="font-medium text-slate-900">{application.user.email}</span>
+                <span className="font-medium text-white">{application.user.email}</span>
               </p>
               <p className="sm:col-span-2">
                 <span className="text-muted-foreground">Guardian:</span>{" "}
-                <span className="font-medium text-slate-900">
+                <span className="font-medium text-white">
                   {application.studentProfile.guardianName}
                   {application.studentProfile.guardianContact ? ` (${application.studentProfile.guardianContact})` : ""}
                 </span>
@@ -109,9 +109,9 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
               <CardTitle className="text-lg">Course</CardTitle>
             </CardHeader>
             <CardContent className="text-sm">
-              <p className="font-display text-base font-semibold text-slate-900">
+              <p className="font-display text-base font-semibold text-white">
                 {application.course.name}{" "}
-                <span className="font-mono text-xs font-normal text-crimson-700">({application.course.code})</span>
+                <span className="font-mono text-xs font-normal text-crimson-300">({application.course.code})</span>
               </p>
               <p className="mt-1 text-muted-foreground">{application.course.college.name}</p>
               {application.submittedAt && (
@@ -127,13 +127,13 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
-                <Wallet className="h-5 w-5 text-crimson-700" /> Payment
+                <Wallet className="h-5 w-5 text-crimson-300" /> Payment
               </CardTitle>
             </CardHeader>
             <CardContent className="text-sm">
               {application.payment ? (
                 <div className="grid gap-2 sm:grid-cols-3">
-                  <p><span className="text-muted-foreground">Amount:</span>{" "}<strong className="text-slate-900">PHP {application.payment.amount.toLocaleString()}</strong></p>
+                  <p><span className="text-muted-foreground">Amount:</span>{" "}<strong className="text-white">PHP {application.payment.amount.toLocaleString()}</strong></p>
                   <p><span className="text-muted-foreground">Status:</span>{" "}<Badge variant="success">{application.payment.status}</Badge></p>
                   <p><span className="text-muted-foreground">Paid:</span>{" "}{formatDate(application.payment.paidAt)}</p>
                 </div>
@@ -160,9 +160,9 @@ export default async function ApplicantDetailPage({ params }: { params: { id: st
                 return (
                   <div key={doc.id} className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3">
                     <div className="flex min-w-0 items-center gap-3">
-                      <FileText className="h-5 w-5 shrink-0 text-crimson-700" />
+                      <FileText className="h-5 w-5 shrink-0 text-crimson-300" />
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-medium text-slate-900">{meta.label}</p>
+                        <p className="truncate text-sm font-medium text-white">{meta.label}</p>
                         <p className="truncate text-xs text-muted-foreground">
                           {doc.fileName} · {formatBytes(doc.sizeBytes)}
                         </p>

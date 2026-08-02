@@ -57,7 +57,7 @@ export function PortalNav({
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-white/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6" aria-label="Portal navigation">
         <div className="flex items-center gap-6">
           <Logo />
@@ -69,7 +69,7 @@ export function PortalNav({
           >
             <span
               className={cn(
-                "pointer-events-none absolute inset-y-0 rounded-md bg-crimson-50 ring-1 ring-crimson-700/20 transition-all duration-300 ease-out",
+                "pointer-events-none absolute inset-y-0 rounded-md bg-crimson-500/15 ring-1 ring-crimson-400/30 transition-all duration-300 ease-out",
                 pill ? "opacity-100" : "opacity-0",
               )}
               style={pill ? { left: pill.left, width: pill.width } : undefined}
@@ -84,7 +84,7 @@ export function PortalNav({
                   href={link.href}
                   className={cn(
                     "relative inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200",
-                    pathname.startsWith(link.href) ? "text-crimson-800" : "text-slate-600 hover:text-crimson-800",
+                    pathname.startsWith(link.href) ? "text-crimson-300" : "text-slate-300 hover:text-crimson-300",
                   )}
                 >
                   <link.icon className="h-4 w-4" />
@@ -99,7 +99,7 @@ export function PortalNav({
           <Link
             href="/portal/notifications"
             aria-label={`Notifications (${unreadCount} unread)`}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-yellow-50 hover:text-crimson-700"
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-md text-slate-400 transition-colors hover:bg-yellow-500/10 hover:text-crimson-300"
           >
             <Bell className="h-5 w-5" />
             {unreadCount > 0 && (
@@ -167,14 +167,14 @@ export function PortalNav({
         </div>
       </nav>
       {/* Mobile bottom links */}
-      <nav className="flex border-t sm:hidden" aria-label="Portal mobile navigation">
+      <nav className="flex border-t border-white/10 sm:hidden" aria-label="Portal mobile navigation">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             className={cn(
               "flex flex-1 items-center justify-center gap-1.5 py-2.5 text-xs font-medium",
-              pathname.startsWith(link.href) ? "text-crimson-700" : "text-muted-foreground",
+              pathname.startsWith(link.href) ? "text-crimson-300" : "text-slate-400",
             )}
           >
             <link.icon className="h-4 w-4" />

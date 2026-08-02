@@ -44,10 +44,10 @@ export default function LoginPage() {
 
   return (
     <Suspense fallback={null}>
-      <Card className="animate-scale-in border-slate-200 bg-white shadow-2xl shadow-red-900/10">
+      <Card className="animate-scale-in border-white/10 bg-white/[0.05] shadow-2xl shadow-black/40">
         <CardHeader className="text-center">
-          <CardTitle className="font-display text-2xl text-slate-900">Student Portal Sign In</CardTitle>
-          <CardDescription className="text-slate-500">Track your application or continue where you left off.</CardDescription>
+          <CardTitle className="font-display text-2xl text-white">Student Portal Sign In</CardTitle>
+          <CardDescription className="text-slate-400">Track your application or continue where you left off.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -57,13 +57,13 @@ export default function LoginPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-slate-700">Email Address</FormLabel>
+                    <FormLabel className="text-slate-200">Email Address</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
                         placeholder="you@example.com"
                         autoComplete="email"
-                        className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                        className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                         {...field}
                       />
                     </FormControl>
@@ -77,8 +77,8 @@ export default function LoginPage() {
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel className="text-slate-700">Password</FormLabel>
-                      <Link href="/register" className="text-xs text-crimson-700 hover:underline">
+                      <FormLabel className="text-slate-200">Password</FormLabel>
+                      <Link href="/register" className="text-xs text-crimson-300 hover:underline">
                         Forgot password?
                       </Link>
                     </div>
@@ -87,7 +87,7 @@ export default function LoginPage() {
                         type="password"
                         placeholder="••••••••"
                         autoComplete="current-password"
-                        className="border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-amber-400"
+                        className="border-white/15 bg-white/[0.06] text-white placeholder:text-slate-500 focus:border-amber-400/70"
                         {...field}
                       />
                     </FormControl>
@@ -99,7 +99,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={pending}
                 size="lg"
-                className="w-full bg-crimson-700 text-white shadow-lg shadow-crimson-900/20 hover:bg-yellow-400 hover:text-slate-900"
+                className="w-full bg-crimson-700 text-white shadow-lg shadow-black/30 hover:bg-yellow-400 hover:text-slate-900"
               >
                 {pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
                 Sign In
@@ -107,9 +107,9 @@ export default function LoginPage() {
             </form>
           </Form>
 
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-6 text-center text-sm text-slate-400">
             New to UA?{" "}
-            <Link href="/register" className="font-medium text-crimson-700 hover:underline">
+            <Link href="/register" className="font-medium text-crimson-300 hover:underline">
               Create an account
             </Link>
           </p>

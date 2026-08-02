@@ -57,18 +57,18 @@ export default function ServicesPage() {
           {quickContacts.map((card) => (
             <Card
               key={card.title}
-              className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
+              className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40"
             >
               <CardContent className="flex items-start gap-4 p-6">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                   <card.icon className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
                     {card.title}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-slate-900">{card.value}</p>
-                  <p className="mt-0.5 text-xs text-slate-500">{card.note}</p>
+                  <p className="mt-1 text-sm font-semibold text-white">{card.value}</p>
+                  <p className="mt-0.5 text-xs text-slate-400">{card.note}</p>
                 </div>
               </CardContent>
             </Card>
@@ -77,13 +77,13 @@ export default function ServicesPage() {
 
         <div className="mt-14">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-300">
               Service Directory
             </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-slate-900">
+            <h2 className="mt-2 font-display text-3xl font-semibold text-white">
               Explore university services
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-slate-500">
+            <p className="mx-auto mt-3 max-w-2xl text-slate-400">
               Search, filter, and jump straight to the service you need. Most services can be
               accessed online through the official university portals.
             </p>

@@ -15,10 +15,10 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="flex items-center gap-2 font-display text-2xl font-semibold text-slate-900">
-          <SettingsIcon className="h-6 w-6 text-crimson-700" /> Settings
+        <h1 className="flex items-center gap-2 font-display text-2xl font-semibold text-white">
+          <SettingsIcon className="h-6 w-6 text-crimson-300" /> Settings
         </h1>
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 text-sm text-slate-400">
           Manage the admission period, application fee, and student announcements.
         </p>
       </div>

@@ -64,7 +64,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </aside>
 
       {/* Right form panel */}
-      <div className="relative flex min-h-screen flex-col bg-white lg:min-h-0 lg:w-1/2">
+      <div className="relative flex min-h-screen flex-col bg-white/[0.05] lg:min-h-0 lg:w-1/2">
         <div
           className="pointer-events-none absolute inset-0 lg:hidden"
           style={{

@@ -71,7 +71,7 @@ export default async function NewsPage({
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <Tabs defaultValue={valid}>
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <TabsList className="w-full justify-start overflow-x-auto border border-slate-200 bg-white shadow-sm sm:w-auto">
+            <TabsList className="w-full justify-start overflow-x-auto border border-white/10 bg-white/[0.05] shadow-sm sm:w-auto">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.value}
@@ -80,18 +80,18 @@ export default async function NewsPage({
                 >
                   <tab.icon className="h-3.5 w-3.5" />
                   {tab.label}
-                  <Badge className="ml-0.5 bg-slate-200 px-1.5 py-0 text-[10px] text-slate-600 data-[state=active]:bg-yellow-300 data-[state=active]:text-crimson-900">
+                  <Badge className="ml-0.5 bg-white/10 px-1.5 py-0 text-[10px] text-slate-300 data-[state=active]:bg-yellow-300 data-[state=active]:text-crimson-900">
                     {countFor(tab.value)}
                   </Badge>
                 </TabsTrigger>
               ))}
             </TabsList>
-            <p className="flex items-center gap-1.5 text-sm text-slate-500">
-              <Briefcase className="h-4 w-4 text-amber-500" />
+            <p className="flex items-center gap-1.5 text-sm text-slate-400">
+              <Briefcase className="h-4 w-4 text-amber-300" />
               New to UA? Read the{" "}
               <a
                 href="/apply"
-                className="font-medium text-crimson-700 underline-offset-4 hover:underline"
+                className="font-medium text-crimson-300 underline-offset-4 hover:underline"
               >
                 admission guide
               </a>
@@ -122,7 +122,7 @@ export default async function NewsPage({
                     {[0, 1, 2].map((i) => (
                       <NewsCardSkeleton key={i} />
                     ))}
-                    <p className="col-span-full pt-2 text-center text-sm text-slate-500">
+                    <p className="col-span-full pt-2 text-center text-sm text-slate-400">
                       No {tab.label.toLowerCase()} posted yet. Check back soon.
                     </p>
                   </div>

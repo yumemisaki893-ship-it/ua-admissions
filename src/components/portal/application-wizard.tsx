@@ -226,14 +226,14 @@ function WizardContent({
   if (!admissionOpen && !application) {
     return (
       <div className="mx-auto max-w-2xl">
-        <div className="rounded-2xl border border-amber-300 bg-yellow-50 p-10 text-center shadow-sm">
+        <div className="rounded-2xl border border-amber-400/50 bg-yellow-500/10 p-10 text-center shadow-sm">
           <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-crimson-700 text-white">
             <Clock className="h-8 w-8" />
           </span>
-          <h1 className="mt-5 font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
+          <h1 className="mt-5 font-display text-2xl font-semibold text-white sm:text-3xl">
             Applications are currently closed
           </h1>
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-600">
+          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-slate-300">
             The Office of Admissions is not accepting new applications at this time. Please check
             back when the next admission period opens.
           </p>
@@ -254,7 +254,7 @@ function WizardContent({
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
+        <h1 className="font-display text-2xl font-semibold text-white sm:text-3xl">
           Online Application
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -263,7 +263,7 @@ function WizardContent({
       </div>
 
       {!admissionOpen && (
-        <div className="flex items-start gap-2.5 rounded-lg border border-amber-300 bg-yellow-50 p-3.5 text-xs text-crimson-800">
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-400/50 bg-yellow-500/10 p-3.5 text-xs text-yellow-200">
           <Info className="mt-0.5 h-4 w-4 shrink-0" />
           <p>
             Admission is currently closed for new applicants. You may still continue and submit
@@ -293,7 +293,7 @@ function WizardContent({
                   >
                     {done ? <Check className="h-4 w-4" /> : <s.icon className="h-4 w-4" />}
                   </span>
-                  <span className={cn("hidden text-[11px] font-medium sm:block", active ? "text-crimson-700" : "text-muted-foreground")}>
+                  <span className={cn("hidden text-[11px] font-medium sm:block", active ? "text-crimson-300" : "text-muted-foreground")}>
                     {s.label}
                   </span>
                 </div>
@@ -629,7 +629,7 @@ function CourseStep({
       <CardContent className="space-y-8">
         {colleges.map(([collegeId, college]) => (
           <fieldset key={collegeId}>
-            <legend className="mb-3 flex items-center gap-2 text-sm font-semibold text-slate-900">
+            <legend className="mb-3 flex items-center gap-2 text-sm font-semibold text-white">
               <span className="rounded bg-crimson-900 px-2 py-0.5 font-mono text-[11px] font-semibold text-yellow-300">
                 {college.code}
               </span>
@@ -644,17 +644,17 @@ function CourseStep({
                   className={cn(
                     "flex items-start justify-between gap-3 rounded-lg border p-4 text-left transition-colors",
                     selected === course.id
-                      ? "border-crimson-700 bg-crimson-50 ring-1 ring-crimson-700"
-                      : "hover:border-amber-300",
+                      ? "border-crimson-400/60 bg-crimson-500/15 ring-1 ring-crimson-400/30"
+                      : "hover:border-amber-400/60",
                   )}
                   aria-pressed={selected === course.id}
                 >
                   <div>
-                    <p className="font-mono text-xs font-semibold text-crimson-700">{course.code}</p>
-                    <p className="mt-1 text-sm font-medium text-slate-900">{course.name}</p>
+                    <p className="font-mono text-xs font-semibold text-crimson-300">{course.code}</p>
+                    <p className="mt-1 text-sm font-medium text-white">{course.name}</p>
                     <p className="mt-1 text-xs text-muted-foreground">{course.durationYears} years</p>
                   </div>
-                  {selected === course.id && <CheckCircle2 className="h-5 w-5 shrink-0 text-crimson-700" />}
+                  {selected === course.id && <CheckCircle2 className="h-5 w-5 shrink-0 text-crimson-300" />}
                 </button>
               ))}
             </div>
@@ -724,11 +724,11 @@ function UploadStep({
                     <FileText className="h-6 w-6 shrink-0 text-muted-foreground/60" />
                   )}
                   <div>
-                    <p className="text-sm font-medium text-slate-900">{field.label}</p>
+                    <p className="text-sm font-medium text-white">{field.label}</p>
                     {doc ? (
                       <p className="text-xs text-muted-foreground">
                         {doc.fileName} · {formatBytes(doc.sizeBytes)} ·{" "}
-                        <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-crimson-700 hover:underline">
+                        <a href={doc.url} target="_blank" rel="noopener noreferrer" className="text-crimson-300 hover:underline">
                           View file
                         </a>
                       </p>
@@ -772,7 +772,7 @@ function UploadStep({
           );
         })}
 
-        <div className="flex items-start gap-2.5 rounded-lg border border-amber-200 bg-yellow-50 p-3.5 text-xs text-crimson-800">
+        <div className="flex items-start gap-2.5 rounded-lg border border-amber-400/40 bg-yellow-500/10 p-3.5 text-xs text-yellow-200">
           <Info className="mt-0.5 h-4 w-4 shrink-0" />
           <p>
             Make sure scanned copies are <strong>clear and legible</strong>. Blurry or incomplete documents may
@@ -822,7 +822,7 @@ function PaymentStep({
         </div>
 
         {simulated && (
-          <div className="flex items-start gap-2.5 rounded-lg border border-amber-300 bg-amber-50 p-3.5 text-xs text-amber-800">
+          <div className="flex items-start gap-2.5 rounded-lg border border-amber-400/50 bg-amber-500/10 p-3.5 text-xs text-amber-200">
             <Info className="mt-0.5 h-4 w-4 shrink-0" />
             <p>
               <strong>Development mode:</strong> PayMongo is not configured, so the payment is simulated. The
@@ -834,7 +834,7 @@ function PaymentStep({
         <div className="space-y-2.5 text-sm">
           {["GCash", "Maya", "Credit / Debit Card"].map((method) => (
             <div key={method} className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-              <span className="font-medium text-slate-900">{method}</span>
+              <span className="font-medium text-white">{method}</span>
               <Badge variant="success">Available</Badge>
             </div>
           ))}
@@ -883,11 +883,11 @@ function ReviewStep({
       </CardHeader>
       <CardContent className="space-y-6">
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <UserRound className="h-4 w-4 text-crimson-700" /> Applicant
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
+            <UserRound className="h-4 w-4 text-crimson-300" /> Applicant
           </h3>
-          <div className="grid gap-x-6 gap-y-1.5 rounded-lg bg-muted/50 p-4 text-sm sm:grid-cols-2">
-            <p><span className="text-muted-foreground">Name:</span> <strong className="text-slate-900">
+          <div className="grid gap-x-6 gap-y-1.5 rounded-lg bg-white/[0.05] p-4 text-sm sm:grid-cols-2">
+            <p><span className="text-muted-foreground">Name:</span> <strong className="text-white">
               {profile?.firstName} {profile?.middleName ?? ""} {profile?.lastName} {profile?.suffix ?? ""}
             </strong></p>
             <p><span className="text-muted-foreground">Gender:</span> {profile?.gender}</p>
@@ -898,22 +898,22 @@ function ReviewStep({
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <GraduationCap className="h-4 w-4 text-crimson-700" /> Course
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
+            <GraduationCap className="h-4 w-4 text-crimson-300" /> Course
           </h3>
-          <div className="rounded-lg bg-muted/50 p-4 text-sm">
-            <p className="font-medium text-slate-900">
-              {application?.course?.name} <span className="font-mono text-xs text-crimson-700">({application?.course?.code})</span>
+          <div className="rounded-lg bg-white/[0.05] p-4 text-sm">
+            <p className="font-medium text-white">
+              {application?.course?.name} <span className="font-mono text-xs text-crimson-300">({application?.course?.code})</span>
             </p>
             <p className="text-xs text-muted-foreground">{application?.course?.college.name}</p>
           </div>
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <FileText className="h-4 w-4 text-crimson-700" /> Documents
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
+            <FileText className="h-4 w-4 text-crimson-300" /> Documents
           </h3>
-          <ul className="space-y-1.5 rounded-lg bg-muted/50 p-4 text-sm">
+          <ul className="space-y-1.5 rounded-lg bg-white/[0.05] p-4 text-sm">
             {(application?.documents ?? []).map((doc) => (
               <li key={doc.id} className="flex items-center justify-between">
                 <span className="flex items-center gap-2">
@@ -927,18 +927,18 @@ function ReviewStep({
         </section>
 
         <section className="space-y-2">
-          <h3 className="flex items-center gap-2 text-sm font-semibold text-slate-900">
-            <CreditCard className="h-4 w-4 text-crimson-700" /> Payment
+          <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
+            <CreditCard className="h-4 w-4 text-crimson-300" /> Payment
           </h3>
-          <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4 text-sm">
+          <div className="flex items-center justify-between rounded-lg bg-white/[0.05] p-4 text-sm">
             <span className="text-muted-foreground">Application fee</span>
-            <span className="flex items-center gap-2 font-medium text-slate-900">
+            <span className="flex items-center gap-2 font-medium text-white">
               PHP {fee.toLocaleString()} <Badge variant="success">Paid</Badge>
             </span>
           </div>
         </section>
 
-        <div className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-xs text-amber-800">
+        <div className="rounded-lg border border-amber-400/50 bg-amber-500/10 p-4 text-xs text-amber-200">
           By submitting this application, you certify that the information provided is true and correct. Any
           misrepresentation may result in the cancellation of your admission.
         </div>
@@ -959,21 +959,21 @@ function ReviewStep({
 // ---------------------------------------------------------------------------
 function SuccessScreen({ referenceNumber }: { referenceNumber: string }) {
   return (
-    <Card className="border-emerald-200">
+    <Card className="border-emerald-500/40">
       <CardContent className="flex flex-col items-center gap-5 p-10 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-400">
           <PartyPopper className="h-8 w-8" />
         </span>
         <div className="space-y-2">
-          <h2 className="font-display text-2xl font-semibold text-slate-900">Application Submitted!</h2>
+          <h2 className="font-display text-2xl font-semibold text-white">Application Submitted!</h2>
           <p className="mx-auto max-w-md text-sm text-muted-foreground">
             Your application has been received. Save your reference number — you will need it for all future
             correspondence.
           </p>
         </div>
-        <div className="rounded-xl border-2 border-dashed border-amber-300 bg-yellow-50 px-8 py-4">
-          <p className="text-xs uppercase tracking-widest text-crimson-700">Reference Number</p>
-          <p className="mt-1 font-display text-3xl font-bold tracking-wider text-slate-900">
+        <div className="rounded-xl border-2 border-dashed border-amber-400/50 bg-yellow-500/10 px-8 py-4">
+          <p className="text-xs uppercase tracking-widest text-crimson-300">Reference Number</p>
+          <p className="mt-1 font-display text-3xl font-bold tracking-wider text-white">
             {referenceNumber}
           </p>
         </div>

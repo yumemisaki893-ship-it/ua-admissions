@@ -50,7 +50,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
 
   return (
     <section
-      className="relative bg-white"
+      className="relative bg-rose-950"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

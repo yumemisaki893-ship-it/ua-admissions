@@ -22,11 +22,11 @@ export default async function PortalLayout({ children }: { children: React.React
     .toUpperCase();
 
   return (
-    <div className="flex min-h-screen flex-col bg-muted/30">
+    <div className="flex min-h-screen flex-col bg-background">
       <PortalNav initials={initials} name={session.user.name ?? "Student"} unreadCount={unreadCount} />
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
-      <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">
-        <Link href="/" className="font-semibold text-crimson-700 hover:underline">
+      <footer className="border-t border-white/10 bg-slate-950/80 py-4 text-center text-xs text-slate-400 backdrop-blur-xl">
+        <Link href="/" className="font-semibold text-crimson-300 hover:underline">
           University of Antique
         </Link>{" "}
         · Student Portal ·{" "}

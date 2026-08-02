@@ -92,7 +92,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Quick facts band */}
-      <section className="border-b border-slate-200 bg-white">
+      <section className="border-b border-white/10 bg-white/[0.05]">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
           {[
             { value: "1954", label: "Year Established" },
@@ -101,8 +101,8 @@ export default async function AboutPage() {
             { value: "25,722", label: "Students Enrolled" },
           ].map((stat, i) => (
             <Reveal key={stat.label} delay={i * 70} className="text-center">
-              <p className="font-display text-3xl font-bold text-crimson-700">{stat.value}</p>
-              <p className="mt-1 text-xs uppercase tracking-wider text-slate-500">{stat.label}</p>
+              <p className="font-display text-3xl font-bold text-crimson-300">{stat.value}</p>
+              <p className="mt-1 text-xs uppercase tracking-wider text-slate-400">{stat.label}</p>
             </Reveal>
           ))}
         </div>
@@ -130,14 +130,14 @@ export default async function AboutPage() {
                   }`}
                 >
                   <span
-                    className={`absolute left-5 top-1 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-amber-400 bg-white sm:left-auto ${
+                    className={`absolute left-5 top-1 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-amber-400 bg-white/[0.05] sm:left-auto ${
                       i % 2 === 0 ? "sm:-right-2 sm:translate-x-1/2" : "sm:-left-2 sm:-translate-x-1/2"
                     }`}
                   />
                   <div>
                     <Badge className="bg-crimson-700 text-white">{m.year}</Badge>
-                    <h3 className="mt-2 font-display text-lg font-semibold text-slate-900">{m.title}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{m.desc}</p>
+                    <h3 className="mt-2 font-display text-lg font-semibold text-white">{m.title}</h3>
+                    <p className="mt-1 text-sm text-slate-400">{m.desc}</p>
                   </div>
                 </Reveal>
               </li>
@@ -147,9 +147,9 @@ export default async function AboutPage() {
 
         {history && (
           <Reveal delay={100}>
-            <Card className="mt-14 border-slate-200 bg-white shadow-sm">
+            <Card className="mt-14 border-white/10 bg-white/[0.05] shadow-sm">
               <CardContent className="p-8">
-                <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-crimson-700">
+                <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-crimson-300">
                   <CalendarCheck className="h-5 w-5" /> A Closer Look
                 </h3>
                 <div className="rich-text mt-4" dangerouslySetInnerHTML={{ __html: history }} />
@@ -160,27 +160,27 @@ export default async function AboutPage() {
       </section>
 
       {/* VMGO */}
-      <section id="vision-mission" className="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16">
+      <section id="vision-mission" className="scroll-mt-24 border-y border-white/10 bg-white/[0.03] py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading eyebrow="Direction" title="Vision, Mission & Quality Policy" />
           </Reveal>
           <div className="stagger mt-12 grid gap-6 md:grid-cols-2">
-            <Card className="border-t-4 border-t-amber-400 border-slate-200 bg-white transition-all hover:shadow-lg hover:shadow-red-900/10">
+            <Card className="border-t-4 border-t-amber-400 border-white/10 bg-white/[0.05] transition-all hover:shadow-lg hover:shadow-black/40">
               <CardContent className="space-y-4 p-8">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                   <Target className="h-6 w-6" />
                 </span>
-                <h3 className="font-display text-xl font-semibold text-slate-900">Vision</h3>
+                <h3 className="font-display text-xl font-semibold text-white">Vision</h3>
                 <div className="rich-text" dangerouslySetInnerHTML={{ __html: vision }} />
               </CardContent>
             </Card>
-            <Card className="border-t-4 border-t-crimson-700 border-slate-200 bg-white transition-all hover:shadow-lg hover:shadow-red-900/10">
+            <Card className="border-t-4 border-t-crimson-700 border-white/10 bg-white/[0.05] transition-all hover:shadow-lg hover:shadow-black/40">
               <CardContent className="space-y-4 p-8">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                   <Landmark className="h-6 w-6" />
                 </span>
-                <h3 className="font-display text-xl font-semibold text-slate-900">Mission</h3>
+                <h3 className="font-display text-xl font-semibold text-white">Mission</h3>
                 <div className="rich-text" dangerouslySetInnerHTML={{ __html: mission }} />
               </CardContent>
             </Card>
@@ -206,10 +206,10 @@ export default async function AboutPage() {
                   { label: "Main Campus", value: siteConfig.address },
                 ].map((row) => (
                   <div key={row.label} className="flex items-start gap-3 text-sm">
-                    <ScrollText className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+                    <ScrollText className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
                     <p>
-                      <strong className="text-slate-900">{row.label}:</strong>{" "}
-                      <span className="text-slate-500">{row.value}</span>
+                      <strong className="text-white">{row.label}:</strong>{" "}
+                      <span className="text-slate-400">{row.value}</span>
                     </p>
                   </div>
                 ))}
@@ -217,13 +217,13 @@ export default async function AboutPage() {
             </div>
           </Reveal>
           <Reveal delay={100}>
-            <Card className="border-slate-200 bg-white shadow-sm">
+            <Card className="border-white/10 bg-white/[0.05] shadow-sm">
               <CardContent className="p-8">
-                <div className="flex items-center gap-3 text-crimson-700">
+                <div className="flex items-center gap-3 text-crimson-300">
                   <Music className="h-6 w-6" />
-                  <h3 className="font-display text-lg font-semibold text-slate-900">UA Hymn</h3>
+                  <h3 className="font-display text-lg font-semibold text-white">UA Hymn</h3>
                 </div>
-                <div className="mt-6 space-y-3 text-slate-600 [&_p]:my-3">
+                <div className="mt-6 space-y-3 text-slate-300 [&_p]:my-3">
                   <div dangerouslySetInnerHTML={{ __html: hymn || "" }} />
                 </div>
               </CardContent>
@@ -233,7 +233,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Seal */}
-      <section id="seal" className="border-y border-slate-200 bg-slate-50 py-16">
+      <section id="seal" className="border-y border-white/10 bg-white/[0.03] py-16">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <Reveal>
             <SectionHeading eyebrow="Symbol" title="The University Seal" />
@@ -249,8 +249,8 @@ export default async function AboutPage() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-500">
-                <ShieldCheck className="h-4 w-4 text-amber-500" />
+              <div className="flex items-center gap-2 text-sm text-slate-400">
+                <ShieldCheck className="h-4 w-4 text-amber-300" />
                 <span dangerouslySetInnerHTML={{ __html: sealDesc }} />
               </div>
             </div>
@@ -271,16 +271,16 @@ export default async function AboutPage() {
           {orgUnits.map((unit, i) => (
             <div
               key={unit.name}
-              className={`flex items-start gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-amber-300 ${
+              className={`flex items-start gap-4 rounded-lg border border-white/10 bg-white/[0.05] p-4 shadow-sm transition-all hover:border-amber-400/60 ${
                 unit.level > 0 ? "ml-4 border-l-2 border-l-amber-400 sm:ml-10" : "border-l-2 border-l-crimson-700"
               }`}
             >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-crimson-700/10 font-mono text-xs font-bold text-crimson-700">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-crimson-500/15 font-mono text-xs font-bold text-crimson-300">
                 {i + 1}
               </span>
               <div>
-                <p className="font-medium text-slate-900">{unit.name}</p>
-                <p className="text-sm text-slate-500">{unit.role}</p>
+                <p className="font-medium text-white">{unit.name}</p>
+                <p className="text-sm text-slate-400">{unit.role}</p>
               </div>
             </div>
           ))}

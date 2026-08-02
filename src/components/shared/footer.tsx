@@ -13,9 +13,9 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-white text-slate-600">
+    <footer className="border-t border-white/10 bg-slate-950/80 text-slate-300 backdrop-blur-xl">
       {/* Masthead strip */}
-      <div className="border-b border-amber-200 bg-gradient-to-r from-crimson-700 via-crimson-800 to-crimson-900">
+      <div className="border-b border-amber-400/30 bg-gradient-to-r from-crimson-700 via-crimson-800 to-crimson-900">
         <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 px-4 py-10 sm:px-6 md:flex-row md:justify-between lg:px-8">
           <div className="flex items-center gap-4">
             <Image
@@ -39,7 +39,7 @@ export function Footer() {
 
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="space-y-4">
-          <p className="text-sm leading-relaxed text-slate-500">{siteConfig.description}</p>
+          <p className="text-sm leading-relaxed text-slate-400">{siteConfig.description}</p>
           <div className="flex gap-3">
             {socialLinks.map((s) => (
               <a
@@ -48,7 +48,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:bg-yellow-300 hover:text-slate-900"
+                className="rounded-full border border-white/10 bg-white/[0.06] p-2 text-slate-300 transition-all hover:-translate-y-0.5 hover:border-amber-400/60 hover:bg-yellow-300 hover:text-slate-900"
               >
                 <s.icon className="h-4 w-4" />
               </a>
@@ -61,9 +61,9 @@ export function Footer() {
                   href={seal.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] text-slate-500 transition-colors hover:border-amber-400 hover:text-crimson-700"
+                  className="inline-flex items-center gap-1 rounded-full border border-white/10 px-2.5 py-1 text-[11px] text-slate-400 transition-colors hover:border-amber-400/70 hover:text-amber-300"
                 >
-                  <ShieldCheck className="h-3 w-3 text-amber-500" />
+                  <ShieldCheck className="h-3 w-3 text-amber-300" />
                   {seal.label}
                 </a>
               </li>
@@ -72,22 +72,22 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Quick Links</h3>
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-300">Quick Links</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {siteConfig.nav.slice(0, 6).map((item) => (
               <li key={item.label}>
-                <Link href={item.href} className="text-slate-500 transition-colors hover:text-crimson-700">
+                <Link href={item.href} className="text-slate-400 transition-colors hover:text-crimson-300">
                   {item.label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="/register" className="text-slate-500 transition-colors hover:text-crimson-700">
+              <Link href="/register" className="text-slate-400 transition-colors hover:text-crimson-300">
                 Apply Online
               </Link>
             </li>
             <li>
-              <Link href="/login" className="text-slate-500 transition-colors hover:text-crimson-700">
+              <Link href="/login" className="text-slate-400 transition-colors hover:text-crimson-300">
                 Student Portal
               </Link>
             </li>
@@ -95,7 +95,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Online Services</h3>
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-300">Online Services</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
             {Object.entries(siteConfig.quickLinks).map(([, group]) =>
               group.items.slice(0, 1).map((item) => (
@@ -104,7 +104,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-500 transition-colors hover:text-crimson-700"
+                    className="text-slate-400 transition-colors hover:text-crimson-300"
                   >
                     {item.label}
                   </a>
@@ -116,7 +116,7 @@ export function Footer() {
                 href="https://antiquespride.edu.ph/ua-transparency-seal/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-500 transition-colors hover:text-crimson-700"
+                className="text-slate-400 transition-colors hover:text-crimson-300"
               >
                 Transparency Seal
               </a>
@@ -125,27 +125,27 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-700">Contact</h3>
-          <ul className="mt-4 space-y-3 text-sm text-slate-500">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-crimson-300">Contact</h3>
+          <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li className="flex gap-2.5">
-              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
               University of Antique Main Campus Sibalom, Antique 5713, Philippines
             </li>
             <li className="flex gap-2.5">
-              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
               {siteConfig.phone}
             </li>
             <li className="flex gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
               {siteConfig.email}
             </li>
             <li className="flex gap-2.5">
-              <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+              <Landmark className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
               <a
                 href={siteConfig.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-crimson-700"
+                className="transition-colors hover:text-crimson-300"
               >
                 www.antiquespride.edu.ph
               </a>
@@ -154,8 +154,8 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-200">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:px-6 lg:px-8">
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-slate-500 sm:flex-row sm:px-6 lg:px-8">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
@@ -164,7 +164,7 @@ export function Footer() {
               href={siteConfig.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-crimson-700"
+              className="transition-colors hover:text-crimson-300"
             >
               antiquespride.edu.ph
             </Link>{" "}

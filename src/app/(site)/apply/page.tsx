@@ -82,11 +82,11 @@ export default async function ApplyPage() {
         <ol className="stagger mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
             <li key={step.num}>
-              <Card className="h-full border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
+              <Card className="h-full border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
                 <CardContent className="p-6">
                   <span className="font-display text-4xl font-bold text-amber-300">{step.num}</span>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-slate-900">{step.title}</h3>
-                  <p className="mt-1.5 text-sm text-slate-500">{step.desc}</p>
+                  <h3 className="mt-3 font-display text-lg font-semibold text-white">{step.title}</h3>
+                  <p className="mt-1.5 text-sm text-slate-400">{step.desc}</p>
                 </CardContent>
               </Card>
             </li>
@@ -94,7 +94,7 @@ export default async function ApplyPage() {
         </ol>
       </section>
 
-      <section id="requirements" className="scroll-mt-24 border-y border-slate-200 bg-slate-50 py-16">
+      <section id="requirements" className="scroll-mt-24 border-y border-white/10 bg-white/[0.03] py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Prepare These"
@@ -103,23 +103,23 @@ export default async function ApplyPage() {
           />
           <div className="stagger mt-12 grid gap-6 md:grid-cols-3">
             {requirements.map((req) => (
-              <Card key={req.title} className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
+              <Card key={req.title} className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
                 <CardContent className="flex items-start gap-4 p-6">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                     <req.icon className="h-5 w-5" />
                   </span>
                   <div>
-                    <h3 className="font-display font-semibold text-slate-900">{req.title}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{req.note}</p>
+                    <h3 className="font-display font-semibold text-white">{req.title}</h3>
+                    <p className="mt-1 text-sm text-slate-400">{req.note}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="mt-8 flex items-center gap-3 rounded-lg border border-amber-300 bg-yellow-50 p-4 text-sm text-slate-600">
-            <Info className="h-5 w-5 shrink-0 text-amber-500" />
-            Files must be in <strong className="text-slate-900">PDF, PNG, or JPEG</strong> format and no larger than{" "}
-            <strong className="text-slate-900">5 MB</strong> each. Accepted file types are strictly enforced.
+          <div className="mt-8 flex items-center gap-3 rounded-lg border border-amber-400/50 bg-yellow-500/10 p-4 text-sm text-slate-300">
+            <Info className="h-5 w-5 shrink-0 text-amber-300" />
+            Files must be in <strong className="text-white">PDF, PNG, or JPEG</strong> format and no larger than{" "}
+            <strong className="text-white">5 MB</strong> each. Accepted file types are strictly enforced.
           </div>
         </div>
       </section>
@@ -140,15 +140,15 @@ export default async function ApplyPage() {
                 { icon: ClipboardList, text: "Your payment is verified automatically after checkout" },
               ].map((item) => (
                 <li key={item.text} className="flex items-start gap-3 text-sm">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-yellow-100 text-amber-600 ring-1 ring-amber-200">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-yellow-500/10 text-amber-300 ring-1 ring-amber-400/40">
                     <item.icon className="h-5 w-5" />
                   </span>
-                  <p className="pt-1.5 text-slate-500">{item.text}</p>
+                  <p className="pt-1.5 text-slate-400">{item.text}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <Card className="overflow-hidden border-slate-200 bg-white shadow-xl shadow-red-900/10">
+          <Card className="overflow-hidden border-white/10 bg-white/[0.05] shadow-xl shadow-black/40">
             <div className="bg-gradient-to-br from-crimson-700 to-crimson-900 p-8 text-center text-white">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">Application Fee</p>
               <p className="mt-3 font-display text-5xl font-semibold">PHP {fee.toLocaleString()}</p>
@@ -157,8 +157,8 @@ export default async function ApplyPage() {
             <CardContent className="p-8">
               <div className="space-y-3 text-sm">
                 {["GCash", "Maya", "Credit / Debit Card"].map((m) => (
-                  <div key={m} className="flex items-center justify-between rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-                    <span className="font-medium text-slate-900">{m}</span>
+                  <div key={m} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.06] px-4 py-3">
+                    <span className="font-medium text-white">{m}</span>
                     <Badge variant="success">Available</Badge>
                   </div>
                 ))}

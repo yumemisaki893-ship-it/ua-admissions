@@ -67,7 +67,7 @@ export default async function ContentPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="font-display text-2xl font-semibold text-slate-900">Content Management</h1>
+        <h1 className="font-display text-2xl font-semibold text-white">Content Management</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Manage news articles, the About page, and the course catalog.
         </p>

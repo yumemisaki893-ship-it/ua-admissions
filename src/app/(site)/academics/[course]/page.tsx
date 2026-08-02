@@ -57,39 +57,39 @@ export default async function CourseDetailPage({ params }: { params: { course: s
         <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]">
           <div className="space-y-10">
             <section className="space-y-3">
-              <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-slate-900">
-                <GraduationCap className="h-5 w-5 text-crimson-700" /> Program Overview
+              <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-white">
+                <GraduationCap className="h-5 w-5 text-crimson-300" /> Program Overview
               </h2>
-              <p className="leading-relaxed text-slate-500">{course.description}</p>
+              <p className="leading-relaxed text-slate-400">{course.description}</p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-slate-900">
-                <Briefcase className="h-5 w-5 text-crimson-700" /> Career Opportunities
+              <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-white">
+                <Briefcase className="h-5 w-5 text-crimson-300" /> Career Opportunities
               </h2>
               {course.careerOpportunities.length > 0 ? (
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {course.careerOpportunities.map((career) => (
                     <li
                       key={career}
-                      className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2.5 text-sm shadow-sm"
+                      className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-2.5 text-sm shadow-sm"
                     >
                       <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
-                      <span className="text-slate-600">{career}</span>
+                      <span className="text-slate-300">{career}</span>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <p className="text-slate-500">Career information is being updated.</p>
+                <p className="text-slate-400">Career information is being updated.</p>
               )}
             </section>
 
             {curriculumHtml && (
               <section className="space-y-3">
-                <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-slate-900">
-                  <Calendar className="h-5 w-5 text-crimson-700" /> Curriculum
+                <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-white">
+                  <Calendar className="h-5 w-5 text-crimson-300" /> Curriculum
                 </h2>
-                <Card className="border-slate-200 bg-white shadow-sm">
+                <Card className="border-white/10 bg-white/[0.05] shadow-sm">
                   <CardContent className="rich-text p-6" dangerouslySetInnerHTML={{ __html: curriculumHtml }} />
                 </Card>
               </section>
@@ -97,24 +97,24 @@ export default async function CourseDetailPage({ params }: { params: { course: s
           </div>
 
           <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
-            <Card className="border-slate-200 bg-white shadow-sm transition-all hover:shadow-lg hover:shadow-red-900/10">
+            <Card className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:shadow-lg hover:shadow-black/40">
               <CardContent className="space-y-4 p-6">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                     <Clock className="h-5 w-5" />
                   </span>
                   <div>
                     <p className="text-xs text-slate-400">Duration</p>
-                    <p className="font-medium text-slate-900">{course.durationYears} years</p>
+                    <p className="font-medium text-white">{course.durationYears} years</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                     <GraduationCap className="h-5 w-5" />
                   </span>
                   <div>
                     <p className="text-xs text-slate-400">College</p>
-                    <p className="font-medium text-slate-900">{course.college.name}</p>
+                    <p className="font-medium text-white">{course.college.name}</p>
                   </div>
                 </div>
                 <Button
@@ -130,9 +130,9 @@ export default async function CourseDetailPage({ params }: { params: { course: s
               </CardContent>
             </Card>
 
-            <Card className="border border-amber-300 bg-yellow-50">
-              <CardContent className="p-6 text-sm leading-relaxed text-slate-600">
-                <p className="font-display font-semibold text-crimson-700">Need help choosing?</p>
+            <Card className="border border-amber-400/50 bg-yellow-500/10">
+              <CardContent className="p-6 text-sm leading-relaxed text-slate-300">
+                <p className="font-display font-semibold text-yellow-200">Need help choosing?</p>
                 <p className="mt-2">
                   Our admissions office is happy to guide you. Call us at (036) 540-9208 or visit the Office of
                   Admissions.

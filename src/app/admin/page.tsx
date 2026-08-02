@@ -35,25 +35,25 @@ export default async function AdminDashboardPage() {
       label: "Total Applicants",
       value: totalApplicants.toLocaleString(),
       icon: Users,
-      tone: "bg-crimson-50 text-crimson-700 ring-crimson-200",
+      tone: "bg-crimson-500/10 text-crimson-300 ring-crimson-500/40",
     },
     {
       label: "Qualified",
       value: accepted.toLocaleString(),
       icon: FileCheck2,
-      tone: "bg-emerald-50 text-emerald-600 ring-emerald-200",
+      tone: "bg-emerald-500/10 text-emerald-400 ring-emerald-500/30",
     },
     {
       label: "Pending Review",
       value: (pending + underReview).toLocaleString(),
       icon: TrendingUp,
-      tone: "bg-amber-50 text-amber-600 ring-amber-200",
+      tone: "bg-amber-500/10 text-amber-300 ring-amber-400/40",
     },
     {
       label: "Revenue (Fees)",
       value: formatCurrency(revenueTotal),
       icon: Wallet,
-      tone: "bg-crimson-50 text-crimson-700 ring-crimson-200",
+      tone: "bg-crimson-500/10 text-crimson-300 ring-crimson-500/40",
     },
   ];
 
@@ -90,7 +90,7 @@ export default async function AdminDashboardPage() {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   {stat.label}
                 </p>
-                <p className="mt-1.5 font-display text-2xl font-semibold text-slate-900">{stat.value}</p>
+                <p className="mt-1.5 font-display text-2xl font-semibold text-white">{stat.value}</p>
               </div>
               <span className={`flex h-10 w-10 items-center justify-center rounded-lg ring-1 ${stat.tone}`}>
                 <stat.icon className="h-5 w-5" />
@@ -124,10 +124,10 @@ export default async function AdminDashboardPage() {
               <Link
                 key={app.id}
                 href={`/admin/applicants/${app.id}`}
-                className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 transition-colors hover:border-amber-300"
+                className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3 transition-colors hover:border-amber-400/60"
               >
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-medium text-slate-900">
+                  <p className="truncate text-sm font-medium text-white">
                     {app.studentProfile.firstName} {app.studentProfile.lastName}
                   </p>
                   <p className="truncate text-xs text-muted-foreground">

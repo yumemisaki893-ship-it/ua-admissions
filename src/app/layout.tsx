@@ -55,8 +55,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.variable} ${poppins.variable} font-sans`}>
+        <div
+          aria-hidden
+          className="pointer-events-none fixed inset-0 -z-50 overflow-hidden bg-background"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(90rem_48rem_at_50%_-12%,hsl(0_55%_26%/0.55),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(70rem_36rem_at_88%_10%,hsl(227_40%_14%/0.55),transparent)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[30rem] bg-[radial-gradient(60rem_26rem_at_50%_100%,hsl(48_65%_24%/0.22),transparent)]" />
+        </div>
         <Providers>{children}</Providers>
       </body>
     </html>

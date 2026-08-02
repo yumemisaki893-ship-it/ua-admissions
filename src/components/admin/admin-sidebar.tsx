@@ -52,12 +52,12 @@ export function AdminSidebar({ role }: { role: string }) {
     <nav className="relative flex-1 space-y-1 p-4" ref={listRef} onMouseMove={handleHover} onMouseLeave={handleLeave}>
       <span
         className={cn(
-          "pointer-events-none absolute left-4 right-4 rounded-lg bg-gradient-to-r from-yellow-50 to-amber-50 ring-1 ring-amber-300/60 transition-all duration-300 ease-out",
+          "pointer-events-none absolute left-4 right-4 rounded-lg bg-gradient-to-r from-yellow-500/10 to-amber-500/10 ring-1 ring-amber-400/40 transition-all duration-300 ease-out",
           pill ? "opacity-100" : "opacity-0",
         )}
         style={pill ? { top: pill.top, height: pill.height } : undefined}
       />
-      <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+      <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
         Administration
       </p>
       {adminLinks.map((link) => (
@@ -66,42 +66,42 @@ export function AdminSidebar({ role }: { role: string }) {
           href={link.href}
           data-active={pathname.startsWith(link.href) ? "true" : "false"}
           className={cn(
-            "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors duration-200",
-            pathname.startsWith(link.href) ? "text-crimson-800" : "hover:text-crimson-700",
+            "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors duration-200",
+            pathname.startsWith(link.href) ? "text-crimson-300" : "hover:text-crimson-300",
           )}
         >
           <link.icon
             className={cn(
               "h-4 w-4 transition-colors duration-200",
               pathname.startsWith(link.href)
-                ? "text-crimson-700"
-                : "text-slate-400 group-hover:text-crimson-700",
+                ? "text-crimson-400"
+                : "text-slate-500 group-hover:text-crimson-400",
             )}
           />
           {link.label}
         </Link>
       ))}
-      <div className="relative border-t border-slate-100 pt-4">
-        <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
+      <div className="relative border-t border-white/10 pt-4">
+        <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-500">
           Session
         </p>
         <Link
           href="/"
-          className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-yellow-50 hover:text-crimson-700"
+          className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-yellow-500/10 hover:text-crimson-300"
         >
-          <Home className="h-4 w-4 text-slate-400 transition-colors group-hover:text-crimson-700" />
+          <Home className="h-4 w-4 text-slate-500 transition-colors group-hover:text-crimson-400" />
           Public Website
         </Link>
         <a
           href="/api/auth/signout"
-          className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-red-50 hover:text-red-700"
+          className="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:bg-red-500/10 hover:text-red-300"
         >
-          <LogOut className="h-4 w-4 text-slate-400 transition-colors group-hover:text-red-600" />
+          <LogOut className="h-4 w-4 text-slate-500 transition-colors group-hover:text-red-400" />
           Sign Out
         </a>
       </div>
       <div className="relative pt-4">
-        <div className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-crimson-700 to-crimson-900 px-3 py-2.5 shadow-md shadow-crimson-900/20">
+        <div className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-crimson-700 to-crimson-900 px-3 py-2.5 shadow-md shadow-black/30">
           <ShieldCheck className="h-4 w-4 shrink-0 text-yellow-300" />
           <p className="text-xs font-semibold text-white">{role.replace("_", " ")}</p>
         </div>

@@ -67,7 +67,7 @@ export default async function ApplicantsPage({
     <div className="space-y-6">
       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
         <div>
-          <h1 className="font-display text-2xl font-semibold text-slate-900">Applicants</h1>
+          <h1 className="font-display text-2xl font-semibold text-white">Applicants</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {applicants.length} submitted application{applicants.length === 1 ? "" : "s"}
           </p>
@@ -100,12 +100,12 @@ export default async function ApplicantsPage({
                 {applicants.map((app) => (
                   <TableRow key={app.id}>
                     <TableCell>
-                      <Link href={`/admin/applicants/${app.id}`} className="font-mono text-xs font-semibold text-crimson-700 hover:underline">
+                      <Link href={`/admin/applicants/${app.id}`} className="font-mono text-xs font-semibold text-crimson-300 hover:underline">
                         {app.referenceNumber ?? "—"}
                       </Link>
                     </TableCell>
                     <TableCell>
-                      <p className="font-medium text-slate-900">
+                      <p className="font-medium text-white">
                         {app.studentProfile.lastName}, {app.studentProfile.firstName}
                       </p>
                       <p className="text-xs text-muted-foreground">{app.studentProfile.contactNumber}</p>

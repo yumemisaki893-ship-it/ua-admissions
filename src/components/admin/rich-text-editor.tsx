@@ -56,7 +56,7 @@ export function RichTextEditor({ value, onChange, minHeight = 200 }: RichTextEdi
             onClick={tool.onClick}
             className={cn(
               "rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground",
-              tool.active && "bg-yellow-100 text-crimson-700",
+              tool.active && "bg-yellow-500/10 text-crimson-300",
             )}
           >
             <tool.icon className="h-4 w-4" />

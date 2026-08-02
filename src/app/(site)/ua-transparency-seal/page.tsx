@@ -97,43 +97,43 @@ export default function TransparencySealPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-3">
-          <Card className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
+          <Card className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
             <CardContent className="p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                 <Landmark className="h-5 w-5" />
               </span>
-              <h2 className="mt-4 font-display text-lg font-semibold text-slate-900">
+              <h2 className="mt-4 font-display text-lg font-semibold text-white">
                 Legal Basis
               </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-500">
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
                 The Transparency Seal is required by Section 93 of the General Appropriations Act,
                 while access to public records is governed by Executive Order No. 2, s. 2016.
               </p>
             </CardContent>
           </Card>
-          <Card className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
+          <Card className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
             <CardContent className="p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                 <FileSearch className="h-5 w-5" />
               </span>
-              <h2 className="mt-4 font-display text-lg font-semibold text-slate-900">
+              <h2 className="mt-4 font-display text-lg font-semibold text-white">
                 What It Contains
               </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-500">
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
                 Budget and financial documents, annual reports, mandates, procurement plans, and
                 compliance information published for public scrutiny.
               </p>
             </CardContent>
           </Card>
-          <Card className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
+          <Card className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
             <CardContent className="p-6">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
                 <Scale className="h-5 w-5" />
               </span>
-              <h2 className="mt-4 font-display text-lg font-semibold text-slate-900">
+              <h2 className="mt-4 font-display text-lg font-semibold text-white">
                 FOI Requests
               </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-500">
+              <p className="mt-1.5 text-sm leading-relaxed text-slate-400">
                 Any person may request access to official records. Requests are processed by the
                 University&apos;s FOI Receiving Officer within the period prescribed by law.
               </p>
@@ -143,13 +143,13 @@ export default function TransparencySealPage() {
 
         <div className="mt-14">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-300">
               Mandated Contents
             </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-slate-900">
+            <h2 className="mt-2 font-display text-3xl font-semibold text-white">
               What the Seal publishes
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-slate-500">
+            <p className="mx-auto mt-3 max-w-2xl text-slate-400">
               Per the General Appropriations Act, the following information must be made available
               on the University website.
             </p>
@@ -158,15 +158,15 @@ export default function TransparencySealPage() {
             {mandatedItems.map((item, i) => (
               <details
                 key={item.title}
-                className="group rounded-xl border border-slate-200 bg-white shadow-sm transition-colors open:border-amber-300 hover:border-amber-300"
+                className="group rounded-xl border border-white/10 bg-white/[0.05] shadow-sm transition-colors open:border-amber-400/50 hover:border-amber-400/60"
               >
                 <summary className="flex cursor-pointer items-start gap-3 p-5 [&::-webkit-details-marker]:hidden">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-xs font-bold text-crimson-700 ring-1 ring-crimson-700/30">
+                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-crimson-500/15 text-xs font-bold text-crimson-300 ring-1 ring-crimson-400/30">
                     {i + 1}
                   </span>
                   <div>
-                    <p className="text-sm font-semibold text-slate-900">{item.title}</p>
-                    <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-slate-400">
                       {item.description}
                     </p>
                   </div>
@@ -178,10 +178,10 @@ export default function TransparencySealPage() {
 
         <div className="mt-14">
           <div className="text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-300">
               Official Resources
             </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold text-slate-900">
+            <h2 className="mt-2 font-display text-3xl font-semibold text-white">
               Access the documents
             </h2>
           </div>
@@ -192,15 +192,15 @@ export default function TransparencySealPage() {
                 href={resource.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
+                className="group rounded-xl border border-white/10 bg-white/[0.05] p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40"
               >
                 <div className="flex items-center justify-between">
-                  <h3 className="font-display text-lg font-semibold text-slate-900 group-hover:text-crimson-700">
+                  <h3 className="font-display text-lg font-semibold text-white group-hover:text-crimson-300">
                     {resource.title}
                   </h3>
-                  <ExternalLink className="h-4 w-4 text-slate-400 transition-colors group-hover:text-crimson-700" />
+                  <ExternalLink className="h-4 w-4 text-slate-400 transition-colors group-hover:text-crimson-300" />
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
                   {resource.description}
                 </p>
               </a>

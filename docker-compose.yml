@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ua_admission_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ua_app
+      POSTGRES_PASSWORD: ua_app_password
+      POSTGRES_DB: ua_admission
+    ports:
+      - "5432:5432"
+    volumes:
+      - ua_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ua_app -d ua_admission"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: ua_admission_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - ua_redisdata:/data
+
+volumes:
+  ua_pgdata:
+  ua_redisdata:

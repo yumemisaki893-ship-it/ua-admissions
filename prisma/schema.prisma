@@ -1,0 +1,223 @@
+// Prisma schema for the University of Antique
+// Student Information Management & Admission System
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  REGISTRAR
+  ADMISSIONS_OFFICER
+  STUDENT
+}
+
+enum ApplicationStatus {
+  DRAFT
+  PENDING
+  UNDER_REVIEW
+  ACCEPTED
+  REJECTED
+}
+
+enum DocumentType {
+  BIRTH_CERT
+  FORM_137
+  PHOTO
+}
+
+enum NewsCategory {
+  NEWS
+  EVENT
+  ANNOUNCEMENT
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String?
+  name         String?
+  image        String?
+  role         Role     @default(STUDENT)
+  isVerified   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  studentProfile StudentProfile?
+  applications   Application[]
+  notifications  Notification[]
+
+  @@index([role])
+}
+
+model StudentProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  firstName       String
+  middleName      String?
+  lastName        String
+  suffix          String?
+  gender          String
+  birthDate       DateTime
+  birthplace      String?
+  address         String
+  city            String
+  province        String
+  zipCode         String?
+  contactNumber   String
+  guardianName    String
+  guardianContact String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications Application[]
+
+  @@index([lastName])
+}
+
+model College {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  name        String
+  description String?
+  imageUrl    String?
+  slug        String   @unique
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  courses Course[]
+
+  @@index([slug])
+}
+
+model Course {
+  id                    String   @id @default(cuid())
+  collegeId             String
+  code                  String
+  name                  String
+  slug                  String   @unique
+  description           String
+  durationYears         Int      @default(4)
+  careerOpportunities   String[] @default([])
+  curriculum            Json?
+  applicationFee        Int      @default(500)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  college      College       @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  applications Application[]
+
+  @@unique([collegeId, code])
+  @@index([slug])
+}
+
+model Application {
+  id                 String            @id @default(cuid())
+  userId             String
+  studentProfileId   String
+  courseId           String
+  status             ApplicationStatus @default(DRAFT)
+  referenceNumber    String?           @unique
+  applicationFeePaid Boolean           @default(false)
+  paymongoCheckoutId String?
+  remarks            String?
+  submittedAt        DateTime?
+  reviewedAt         DateTime?
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  studentProfile StudentProfile @relation(fields: [studentProfileId], references: [id], onDelete: Cascade)
+  course         Course        @relation(fields: [courseId], references: [id])
+  documents      Document[]
+  payment        Payment?
+
+  @@index([status])
+  @@index([referenceNumber])
+}
+
+model Document {
+  id            String       @id @default(cuid())
+  applicationId String
+  type          DocumentType
+  fileName      String
+  mimeType      String
+  sizeBytes     Int
+  url           String
+  publicId      String?
+  uploadedAt    DateTime     @default(now())
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+
+  @@index([applicationId, type])
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  applicationId String    @unique
+  amount        Int
+  currency      String    @default("PHP")
+  status        String    @default("PENDING")
+  paymongoId    String?
+  method        String?
+  paidAt        DateTime?
+  createdAt     DateTime  @default(now())
+
+  application Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model News {
+  id          String        @id @default(cuid())
+  title       String
+  slug        String        @unique
+  excerpt     String?
+  content     Json
+  imageUrl    String?
+  category    NewsCategory  @default(NEWS)
+  published   Boolean       @default(true)
+  publishedAt DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([category, published])
+  @@index([slug])
+}
+
+model SiteContent {
+  id          String @id @default(cuid())
+  key         String @unique
+  title       String?
+  content     Json
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, read])
+}

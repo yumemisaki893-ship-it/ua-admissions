@@ -4,7 +4,7 @@ import { authConfig } from "@/lib/auth.config";
 
 const { auth } = NextAuth(authConfig);
 
-const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER"];
+const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER", "ICTU"];
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -31,7 +31,8 @@ export default auth((req) => {
   // Already-authenticated users should not see auth pages
   if (nextUrl.pathname.startsWith("/login") || nextUrl.pathname.startsWith("/register")) {
     if (isLoggedIn) {
-      return NextResponse.redirect(new URL("/portal/dashboard", nextUrl));
+      const dest = role && ADMIN_ROLES.includes(role) ? "/admin" : "/portal/dashboard";
+      return NextResponse.redirect(new URL(dest, nextUrl));
     }
   }
 

@@ -84,7 +84,7 @@ export function CardCarousel({
               type="button"
               onClick={() => api?.scrollPrev()}
               aria-label="Previous slide"
-              className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-200 shadow-lg shadow-black/40 backdrop-blur-xl transition-all hover:scale-105 hover:border-amber-400/70 hover:bg-yellow-300 hover:text-crimson-900 lg:flex"
+              className="absolute -left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-md transition-all hover:scale-105 hover:border-amber-300 hover:bg-yellow-300 hover:text-crimson-900 lg:flex"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -92,7 +92,7 @@ export function CardCarousel({
               type="button"
               onClick={() => api?.scrollNext()}
               aria-label="Next slide"
-              className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/15 bg-slate-900/80 text-slate-200 shadow-lg shadow-black/40 backdrop-blur-xl transition-all hover:scale-105 hover:border-amber-400/70 hover:bg-yellow-300 hover:text-crimson-900 lg:flex"
+              className="absolute -right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-md transition-all hover:scale-105 hover:border-amber-300 hover:bg-yellow-300 hover:text-crimson-900 lg:flex"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -111,8 +111,8 @@ export function CardCarousel({
               className={cn(
                 "h-2 rounded-full transition-all duration-300",
                 current === i
-                  ? "w-7 bg-crimson-400"
-                  : "w-2 bg-white/20 hover:bg-amber-300",
+                  ? "w-7 bg-crimson-700"
+                  : "w-2 bg-slate-300 hover:bg-amber-300",
               )}
             />
           ))}

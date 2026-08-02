@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[240px_1fr]">
           <nav className="hidden lg:block" aria-label="Privacy policy sections">
-            <div className="sticky top-24 space-y-1 rounded-xl border border-white/10 bg-white/[0.05] p-4 shadow-sm">
+            <div className="sticky top-24 space-y-1 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
               <p className="px-2 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
                 On this page
               </p>
@@ -135,7 +135,7 @@ export default function PrivacyPolicyPage() {
                 <a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="block rounded-lg px-2 py-1.5 text-sm text-slate-300 transition-colors hover:bg-yellow-500/10 hover:text-crimson-300"
+                  className="block rounded-lg px-2 py-1.5 text-sm text-slate-600 transition-colors hover:bg-yellow-50 hover:text-crimson-700"
                 >
                   {s.title}
                 </a>
@@ -148,10 +148,10 @@ export default function PrivacyPolicyPage() {
               <section
                 key={section.id}
                 id={section.id}
-                className="scroll-mt-28 rounded-xl border border-white/10 bg-white/[0.05] p-6 shadow-sm sm:p-8"
+                className="scroll-mt-28 rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8"
               >
-                <h2 className="flex items-center gap-3 font-display text-xl font-semibold text-white">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-crimson-500/15 text-sm font-bold text-crimson-300 ring-1 ring-crimson-400/30">
+                <h2 className="flex items-center gap-3 font-display text-xl font-semibold text-slate-900">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-sm font-bold text-crimson-700 ring-1 ring-crimson-700/30">
                     {i + 1}
                   </span>
                   {section.title}
@@ -160,7 +160,7 @@ export default function PrivacyPolicyPage() {
                   {section.body.map((paragraph, j) => (
                     <p
                       key={j}
-                      className="text-sm leading-relaxed text-slate-300 [&:not(:first-child)]:mt-3"
+                      className="text-sm leading-relaxed text-slate-600 [&:not(:first-child)]:mt-3"
                     >
                       {paragraph}
                     </p>
@@ -169,15 +169,15 @@ export default function PrivacyPolicyPage() {
               </section>
             ))}
 
-            <div className="flex flex-col items-center gap-3 rounded-xl border border-amber-400/50 bg-yellow-500/10 p-6 text-center sm:flex-row sm:text-left">
+            <div className="flex flex-col items-center gap-3 rounded-xl border border-amber-300 bg-yellow-50 p-6 text-center sm:flex-row sm:text-left">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700 text-white">
                 <Mail className="h-5 w-5" />
               </span>
               <div className="flex-1">
-                <p className="font-display text-base font-semibold text-yellow-200">
+                <p className="font-display text-base font-semibold text-crimson-700">
                   Data Protection Officer
                 </p>
-                <p className="mt-1 text-sm text-slate-300">
+                <p className="mt-1 text-sm text-slate-600">
                   Send privacy-related requests to {siteConfig.email} or call {siteConfig.phone}.
                 </p>
               </div>

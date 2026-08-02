@@ -25,10 +25,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
     .toUpperCase();
 
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-slate-50">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-white/10 bg-slate-950/90 backdrop-blur-xl lg:flex">
-        <div className="flex h-16 items-center border-b border-white/10 px-5">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-slate-200 bg-white lg:flex">
+        <div className="flex h-16 items-center border-b border-slate-100 px-5">
           <Logo compact />
         </div>
         <AdminSidebar role={role} />
@@ -36,11 +36,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
       <div className="flex-1 lg:pl-60">
         {/* Topbar */}
-        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 backdrop-blur-xl sm:px-6">
+        <header className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-6">
           <div className="lg:hidden">
             <Logo compact />
           </div>
-          <p className="hidden text-sm font-medium text-slate-400 lg:block">
+          <p className="hidden text-sm font-medium text-slate-500 lg:block">
             University of Antique · Admin Console
           </p>
           <div className="flex items-center gap-3">
@@ -50,22 +50,22 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               </AvatarFallback>
             </Avatar>
             <div className="hidden sm:block">
-              <p className="text-sm font-medium leading-tight text-white">{session.user.name}</p>
-              <p className="text-xs text-slate-400">{role.replace("_", " ")}</p>
+              <p className="text-sm font-medium leading-tight text-slate-900">{session.user.name}</p>
+              <p className="text-xs text-slate-500">{role.replace("_", " ")}</p>
             </div>
           </div>
         </header>
 
         {/* Mobile nav */}
         <nav
-          className="flex overflow-x-auto border-b border-white/10 bg-slate-950/80 backdrop-blur-xl lg:hidden"
+          className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
           aria-label="Admin mobile navigation"
         >
           {adminLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="flex min-w-20 flex-1 flex-col items-center gap-1 py-2.5 text-xs font-medium text-slate-400"
+              className="flex min-w-20 flex-1 flex-col items-center gap-1 py-2.5 text-xs font-medium text-slate-500"
             >
               <link.icon className="h-4 w-4" />
               {link.label}

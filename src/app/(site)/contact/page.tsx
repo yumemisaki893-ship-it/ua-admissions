@@ -40,16 +40,16 @@ export default function ContactPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {contactCards.map((card) => (
-            <Card key={card.label} className="border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/60 hover:shadow-lg hover:shadow-black/40">
+            <Card key={card.label} className="border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10">
               <CardContent className="flex items-start gap-4 p-6">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
                   <card.icon className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
                     {card.label}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-white">{card.value}</p>
+                  <p className="mt-1 text-sm font-medium text-slate-900">{card.value}</p>
                 </div>
               </CardContent>
             </Card>
@@ -70,7 +70,7 @@ export default function ContactPage() {
           </div>
 
           <div className="space-y-5">
-            <div className="overflow-hidden rounded-xl border border-white/10 shadow-sm">
+            <div className="overflow-hidden rounded-xl border border-slate-200 shadow-sm">
               <iframe
                 src={mapUrl}
                 title="University of Antique map"
@@ -82,12 +82,12 @@ export default function ContactPage() {
                 allowFullScreen
               />
             </div>
-            <Card className="border border-amber-400/50 bg-yellow-500/10">
-              <CardContent className="p-6 text-sm leading-relaxed text-slate-300">
-                <p className="font-display text-base font-semibold text-yellow-200">Office of Admissions</p>
+            <Card className="border border-amber-300 bg-yellow-50">
+              <CardContent className="p-6 text-sm leading-relaxed text-slate-600">
+                <p className="font-display text-base font-semibold text-crimson-700">Office of Admissions</p>
                 <p className="mt-2">
                   For application-related concerns, email{" "}
-                  <span className="text-yellow-200">admissions@universityofantique.edu.ph</span> or visit the
+                  <span className="text-crimson-700">admissions@universityofantique.edu.ph</span> or visit the
                   Admissions Office at the Main Campus, Sibalom, Antique.
                 </p>
               </CardContent>

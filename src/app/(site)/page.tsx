@@ -163,9 +163,9 @@ export default async function HomePage() {
       <HeroCarousel slides={slides} />
 
       {/* Welcome + quick links */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden bg-white">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.08]"
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
               "radial-gradient(circle at 15% 20%, #dfae19 0, transparent 35%), radial-gradient(circle at 85% 75%, #9d0505 0, transparent 35%)",
@@ -177,16 +177,16 @@ export default async function HomePage() {
               <Seal size={128} className="animate-float" />
             </Reveal>
             <Reveal delay={100} className="text-center lg:text-left">
-              <Badge className="border-amber-400/50 bg-yellow-500/10 text-yellow-200 ring-1 ring-amber-400/40">
+              <Badge className="border-amber-300 bg-yellow-50 text-crimson-700 ring-1 ring-amber-300">
                 Transforming Lives &amp; Building Communities
               </Badge>
-              <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+              <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
                 Welcome to the{" "}
-                <span className="bg-gradient-to-r from-crimson-300 to-amber-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-crimson-700 to-crimson-900 bg-clip-text text-transparent">
                   University of Antique
                 </span>
               </h1>
-              <p className="mt-4 max-w-2xl text-slate-400">
+              <p className="mt-4 max-w-2xl text-slate-500">
                 A proud state university serving the province of Antique and Western Visayas through
                 instruction, research, extension and production — with five campuses, one community.
               </p>
@@ -200,15 +200,15 @@ export default async function HomePage() {
               const Icon = quickLinkIcons[i];
               return (
                 <Reveal key={key} delay={i * 80}>
-                  <div className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-sm backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-xl hover:shadow-black/40">
-                    <span className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gradient-to-br from-yellow-500/20 to-amber-500/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="group relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-red-900/10">
+                    <span className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200/60 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="relative flex items-center justify-between gap-2">
                       <IconTile icon={Icon} size="h-10 w-10" />
                       <span className="rounded-full bg-crimson-700 px-2.5 py-0.5 font-mono text-[11px] font-bold text-white shadow-sm">
                         {group.items.length}
                       </span>
                     </div>
-                    <h2 className="relative mt-4 font-display text-base font-semibold text-white">
+                    <h2 className="relative mt-4 font-display text-base font-semibold text-slate-900">
                       {group.title}
                     </h2>
                     <p className="relative mt-1 text-xs text-slate-400">{group.description}</p>
@@ -219,15 +219,15 @@ export default async function HomePage() {
                             href={item.href}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-sm text-slate-300 transition-colors hover:text-crimson-300"
+                            className="flex items-center gap-1.5 text-sm text-slate-600 transition-colors hover:text-crimson-700"
                           >
-                            <ExternalLink className="h-3 w-3 shrink-0 text-amber-300" />
+                            <ExternalLink className="h-3 w-3 shrink-0 text-amber-500" />
                             <span className="truncate">{item.label}</span>
                           </a>
                         </li>
                       ))}
                     </ul>
-                    <span className="relative mt-3 inline-flex items-center gap-1 text-xs font-semibold text-crimson-300 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
+                    <span className="relative mt-3 inline-flex items-center gap-1 text-xs font-semibold text-crimson-700 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
                       Explore <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -274,7 +274,7 @@ export default async function HomePage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <Reveal>
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/10 bg-white/[0.05] shadow-xl shadow-black/40">
+            <div className="relative aspect-video overflow-hidden rounded-2xl border border-amber-200 bg-slate-100 shadow-xl shadow-red-900/10">
               <iframe
                 src="https://www.youtube.com/embed/TRLYbelduhc"
                 title="University of Antique Institutional Video"
@@ -286,27 +286,27 @@ export default async function HomePage() {
           </Reveal>
           <Reveal delay={120}>
             <div className="space-y-4">
-              <Badge className="bg-crimson-700 text-white shadow-md shadow-black/30">
+              <Badge className="bg-crimson-700 text-white shadow-md shadow-crimson-900/20">
                 <PlayCircle className="mr-1 h-3.5 w-3.5" /> Institutional Video
               </Badge>
-              <h2 className="font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
                 Experience the University of Antique
               </h2>
-              <p className="text-slate-400">
+              <p className="text-slate-500">
                 From our historic roots in Sibalom to a proud state university serving Western Visayas —
                 watch the official institutional video and discover the community that awaits you.
               </p>
-              <ul className="space-y-3 text-sm text-slate-300">
+              <ul className="space-y-3 text-sm text-slate-600">
                 <li className="flex items-start gap-3">
-                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                  <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                   Accredited state university with a commitment to instruction, research, extension and production.
                 </li>
                 <li className="flex items-start gap-3">
-                  <Users className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                  <Users className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                   Five campuses across the province of Antique.
                 </li>
                 <li className="flex items-start gap-3">
-                  <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                  <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
                   A vibrant community of more than 25,000 students.
                 </li>
               </ul>
@@ -349,15 +349,15 @@ export default async function HomePage() {
           ].map((step, i) => (
             <Card
               key={step.title}
-              className="group relative overflow-hidden border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-xl hover:shadow-black/40"
+              className="group relative overflow-hidden border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
             >
               <CardContent className="space-y-4 p-6">
-                <span className="pointer-events-none absolute -right-5 -top-5 font-display text-6xl font-bold text-white/[0.06] transition-colors duration-300 group-hover:text-yellow-500/25">
+                <span className="pointer-events-none absolute -right-5 -top-5 font-display text-6xl font-bold text-slate-100/80 transition-colors duration-300 group-hover:text-yellow-100">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <IconTile icon={step.icon} className="transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="font-display text-lg font-semibold text-white">{step.title}</h3>
-                <p className="text-sm text-slate-400">{step.description}</p>
+                <h3 className="font-display text-lg font-semibold text-slate-900">{step.title}</h3>
+                <p className="text-sm text-slate-500">{step.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -366,7 +366,7 @@ export default async function HomePage() {
           <div className="mt-10 text-center">
             <Button
               size="lg"
-              className="bg-crimson-700 text-white shadow-lg shadow-black/30 hover:bg-yellow-400 hover:text-slate-900"
+              className="bg-crimson-700 text-white shadow-lg shadow-crimson-900/20 hover:bg-yellow-400 hover:text-slate-900"
               asChild
             >
               <Link href="/register">
@@ -378,7 +378,7 @@ export default async function HomePage() {
       </section>
 
       {/* Programs preview */}
-      <section className="border-y border-white/10 bg-white/[0.03] py-20">
+      <section className="border-y border-slate-200 bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading
@@ -391,15 +391,15 @@ export default async function HomePage() {
             <CardCarousel className="mt-12">
               {corporate.map((c) => (
                 <Link key={c.code} href="/academics" className="group block h-full">
-                  <Card className="h-full border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-xl hover:shadow-black/40">
+                  <Card className="h-full border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-md hover:shadow-red-900/10">
                     <CardContent className="flex items-start gap-4 p-5">
                       <IconTile icon={c.icon} className="transition-transform duration-300 group-hover:scale-110" />
                       <div>
-                        <p className="font-mono text-xs font-semibold text-crimson-300">{c.code}</p>
-                        <h3 className="mt-0.5 font-display font-semibold text-white group-hover:text-crimson-300">
+                        <p className="font-mono text-xs font-semibold text-crimson-700">{c.code}</p>
+                        <h3 className="mt-0.5 font-display font-semibold text-slate-900 group-hover:text-crimson-800">
                           {c.name}
                         </h3>
-                        <p className="mt-1 text-sm text-slate-400">{c.desc}</p>
+                        <p className="mt-1 text-sm text-slate-500">{c.desc}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -412,7 +412,7 @@ export default async function HomePage() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-amber-400/50 text-crimson-300 hover:bg-yellow-300 hover:text-slate-900"
+                className="border-amber-400/70 text-crimson-700 hover:bg-yellow-300 hover:text-slate-900"
                 asChild
               >
                 <Link href="/academics">
@@ -436,7 +436,7 @@ export default async function HomePage() {
         <Reveal delay={80}>
           <Tabs defaultValue="news" className="mt-12">
             <div className="flex justify-center">
-              <TabsList className="border border-white/10 bg-white/[0.05] shadow-sm">
+              <TabsList className="border border-slate-200 bg-white shadow-sm">
                 <TabsTrigger value="news" className="flex items-center gap-1.5 data-[state=active]:bg-crimson-700 data-[state=active]:text-white">
                   <ScrollText className="h-3.5 w-3.5" /> News
                 </TabsTrigger>
@@ -468,7 +468,7 @@ export default async function HomePage() {
               <div className="mt-10 text-center">
                 <Button
                   variant="outline"
-                  className="border-amber-400/70 text-crimson-300 hover:bg-yellow-300 hover:text-slate-900"
+                  className="border-amber-400/70 text-crimson-700 hover:bg-yellow-300 hover:text-slate-900"
                   asChild
                 >
                   <Link href="/news">
@@ -484,11 +484,11 @@ export default async function HomePage() {
                   <Link
                     key={item.id}
                     href={`/news/${item.slug}`}
-                    className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 shadow-sm transition-all hover:border-amber-400/40 hover:shadow-md hover:shadow-black/40"
+                    className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-amber-300 hover:shadow-md hover:shadow-red-900/10"
                   >
-                    <span className="mt-1 inline-flex h-2.5 w-2.5 shrink-0 animate-pulse-ring rounded-full bg-crimson-500" />
+                    <span className="mt-1 inline-flex h-2.5 w-2.5 shrink-0 animate-pulse-ring rounded-full bg-crimson-600" />
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-slate-200 group-hover:text-crimson-300">
+                      <p className="truncate text-sm font-medium text-slate-700 group-hover:text-crimson-700">
                         {item.title}
                       </p>
                       <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-400">
@@ -496,7 +496,7 @@ export default async function HomePage() {
                         {formatDate(item.publishedAt)}
                       </p>
                     </div>
-                    <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-amber-300 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="ml-auto mt-1 h-4 w-4 shrink-0 text-amber-500 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 ))}
               </div>
@@ -510,14 +510,14 @@ export default async function HomePage() {
                     href={job.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 shadow-sm transition-all hover:border-amber-400/40 hover:shadow-md hover:shadow-black/40"
+                    className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-amber-300 hover:shadow-md hover:shadow-red-900/10"
                   >
                     <IconTile icon={Briefcase} size="h-10 w-10" />
                     <div>
-                      <p className="text-sm font-medium text-slate-200 group-hover:text-crimson-300">{job.title}</p>
+                      <p className="text-sm font-medium text-slate-700 group-hover:text-crimson-700">{job.title}</p>
                       <p className="mt-1 text-xs text-slate-400">University of Antique · Hiring</p>
                     </div>
-                    <ExternalLink className="ml-auto mt-1 h-4 w-4 shrink-0 text-amber-300" />
+                    <ExternalLink className="ml-auto mt-1 h-4 w-4 shrink-0 text-amber-500" />
                   </a>
                 ))}
               </div>
@@ -527,7 +527,7 @@ export default async function HomePage() {
       </section>
 
       {/* Campuses */}
-      <section className="border-y border-white/10 bg-white/[0.03] py-20">
+      <section className="border-y border-slate-200 bg-slate-50 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Reveal>
             <SectionHeading
@@ -543,14 +543,14 @@ export default async function HomePage() {
                   key={campus.name}
                   href={campus.href}
                   {...(campus.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                  className="group flex h-full flex-col gap-3 rounded-xl border border-white/10 bg-white/[0.05] p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-lg hover:shadow-black/40"
+                  className="group flex h-full flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
                 >
                   <IconTile icon={MapPin} className="transition-transform duration-300 group-hover:scale-110" />
                   <div>
-                    <h3 className="font-display font-semibold text-white group-hover:text-crimson-300">{campus.name}</h3>
-                    <p className="mt-1 text-xs text-slate-400">{campus.location}</p>
+                    <h3 className="font-display font-semibold text-slate-900 group-hover:text-crimson-800">{campus.name}</h3>
+                    <p className="mt-1 text-xs text-slate-500">{campus.location}</p>
                   </div>
-                  <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-crimson-300">
+                  <span className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-crimson-700">
                     Visit campus <ExternalLink className="h-3 w-3" />
                   </span>
                 </a>
@@ -561,9 +561,9 @@ export default async function HomePage() {
       </section>
 
       {/* Transparency seals */}
-      <section className="border-b border-white/10 py-12">
+      <section className="border-b border-slate-200 bg-white py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-crimson-300">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
             Transparency &amp; Accountability
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -573,9 +573,9 @@ export default async function HomePage() {
                 href={seal.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-5 py-2.5 text-sm font-medium text-slate-300 shadow-sm transition-all hover:-translate-y-0.5 hover:border-amber-400/70 hover:shadow-md hover:text-crimson-300"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-amber-400 hover:shadow-md hover:text-crimson-700"
               >
-                <ShieldCheck className="h-4 w-4 text-amber-300" />
+                <ShieldCheck className="h-4 w-4 text-amber-500" />
                 {seal.label}
               </a>
             ))}

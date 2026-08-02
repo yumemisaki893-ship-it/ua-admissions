@@ -105,7 +105,7 @@ export function ServiceDirectory() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search services…"
-            className="h-11 w-full rounded-xl border border-white/15 bg-white/[0.06] pl-10 pr-4 text-sm text-white placeholder:text-slate-500 shadow-sm outline-none transition-colors focus:border-crimson-400 focus:ring-2 focus:ring-crimson-500/30"
+            className="h-11 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-sm text-slate-900 placeholder:text-slate-400 shadow-sm outline-none transition-colors focus:border-crimson-400 focus:ring-2 focus:ring-crimson-100"
           />
         </div>
         <div className="flex flex-wrap gap-2">
@@ -117,7 +117,7 @@ export function ServiceDirectory() {
                 "rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors",
                 category === c
                   ? "bg-crimson-700 text-white shadow-sm"
-                  : "border border-white/15 bg-white/[0.05] text-slate-300 hover:border-amber-400/70 hover:text-crimson-300",
+                  : "border border-slate-200 bg-white text-slate-600 hover:border-amber-300 hover:text-crimson-700",
               )}
             >
               {c}
@@ -132,24 +132,24 @@ export function ServiceDirectory() {
           return (
             <Card
               key={service.title}
-              className="group flex flex-col border-white/10 bg-white/[0.05] shadow-sm transition-all hover:-translate-y-1 hover:border-amber-400/40 hover:shadow-xl hover:shadow-black/40"
+              className="group flex flex-col border-slate-200 bg-white shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
             >
               <CardContent className="flex flex-1 flex-col p-6">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-500/15 text-crimson-300 ring-1 ring-crimson-400/30 transition-colors group-hover:bg-yellow-300 group-hover:text-crimson-900 group-hover:ring-amber-400">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30 transition-colors group-hover:bg-yellow-300 group-hover:text-crimson-900 group-hover:ring-amber-400">
                     <Icon className="h-5 w-5" />
                   </span>
-                  <span className="rounded-full bg-white/[0.06] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-400 ring-1 ring-white/10">
+                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-slate-500">
                     {service.category}
                   </span>
                 </div>
-                <h3 className="mt-4 font-display text-lg font-semibold text-white">{service.title}</h3>
-                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-400">{service.description}</p>
+                <h3 className="mt-4 font-display text-lg font-semibold text-slate-900">{service.title}</h3>
+                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-500">{service.description}</p>
                 <a
                   href={service.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-crimson-300 transition-colors hover:text-amber-300"
+                  className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-crimson-700 transition-colors hover:text-amber-600"
                 >
                   Visit service <ExternalLink className="h-3.5 w-3.5" />
                 </a>
@@ -160,9 +160,9 @@ export function ServiceDirectory() {
       </div>
 
       {filtered.length === 0 && (
-        <div className="mt-8 rounded-xl border border-dashed border-white/15 bg-white/[0.04] py-14 text-center">
-          <p className="text-sm text-slate-400">No services match your search.</p>
-          <p className="mt-1 text-xs text-slate-500">Try a different keyword or clear the filters.</p>
+        <div className="mt-8 rounded-xl border border-dashed border-slate-300 bg-white py-14 text-center">
+          <p className="text-sm text-slate-500">No services match your search.</p>
+          <p className="mt-1 text-xs text-slate-400">Try a different keyword or clear the filters.</p>
         </div>
       )}
     </div>

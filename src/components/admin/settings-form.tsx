@@ -60,7 +60,7 @@ export function SettingsForm({
   return (
     <div className="space-y-6">
       <form onSubmit={saveSettings} className="space-y-6">
-        <Card className="border-white/10 bg-white/[0.06] shadow-sm">
+        <Card className="border-slate-200 bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg">Admission Period</CardTitle>
             <CardDescription>
@@ -70,13 +70,13 @@ export function SettingsForm({
           </CardHeader>
           <CardContent className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-sm font-medium text-white">
+              <p className="text-sm font-medium text-slate-900">
                 Status:{" "}
-                <span className={cn("font-semibold", open ? "text-emerald-400" : "text-crimson-300")}>
+                <span className={cn("font-semibold", open ? "text-emerald-600" : "text-crimson-700")}>
                   {open ? "Open" : "Closed"}
                 </span>
               </p>
-              <p className="mt-0.5 text-xs text-slate-400">
+              <p className="mt-0.5 text-xs text-slate-500">
                 When closed, the Apply page shows a notice to new applicants.
               </p>
             </div>
@@ -87,7 +87,7 @@ export function SettingsForm({
               onClick={() => setOpen(!open)}
               className={cn(
                 "relative h-7 w-12 rounded-full transition-colors",
-                open ? "bg-emerald-500" : "bg-white/15",
+                open ? "bg-emerald-500" : "bg-slate-300",
               )}
             >
               <span
@@ -100,7 +100,7 @@ export function SettingsForm({
           </CardContent>
         </Card>
 
-        <Card className="border-white/10 bg-white/[0.06] shadow-sm">
+        <Card className="border-slate-200 bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="text-lg">Application Fee</CardTitle>
             <CardDescription>
@@ -128,10 +128,10 @@ export function SettingsForm({
       </form>
 
       <form onSubmit={send}>
-        <Card className="border-white/10 bg-white/[0.06] shadow-sm">
+        <Card className="border-slate-200 bg-white shadow-sm">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-lg">
-              <Megaphone className="h-5 w-5 text-crimson-300" /> Send Announcement
+              <Megaphone className="h-5 w-5 text-crimson-700" /> Send Announcement
             </CardTitle>
             <CardDescription>
               Post a notification to all {studentCount} student account{studentCount === 1 ? "" : "s"}.

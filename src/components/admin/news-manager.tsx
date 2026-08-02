@@ -134,7 +134,7 @@ export function NewsManager({ items }: { items: NewsItem[] }) {
           <div key={item.id} className="flex items-center justify-between gap-3 rounded-lg border bg-card px-4 py-3">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="truncate font-medium text-white">{item.title}</p>
+                <p className="truncate font-medium text-slate-900">{item.title}</p>
                 <Badge variant={item.category === "EVENT" ? "warning" : item.category === "ANNOUNCEMENT" ? "default" : "secondary"}>
                   {item.category}
                 </Badge>

@@ -56,7 +56,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
     <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
       <Link
         href="/news"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-crimson-300 transition-colors hover:text-crimson-300"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-crimson-700 transition-colors hover:text-crimson-800"
       >
         <ArrowLeft className="h-4 w-4" /> Back to News
       </Link>
@@ -66,26 +66,26 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
         <div className="flex flex-wrap items-center gap-3">
           <Badge className="bg-crimson-700 text-white">{item.category}</Badge>
           {item.publishedAt && (
-            <span className="flex items-center gap-1.5 text-sm text-slate-400">
+            <span className="flex items-center gap-1.5 text-sm text-slate-500">
               <CalendarDays className="h-4 w-4" />
               {formatDate(item.publishedAt)}
             </span>
           )}
-          <span className="flex items-center gap-1.5 text-sm text-slate-400">
+          <span className="flex items-center gap-1.5 text-sm text-slate-500">
             <Clock className="h-4 w-4" />
             {minutes} min read
           </span>
         </div>
 
-        <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
+        <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
           {item.title}
         </h1>
-        {item.excerpt && <p className="mt-4 text-lg text-slate-400">{item.excerpt}</p>}
+        {item.excerpt && <p className="mt-4 text-lg text-slate-500">{item.excerpt}</p>}
       </header>
 
       {/* Hero image */}
       {item.imageUrl && (
-        <div className="relative mt-8 aspect-[21/9] w-full overflow-hidden rounded-2xl border border-white/10 shadow-lg shadow-black/40">
+        <div className="relative mt-8 aspect-[21/9] w-full overflow-hidden rounded-2xl border border-slate-200 shadow-lg shadow-red-900/10">
           <Image
             src={item.imageUrl}
             alt={item.title}
@@ -98,7 +98,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
       )}
 
       {/* Share */}
-      <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-white/10 pb-6">
+      <div className="mt-8 flex flex-wrap items-center gap-2 border-b border-slate-200 pb-6">
         <ShareButtons title={item.title} />
       </div>
 
@@ -106,8 +106,8 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
 
       {/* Related */}
       {related.length > 0 && (
-        <div className="mt-14 border-t border-white/10 pt-10">
-          <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-crimson-300">
+        <div className="mt-14 border-t border-slate-200 pt-10">
+          <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-crimson-700">
             <Tag className="h-5 w-5" /> Related Stories
           </h2>
           <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -126,7 +126,7 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
           <div className="mt-10 text-center">
             <Button
               variant="outline"
-              className="border-amber-400/70 text-crimson-300 hover:bg-yellow-300 hover:text-slate-900"
+              className="border-amber-400/70 text-crimson-700 hover:bg-yellow-300 hover:text-slate-900"
               asChild
             >
               <Link href="/news">

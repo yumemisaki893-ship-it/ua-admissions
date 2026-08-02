@@ -196,7 +196,7 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
             <div>
               <div className="flex items-center gap-2">
                 <Badge className="bg-crimson-900 text-yellow-300">{college.code}</Badge>
-                <h3 className="font-display font-semibold text-white">{college.name}</h3>
+                <h3 className="font-display font-semibold text-slate-900">{college.name}</h3>
               </div>
               {college.description && (
                 <p className="mt-1 max-w-2xl text-xs text-muted-foreground">{college.description}</p>
@@ -215,8 +215,8 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
             {college.courses.map((course) => (
               <div key={course.id} className="flex items-center justify-between gap-3 px-5 py-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-white">
-                    {course.name} <span className="font-mono text-xs text-crimson-300">({course.code})</span>
+                  <p className="text-sm font-medium text-slate-900">
+                    {course.name} <span className="font-mono text-xs text-crimson-700">({course.code})</span>
                   </p>
                   <p className="truncate text-xs text-muted-foreground">
                     {course.description} · {course.durationYears} years
@@ -235,7 +235,7 @@ export function CollegesManager({ colleges }: { colleges: CollegeItem[] }) {
             <button
               type="button"
               onClick={() => openCreateCourse(college.id)}
-              className="w-full px-5 py-3 text-left text-sm font-medium text-crimson-300 transition-colors hover:bg-yellow-500/10"
+              className="w-full px-5 py-3 text-left text-sm font-medium text-crimson-700 transition-colors hover:bg-yellow-50"
             >
               + Add course to {college.code}
             </button>

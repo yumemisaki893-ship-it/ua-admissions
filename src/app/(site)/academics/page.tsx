@@ -48,12 +48,12 @@ export default async function AcademicsPage() {
             <Reveal delay={ci % 2 === 0 ? 0 : 60}>
               <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <span className="font-mono text-sm font-semibold text-crimson-300">{college.code}</span>
-                  <h2 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
+                  <span className="font-mono text-sm font-semibold text-crimson-700">{college.code}</span>
+                  <h2 className="mt-1 font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
                     {college.name}
                   </h2>
                   {college.description && (
-                    <p className="mt-2 max-w-2xl text-slate-400">{college.description}</p>
+                    <p className="mt-2 max-w-2xl text-slate-500">{college.description}</p>
                   )}
                 </div>
                 <Badge className="w-fit bg-crimson-700 text-white">
@@ -94,27 +94,27 @@ export default async function AcademicsPage() {
         )}
 
         <Reveal>
-          <section id="graduate-school" className="scroll-mt-24 rounded-2xl border border-amber-400/50 bg-gradient-to-br from-crimson-700/10 via-white/[0.05] to-amber-500/10 p-8 sm:p-12">
+          <section id="graduate-school" className="scroll-mt-24 rounded-2xl border border-amber-300/70 bg-gradient-to-br from-crimson-700/10 via-white to-amber-100 p-8 sm:p-12">
             <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
               <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-300">Graduate School</p>
-                <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">Graduate School</p>
+                <h2 className="font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
                   Advance your education with masteral & doctoral programs
                 </h2>
-                <p className="text-slate-300">
+                <p className="text-slate-600">
                   The UA Graduate School offers advanced degrees in education, management, public administration,
                   and more — designed for working professionals.
                 </p>
               </div>
-              <Card className="border-amber-400/40 bg-white/[0.06] shadow-lg ring-1 ring-amber-400/40">
-                <CardContent className="space-y-4 p-8 text-sm text-slate-300">
+              <Card className="border-amber-200 bg-white/90 shadow-lg ring-1 ring-amber-200">
+                <CardContent className="space-y-4 p-8 text-sm text-slate-600">
                   <p>
-                    <strong className="text-crimson-300">Admission tip:</strong> Graduate school applicants should
+                    <strong className="text-crimson-700">Admission tip:</strong> Graduate school applicants should
                     prepare their Transcript of Records (TOR), diploma, and recommendation letters.
                   </p>
                   <p>
                     For inquiries, contact the Graduate School Office or email{" "}
-                    <span className="text-crimson-300">gradschool@universityofantique.edu.ph</span>.
+                    <span className="text-crimson-700">gradschool@universityofantique.edu.ph</span>.
                   </p>
                 </CardContent>
               </Card>

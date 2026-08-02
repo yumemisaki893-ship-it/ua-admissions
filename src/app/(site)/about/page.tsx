@@ -1,5 +1,18 @@
-import { Landmark, Target, ScrollText, Music, ShieldCheck, CalendarCheck } from "lucide-react";
+import {
+  CalendarDays,
+  GraduationCap,
+  Hammer,
+  Landmark,
+  MapPin,
+  Music,
+  Play,
+  ScrollText,
+  ShieldCheck,
+  Target,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
+import type { JSONContent } from "@tiptap/react";
 
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Reveal } from "@/components/shared/reveal";
@@ -11,27 +24,72 @@ import { siteConfig } from "@/lib/site-config";
 
 export const dynamic = "force-dynamic";
 
-const milestones = [
+const journey = [
   {
     year: "1954",
-    title: "Antique School of Arts and Trades",
-    desc: "Established on January 19, 1954 by virtue of Republic Act No. 851 through the efforts of Cong. Tobias A. Fornier. First classes opened on July 1, 1954 with 188 Secondary Trade and 53 Trade-Technical Education students.",
+    title: "ASAT",
+    desc: "The Antique School of Arts and Trades is established by Republic Act No. 851.",
+    icon: Hammer,
   },
   {
     year: "1982",
-    title: "Polytechnic State College of Antique",
-    desc: "Converted from a trade school into a state college on November 14, 1982 by Batas Pambansa Blg. 281, with Dr. Godofredo E. Gallega as its first president.",
+    title: "PSCA",
+    desc: "Converted into a chartered state college by Batas Pambansa Blg. 281.",
+    icon: Landmark,
   },
   {
     year: "2009",
-    title: "University of Antique",
-    desc: "Converted into a state university on November 10, 2009 by virtue of Republic Act No. 9746 signed by President Gloria Macapagal-Arroyo.",
+    title: "UA",
+    desc: "Elevated to the University of Antique by Republic Act No. 9746.",
+    icon: GraduationCap,
   },
   {
     year: "Today",
-    title: "Five Campuses & 25,000+ Students",
-    desc: "Serving Antique from the main campus in Sibalom and campuses in Tibiao, Hamtic, Libertad, and Caluya.",
+    title: "Five Campuses",
+    desc: "Sibalom, Tibiao, Hamtic, Libertad and Caluya — one university, one community.",
+    icon: Users,
   },
+];
+
+const eraMeta = [
+  { range: "1954 – 1982", act: "Republic Act No. 851", icon: Hammer },
+  { range: "1982 – 2009", act: "Batas Pambansa Blg. 281", icon: Landmark },
+  { range: "2009 – Present", act: "Republic Act No. 9746", icon: GraduationCap },
+];
+
+type EraMedia =
+  | { kind: "image"; src: string; alt: string; caption: string; w: number; h: number }
+  | { kind: "video"; src: string; caption: string };
+
+const eraMedia: EraMedia[] = [
+  {
+    kind: "image",
+    src: "/ua/asat.jpg",
+    alt: "The Antique School of Arts and Trades, predecessor of the University of Antique",
+    caption: "The Antique School of Arts and Trades",
+    w: 960,
+    h: 540,
+  },
+  {
+    kind: "image",
+    src: "/ua/ua-gate.jpg",
+    alt: "The University of Antique gate",
+    caption: "The University of Antique gate",
+    w: 573,
+    h: 632,
+  },
+  {
+    kind: "video",
+    src: "https://antiquespride.edu.ph/wp-content/uploads/2021/11/University-Of-Antique.mp4",
+    caption: "A film on the University of Antique",
+  },
+];
+
+const stats = [
+  { value: "1954", label: "Year Established", icon: CalendarDays },
+  { value: "Level IV", label: "SUC Level Status", icon: ShieldCheck },
+  { value: "5", label: "Campuses", icon: MapPin },
+  { value: "25,722", label: "Students Enrolled", icon: Users },
 ];
 
 const orgUnits = [
@@ -44,18 +102,43 @@ const orgUnits = [
   { name: "Registrar, Admissions, Student Services, Library, ICT", role: "Support services for students and faculty", level: 3 },
 ];
 
+const UA_VIDEO_URL = "https://antiquespride.edu.ph/wp-content/uploads/2021/11/University-Of-Antique.mp4";
+
+type EraBlock = { title: string; body: string };
+
+function parseHistoryEras(raw: string | null | undefined): EraBlock[] {
+  if (!raw || typeof raw !== "string") return [];
+  try {
+    const doc = JSON.parse(raw) as JSONContent;
+    const eras: EraBlock[] = [];
+    let current: EraBlock | null = null;
+    for (const node of doc.content ?? []) {
+      if (node.type === "heading") {
+        current = { title: "", body: "" };
+        eras.push(current);
+        current.title = renderRichText({ type: "doc", content: [node] }).replace(/<\/?h\d>/g, "");
+      } else if (node.type === "paragraph" && current) {
+        current.body += renderRichText({ type: "doc", content: [node] });
+      }
+    }
+    return eras.filter((e) => e.body.trim());
+  } catch {
+    return [];
+  }
+}
+
 async function getContent() {
   const records = await prisma.siteContent.findMany({
     where: { key: { in: ["about_history", "about_vision", "about_mission", "about_hymn", "about_seal"] } },
   });
-  const map = new Map(records.map((r) => [r.key, r.content]));
+  const map = new Map(records.map((r) => [r.key, typeof r.content === "string" ? r.content : ""]));
   return map;
 }
 
 export default async function AboutPage() {
   const content = await getContent();
 
-  const history = renderRichText(content.get("about_history"));
+  const historyEras = parseHistoryEras(content.get("about_history"));
   const vision = renderRichText(content.get("about_vision")) || "Vision statement coming soon.";
   const mission = renderRichText(content.get("about_mission")) || "Mission statement coming soon.";
   const hymn = renderRichText(content.get("about_hymn"));
@@ -63,90 +146,164 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
+      <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.08]"
           style={{
             backgroundImage: "radial-gradient(circle at 25% 25%, #dfae19 0, transparent 40%), radial-gradient(circle at 80% 70%, #3f0608 0, transparent 45%)",
           }}
         />
-        <div className="relative mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">About the University</p>
-          <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
-            A Legacy of Excellence Since 1954
-          </h1>
-          <p className="mt-4 text-red-50">
-            From a modest school of arts and trades to a Level IV state university serving the province of Antique.
-          </p>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-200">About the University</p>
+            <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
+              A Legacy of Excellence Since 1954
+            </h1>
+            <p className="mt-4 max-w-xl text-red-50">
+              From a modest school of arts and trades to a Level IV state university serving the province of
+              Antique — witness the story behind Antique&apos;s pride.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Badge className="bg-yellow-300 text-crimson-900">ASAT · 1954</Badge>
+              <Badge variant="outline" className="border-white/40 text-white">
+                PSCA · 1982
+              </Badge>
+              <Badge variant="outline" className="border-white/40 text-white">
+                UA · 2009
+              </Badge>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <div className="overflow-hidden rounded-2xl bg-black/20 shadow-2xl ring-1 ring-white/15">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                className="aspect-video w-full object-cover"
+                src={UA_VIDEO_URL}
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Quick facts band */}
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:px-6 lg:grid-cols-4 lg:px-8">
-          {[
-            { value: "1954", label: "Year Established" },
-            { value: "Level IV", label: "SUC Level Status" },
-            { value: "5", label: "Campuses" },
-            { value: "25,722", label: "Students Enrolled" },
-          ].map((stat, i) => (
+          {stats.map((stat, i) => (
             <Reveal key={stat.label} delay={i * 70} className="text-center">
-              <p className="font-display text-3xl font-bold text-crimson-700">{stat.value}</p>
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/20">
+                <stat.icon className="h-5 w-5" />
+              </span>
+              <p className="mt-3 font-display text-3xl font-bold text-crimson-700">{stat.value}</p>
               <p className="mt-1 text-xs uppercase tracking-wider text-slate-500">{stat.label}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* History timeline */}
+      {/* History */}
       <section id="history" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-16 sm:px-6 lg:px-8">
         <Reveal>
           <SectionHeading
             eyebrow="Our Story"
             title="History of the University"
-            description="From a school of arts and trades in 1954 to the University of Antique today."
+            description="Three eras, one journey — from a trade school in 1954 to the University of Antique today."
           />
         </Reveal>
 
-        <div className="relative mx-auto mt-14 max-w-3xl">
-          <span className="absolute left-5 top-2 bottom-2 w-px bg-gradient-to-b from-amber-400 via-crimson-700 to-transparent sm:left-1/2" />
-          <ol className="space-y-8">
-            {milestones.map((m, i) => (
-              <li key={m.year} className="relative">
-                <Reveal
-                  delay={i * 60}
-                  className={`flex flex-col gap-3 pl-14 sm:w-1/2 sm:pl-0 ${
-                    i % 2 === 0 ? "sm:pr-10 sm:text-right" : "sm:ml-auto sm:pl-10"
-                  }`}
-                >
-                  <span
-                    className={`absolute left-5 top-1 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-amber-400 bg-white sm:left-auto ${
-                      i % 2 === 0 ? "sm:-right-2 sm:translate-x-1/2" : "sm:-left-2 sm:-translate-x-1/2"
-                    }`}
-                  />
-                  <div>
-                    <Badge className="bg-crimson-700 text-white">{m.year}</Badge>
-                    <h3 className="mt-2 font-display text-lg font-semibold text-slate-900">{m.title}</h3>
-                    <p className="mt-1 text-sm text-slate-500">{m.desc}</p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+        {/* Era journey */}
+        <Reveal delay={60}>
+          <div className="relative mt-14 rounded-3xl border border-slate-200 bg-gradient-to-b from-slate-50 to-white p-8 shadow-sm sm:p-10">
+            <span className="absolute inset-x-12 top-[4.5rem] hidden h-0.5 bg-gradient-to-r from-amber-400 via-crimson-700 to-crimson-950 lg:block" />
+            <ol className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+              {journey.map((j) => (
+                <li key={j.year} className="relative flex flex-col items-center text-center">
+                  <span className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full border-2 border-amber-400 bg-white text-crimson-700 shadow-md transition-transform duration-300 hover:scale-110">
+                    <j.icon className="h-6 w-6" />
+                  </span>
+                  <p className="mt-4 font-display text-3xl font-bold text-crimson-700">{j.year}</p>
+                  <p className="font-display font-semibold uppercase tracking-wide text-slate-900">{j.title}</p>
+                  <p className="mt-1.5 max-w-[15rem] text-sm leading-relaxed text-slate-500">{j.desc}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
+
+        {/* Full story */}
+        <div className="mt-16 flex items-center gap-4">
+          <span className="h-px flex-1 bg-gradient-to-r from-transparent to-slate-200" />
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-crimson-700">
+            The Full Story
+          </p>
+          <span className="h-px flex-1 bg-gradient-to-l from-transparent to-slate-200" />
         </div>
 
-        {history && (
-          <Reveal delay={100}>
-            <Card className="mt-14 border-slate-200 bg-white shadow-sm">
-              <CardContent className="p-8">
-                <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-crimson-700">
-                  <CalendarCheck className="h-5 w-5" /> The Full Story
-                </h3>
-                <div className="rich-text mt-4" dangerouslySetInnerHTML={{ __html: history }} />
-              </CardContent>
-            </Card>
-          </Reveal>
-        )}
+        <div className="mt-12 space-y-20">
+          {historyEras.length > 0 ? (
+            historyEras.map((era, i) => {
+              const meta = eraMeta[i % eraMeta.length];
+              const media = eraMedia[i % eraMedia.length];
+              const flip = i % 2 === 1;
+              return (
+                <div key={`${era.title}-${i}`} className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+                  <Reveal className={flip ? "lg:order-2" : undefined}>
+                    <div className="flex items-center gap-4">
+                      <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-crimson-700/10 text-crimson-700 ring-1 ring-crimson-700/30">
+                        <meta.icon className="h-6 w-6" />
+                      </span>
+                      <div>
+                        <Badge className="bg-crimson-700 text-white">{meta.range}</Badge>
+                        <p className="mt-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-amber-600">
+                          {meta.act}
+                        </p>
+                      </div>
+                    </div>
+                    <h3 className="mt-5 font-display text-2xl font-semibold text-slate-900">{era.title}</h3>
+                    <div
+                      className="rich-text mt-4 text-[15px] leading-7 text-slate-600 [&_p]:my-4 first:[&_p]:mt-0"
+                      dangerouslySetInnerHTML={{ __html: era.body }}
+                    />
+                  </Reveal>
+                  <Reveal delay={120} className={flip ? "lg:order-1" : undefined}>
+                    {media.kind === "video" ? (
+                      <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+                        <video
+                          controls
+                          playsInline
+                          preload="metadata"
+                          className="aspect-video w-full object-cover"
+                          src={media.src}
+                        />
+                        <figcaption className="flex items-center gap-2 px-5 py-3 text-sm text-slate-500">
+                          <Play className="h-4 w-4 text-amber-500" /> {media.caption}
+                        </figcaption>
+                      </figure>
+                    ) : (
+                      <figure className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-2 shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-red-900/10">
+                        <Image
+                          src={media.src}
+                          alt={media.alt}
+                          width={media.w}
+                          height={media.h}
+                          className="h-auto w-full rounded-xl object-cover"
+                        />
+                        <figcaption className="px-3 py-3 text-center text-sm italic text-slate-500">
+                          {media.caption}
+                        </figcaption>
+                      </figure>
+                    )}
+                  </Reveal>
+                </div>
+              );
+            })
+          ) : (
+            <Reveal>
+              <p className="text-center text-slate-400">The full history is being prepared. Please check back soon.</p>
+            </Reveal>
+          )}
+        </div>
       </section>
 
       {/* VMGO */}

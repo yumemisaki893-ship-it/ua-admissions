@@ -4,7 +4,8 @@ import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import { Logo } from "@/components/shared/logo";
-import { AdminSidebar, adminLinks, ictuLinks } from "@/components/admin/admin-sidebar";
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
+import { adminLinks, ictuLinks } from "@/components/admin/admin-links";
 
 export const dynamic = "force-dynamic";
 

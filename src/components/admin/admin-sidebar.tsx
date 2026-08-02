@@ -4,34 +4,15 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard,
-  Users,
-  FileText,
   LogOut,
   Home,
-  Settings,
   ShieldCheck,
-  Link2,
-  Fingerprint,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import type { AdminNavLink } from "@/components/admin/admin-links";
 
-export const adminLinks = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/applicants", label: "Applicants", icon: Users },
-  { href: "/admin/content", label: "Content", icon: FileText },
-  { href: "/admin/links", label: "Links", icon: Link2 },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
-];
-
-export const ictuLinks = [
-  { href: "/admin", label: "Oversight", icon: LayoutDashboard },
-  { href: "/admin/ictu/registrars", label: "Registrars", icon: Users },
-  { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
-];
-
-export function AdminSidebar({ role, links }: { role: string; links: { href: string; label: string; icon: typeof LayoutDashboard }[] }) {
+export function AdminSidebar({ role, links }: { role: string; links: AdminNavLink[] }) {
   const pathname = usePathname();
   const listRef = React.useRef<HTMLDivElement>(null);
   const [pill, setPill] = React.useState<{ top: number; height: number } | null>(null);

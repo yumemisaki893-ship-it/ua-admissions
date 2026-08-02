@@ -23,6 +23,8 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const listRef = useRef<HTMLUListElement>(null);
   const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -38,6 +40,27 @@ export function Navbar() {
       setPill({ left: active.offsetLeft, width: active.offsetWidth });
     }
   }, [pathname]);
+
+  useEffect(() => () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
+
+  // Hover-open the mega menu, with a short grace period so the cursor can
+  // travel from the trigger into the dropdown panel without closing it.
+  function openOnHover(label: string) {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenMenu(label);
+  }
+
+  function closeSoon() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 160);
+  }
+
+  function closeNow() {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpenMenu(null);
+  }
 
   function handleHover(e: React.MouseEvent<HTMLUListElement>) {
     const li = (e.target as HTMLElement).closest("li");
@@ -88,8 +111,13 @@ export function Navbar() {
                   key={item.label}
                   data-active={pathname.startsWith(item.href) ? "true" : "false"}
                   className="relative"
+                  onMouseEnter={() => openOnHover(item.label)}
+                  onMouseLeave={closeSoon}
                 >
-                  <DropdownMenu>
+                  <DropdownMenu
+                    open={openMenu === item.label}
+                    onOpenChange={(next) => (next ? openOnHover(item.label) : closeNow())}
+                  >
                     <DropdownMenuTrigger asChild>
                       <button
                         className={cn(
@@ -103,6 +131,8 @@ export function Navbar() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                       align="start"
+                      onMouseEnter={() => openOnHover(item.label)}
+                      onMouseLeave={closeSoon}
                       className="w-[340px] border-slate-200 bg-white/95 p-2 shadow-xl backdrop-blur data-[state=open]:slide-in-from-top-2"
                     >
                       <div className="grid grid-cols-1">

@@ -4,14 +4,18 @@ import { Globe, AtSign, Video, Mail, Phone, MapPin, Landmark, ShieldCheck } from
 
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { siteConfig } from "@/lib/site-config";
+import { getExternalLinks, resolveLink } from "@/lib/external-links";
+import { slugify } from "@/lib/utils";
 
-const socialLinks = [
-  { label: "Facebook", href: siteConfig.socials.facebook, icon: Globe },
-  { label: "YouTube", href: siteConfig.socials.youtube, icon: Video },
-  { label: "X (Twitter)", href: siteConfig.socials.twitter, icon: AtSign },
-];
+export async function Footer() {
+  const links = await getExternalLinks();
 
-export function Footer() {
+  const socialLinks = [
+    { label: "Facebook", href: resolveLink(links, "social-facebook", siteConfig.socials.facebook), icon: Globe },
+    { label: "YouTube", href: resolveLink(links, "social-youtube", siteConfig.socials.youtube), icon: Video },
+    { label: "X (Twitter)", href: resolveLink(links, "social-twitter", siteConfig.socials.twitter), icon: AtSign },
+  ];
+
   return (
     <footer className="border-t border-slate-200 bg-white text-slate-600">
       {/* Masthead strip */}
@@ -55,19 +59,23 @@ export function Footer() {
             ))}
           </div>
           <ul className="flex flex-wrap gap-2 pt-1">
-            {siteConfig.transparencySeals.slice(0, 3).map((seal) => (
-              <li key={seal.label}>
-                <a
-                  href={seal.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] text-slate-500 transition-colors hover:border-amber-400 hover:text-crimson-700"
-                >
-                  <ShieldCheck className="h-3 w-3 text-amber-500" />
-                  {seal.label}
-                </a>
-              </li>
-            ))}
+            {siteConfig.transparencySeals.slice(0, 3).map((seal) => {
+              const href = seal.href.startsWith("http")
+                ? resolveLink(links, `seal-${slugify(seal.label)}`, seal.href)
+                : seal.href;
+              return (
+                <li key={seal.label}>
+                  <a
+                    href={href}
+                    {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] text-slate-500 transition-colors hover:border-amber-400 hover:text-crimson-700"
+                  >
+                    <ShieldCheck className="h-3 w-3 text-amber-500" />
+                    {seal.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
@@ -101,9 +109,12 @@ export function Footer() {
               group.items.slice(0, 1).map((item) => (
                 <li key={item.label}>
                   <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={
+                      item.href.startsWith("http")
+                        ? resolveLink(links, `quick-${slugify(item.label)}`, item.href)
+                        : item.href
+                    }
+                    {...(item.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="text-slate-500 transition-colors hover:text-crimson-700"
                   >
                     {item.label}
@@ -113,7 +124,7 @@ export function Footer() {
             )}
             <li>
               <a
-                href="https://antiquespride.edu.ph/ua-transparency-seal/"
+                href={resolveLink(links, "seal-transparency-seal", "https://antiquespride.edu.ph/ua-transparency-seal/")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-500 transition-colors hover:text-crimson-700"

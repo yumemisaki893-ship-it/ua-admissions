@@ -1,6 +1,7 @@
 import { ExternalLink, FileSearch, Landmark, Scale } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { getExternalLinks, resolveLink } from "@/lib/external-links";
 
 export const dynamic = "force-dynamic";
 
@@ -56,21 +57,26 @@ const resources = [
   {
     title: "Official Transparency Seal",
     description: "The full transparency seal page on the official University website, including downloadable reports and documents.",
-    href: "https://antiquespride.edu.ph/ua-transparency-seal/",
+    slug: "seal-transparency-seal",
+    fallback: "https://antiquespride.edu.ph/ua-transparency-seal/",
   },
   {
     title: "Bids and Awards",
     description: "Procurement opportunities, bid notices, and award announcements.",
-    href: "https://antiquespride.edu.ph/bids-and-awards/",
+    slug: "seal-bids-and-awards",
+    fallback: "https://antiquespride.edu.ph/bids-and-awards/",
   },
   {
     title: "Freedom of Information (FOI)",
     description: "File an FOI request through the official government FOI portal.",
-    href: "https://www.foi.gov.ph/",
+    slug: "seal-foi",
+    fallback: "https://www.foi.gov.ph/",
   },
 ];
 
-export default function TransparencySealPage() {
+export default async function TransparencySealPage() {
+  const links = await getExternalLinks("seal");
+
   return (
     <>
       <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
@@ -189,7 +195,7 @@ export default function TransparencySealPage() {
             {resources.map((resource) => (
               <a
                 key={resource.title}
-                href={resource.href}
+                href={resolveLink(links, resource.slug, resource.fallback)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"

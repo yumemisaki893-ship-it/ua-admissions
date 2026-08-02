@@ -33,8 +33,9 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { prisma } from "@/lib/prisma";
 import { siteConfig } from "@/lib/site-config";
-import { formatDate } from "@/lib/utils";
+import { formatDate, slugify } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { getExternalLinkRows, getExternalLinks } from "@/lib/external-links";
 
 export const dynamic = "force-dynamic";
 
@@ -86,21 +87,6 @@ const campuses = [
   { name: "Hamtic Campus", location: "Hamtic, Antique", href: "https://hc.antiquespride.edu.ph" },
 ];
 
-const careers = [
-  {
-    title: "Administrative Officer V (SG 18), Main Campus Sibalom",
-    href: "https://www.antiquespride.edu.ph/we-are-hiring-18/",
-  },
-  {
-    title: "Faculty — Filipino, College of Arts and Sciences (COS)",
-    href: "https://www.antiquespride.edu.ph/we-are-hiring-17/",
-  },
-  {
-    title: "Faculty — Hospitality Management and Criminology",
-    href: "https://www.antiquespride.edu.ph/we-are-hiring-16/",
-  },
-];
-
 /** Gradient icon tile — the new "clipart" style used across sections. */
 function IconTile({
   icon: Icon,
@@ -126,7 +112,7 @@ function IconTile({
 }
 
 export default async function HomePage() {
-  const [slides, news, announcements] = await Promise.all([
+  const [slides, news, announcements, externalLinks, campusRows, careerRows] = await Promise.all([
     getHeroSlides(),
     prisma.news.findMany({
       where: { published: true, category: "NEWS" },
@@ -156,7 +142,41 @@ export default async function HomePage() {
         slug: true,
       },
     }),
+    getExternalLinks(),
+    getExternalLinkRows("campus"),
+    getExternalLinkRows("career"),
   ]);
+
+  const externalCampuses =
+    campusRows.length > 0
+      ? campusRows.map((row) => ({
+          name: row.label,
+          location: row.description ?? "",
+          href: row.url,
+        }))
+      : campuses.filter((c) => c.href.startsWith("http"));
+  const allCampuses = [
+    { name: "Main Campus", location: "Sibalom, Antique", href: "/about" },
+    ...externalCampuses,
+  ];
+
+  const careers =
+    careerRows.length > 0
+      ? careerRows.map((row) => ({ title: row.label, href: row.url }))
+      : [
+          {
+            title: "Administrative Officer V (SG 18), Main Campus Sibalom",
+            href: "https://www.antiquespride.edu.ph/we-are-hiring-18/",
+          },
+          {
+            title: "Faculty — Filipino, College of Arts and Sciences (COS)",
+            href: "https://www.antiquespride.edu.ph/we-are-hiring-17/",
+          },
+          {
+            title: "Faculty — Hospitality Management and Criminology",
+            href: "https://www.antiquespride.edu.ph/we-are-hiring-16/",
+          },
+        ];
 
   return (
     <>
@@ -216,7 +236,7 @@ export default async function HomePage() {
                       {group.items.slice(0, 3).map((item) => (
                         <li key={item.label}>
                           <a
-                            href={item.href}
+                            href={externalLinks[`quick-${slugify(item.label)}`] ?? item.href}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center gap-1.5 text-sm text-slate-600 transition-colors hover:text-crimson-700"
@@ -538,7 +558,7 @@ export default async function HomePage() {
           </Reveal>
           <Reveal delay={80}>
             <CardCarousel className="mt-12" itemsPerView="md">
-              {campuses.map((campus) => (
+              {allCampuses.map((campus) => (
                 <a
                   key={campus.name}
                   href={campus.href}

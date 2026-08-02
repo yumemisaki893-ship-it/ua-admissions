@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Logo } from "@/components/shared/logo";
 import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ links = {} }: { links?: Record<string, string> }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -105,7 +105,7 @@ export function Navbar() {
                           >
                             {child.external ? (
                               <a
-                                href={child.href}
+                                href={links[`nav-${slugify(child.label)}`] ?? child.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex flex-col gap-0.5 text-slate-700"
@@ -225,7 +225,14 @@ export function Navbar() {
                           {item.children.map((child) => (
                             <Link
                               key={child.href + child.label}
-                              href={child.href}
+                              href={
+                                child.external
+                                  ? (links[`nav-${slugify(child.label)}`] ?? child.href)
+                                  : child.href
+                              }
+                              {...(child.external
+                                ? { target: "_blank", rel: "noopener noreferrer" }
+                                : {})}
                               onClick={() => setOpen(false)}
                               className="flex flex-col gap-0.5 rounded-md px-3 py-2 text-slate-500 hover:bg-slate-100 hover:text-crimson-800"
                             >

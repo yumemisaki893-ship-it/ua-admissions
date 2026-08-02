@@ -1,0 +1,91 @@
+"use server";
+
+import { prisma } from "@/lib/prisma";
+import { auth } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { defaultExternalLinks, externalLinkCategories } from "@/lib/external-links";
+
+const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER"] as const;
+
+type ActionResult = { ok: true } | { ok: false; error: string };
+
+const linkSchema = z.object({
+  slug: z.string().min(2).max(120).regex(/^[a-z0-9-]+$/, "Slug may only contain lowercase letters, numbers and dashes."),
+  label: z.string().min(2).max(120),
+  url: z.string().url("Enter a valid URL (include https://)."),
+  category: z.enum(externalLinkCategories),
+  description: z.string().max(240).optional().nullable(),
+  order: z.coerce.number().int().min(0).max(999),
+  active: z.coerce.boolean().default(true),
+});
+
+async function requireAdmin(): Promise<void> {
+  const session = await auth();
+  const role = session?.user?.role;
+  if (!role || !(ADMIN_ROLES as readonly string[]).includes(role)) {
+    throw new Error("You are not authorized to perform this action.");
+  }
+}
+
+async function run(action: () => Promise<void>): Promise<ActionResult> {
+  try {
+    await action();
+    revalidatePath("/admin/links");
+    revalidatePath("/", "layout");
+    return { ok: true };
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return { ok: false, error: error.errors[0]?.message ?? "Please check your inputs and try again." };
+    }
+    return { ok: false, error: error instanceof Error ? error.message : "Something went wrong." };
+  }
+}
+
+export async function listExternalLinks() {
+  await requireAdmin();
+  return prisma.externalLink.findMany({
+    orderBy: [{ category: "asc" }, { order: "asc" }],
+    select: {
+      id: true,
+      slug: true,
+      label: true,
+      url: true,
+      category: true,
+      description: true,
+      order: true,
+      active: true,
+    },
+  });
+}
+
+export async function createExternalLink(input: unknown): Promise<ActionResult> {
+  await requireAdmin();
+  const data = linkSchema.parse(input);
+  return run(async () => {
+    await prisma.externalLink.create({ data });
+  });
+}
+
+export async function updateExternalLink(id: string, input: unknown): Promise<ActionResult> {
+  await requireAdmin();
+  const data = linkSchema.parse(input);
+  return run(async () => {
+    await prisma.externalLink.update({ where: { id }, data });
+  });
+}
+
+export async function deleteExternalLink(id: string): Promise<ActionResult> {
+  await requireAdmin();
+  return run(async () => {
+    await prisma.externalLink.delete({ where: { id } });
+  });
+}
+
+export async function restoreDefaultLinks(): Promise<ActionResult> {
+  await requireAdmin();
+  return run(async () => {
+    await prisma.externalLink.deleteMany();
+    await prisma.externalLink.createMany({ data: defaultExternalLinks() });
+  });
+}

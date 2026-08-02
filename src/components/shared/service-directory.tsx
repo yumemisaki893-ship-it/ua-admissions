@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Search, ExternalLink, Stethoscope, GraduationCap, Users, BookOpen, LifeBuoy, FileText, MessageSquare } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn, slugify } from "@/lib/utils";
 
 const iconMap: Record<string, typeof Stethoscope> = {
   Stethoscope,
@@ -79,7 +79,7 @@ const services: Service[] = [
 
 const categories = ["All", ...Array.from(new Set(services.map((s) => s.category)))];
 
-export function ServiceDirectory() {
+export function ServiceDirectory({ links = {} }: { links?: Record<string, string> }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
 
@@ -146,7 +146,7 @@ export function ServiceDirectory() {
                 <h3 className="mt-4 font-display text-lg font-semibold text-slate-900">{service.title}</h3>
                 <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-500">{service.description}</p>
                 <a
-                  href={service.href}
+                  href={links[`service-${slugify(service.title)}`] ?? service.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-crimson-700 transition-colors hover:text-amber-600"

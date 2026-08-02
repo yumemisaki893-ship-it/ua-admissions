@@ -1,10 +1,13 @@
 import { Navbar } from "@/components/shared/navbar";
 import { Footer } from "@/components/shared/footer";
+import { getExternalLinks } from "@/lib/external-links";
 
-export default function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+  const externalLinks = await getExternalLinks();
+
   return (
-    <div className="dark flex min-h-screen flex-col bg-background text-foreground">
-      <Navbar />
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Navbar links={externalLinks} />
       <main className="flex-1">{children}</main>
       <Footer />
     </div>

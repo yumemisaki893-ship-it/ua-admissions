@@ -3,6 +3,7 @@ import { Clock, HeartHandshake, PhoneCall } from "lucide-react";
 import { ServiceDirectory } from "@/components/shared/service-directory";
 import { Card, CardContent } from "@/components/ui/card";
 import { siteConfig } from "@/lib/site-config";
+import { getExternalLinks } from "@/lib/external-links";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,9 @@ const quickContacts = [
   },
 ];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const links = await getExternalLinks();
+
   return (
     <>
       <section className="relative overflow-hidden border-b border-amber-200 bg-gradient-to-br from-crimson-700 via-crimson-800 to-crimson-950 py-16 text-center">
@@ -89,7 +92,7 @@ export default function ServicesPage() {
             </p>
           </div>
           <div className="mt-8">
-            <ServiceDirectory />
+            <ServiceDirectory links={links} />
           </div>
         </div>
       </section>

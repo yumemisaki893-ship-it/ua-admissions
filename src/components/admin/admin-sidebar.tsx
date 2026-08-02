@@ -11,6 +11,7 @@ import {
   Home,
   Settings,
   ShieldCheck,
+  Link2,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -19,6 +20,7 @@ export const adminLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/applicants", label: "Applicants", icon: Users },
   { href: "/admin/content", label: "Content", icon: FileText },
+  { href: "/admin/links", label: "Links", icon: Link2 },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 

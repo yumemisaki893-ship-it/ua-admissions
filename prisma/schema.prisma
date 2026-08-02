@@ -198,6 +198,21 @@ model SiteContent {
   updatedAt   DateTime @updatedAt
 }
 
+model ExternalLink {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  label       String
+  url         String
+  category    String   @default("general")
+  description String?
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category, active, order])
+}
+
 model ContactMessage {
   id        String   @id @default(cuid())
   name      String

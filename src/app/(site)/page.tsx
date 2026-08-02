@@ -634,7 +634,7 @@ export default async function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-white/30 text-white hover:bg-yellow-300 hover:text-crimson-900"
+                className="border-white/40 bg-white/10 text-white backdrop-blur transition-all hover:border-white hover:bg-yellow-300 hover:text-crimson-900 hover:shadow-lg hover:shadow-yellow-300/30"
                 asChild
               >
                 <Link href="/news">Read Campus News</Link>

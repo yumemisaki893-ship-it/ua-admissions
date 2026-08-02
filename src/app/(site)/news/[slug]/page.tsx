@@ -34,42 +34,42 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       <Link
         href="/news"
-        className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-600 transition-colors hover:text-sky-800"
+        className="inline-flex items-center gap-1.5 text-sm font-medium text-gold-300 transition-colors hover:text-gold-200"
       >
         <ArrowLeft className="h-4 w-4" /> Back to News
       </Link>
 
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <Badge>{item.category}</Badge>
+        <Badge className="bg-crimson-700 text-white">{item.category}</Badge>
         {item.publishedAt && (
-          <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-sm text-navy-300">
             <CalendarDays className="h-4 w-4" />
             {formatDate(item.publishedAt)}
           </span>
         )}
       </div>
 
-      <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-navy-900 sm:text-4xl">
+      <h1 className="mt-4 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">
         {item.title}
       </h1>
-      {item.excerpt && <p className="mt-4 text-lg text-muted-foreground">{item.excerpt}</p>}
+      {item.excerpt && <p className="mt-4 text-lg text-navy-300">{item.excerpt}</p>}
 
-      <div className="rich-text mt-8 border-t border-border pt-8" dangerouslySetInnerHTML={{ __html: html }} />
+      <div className="rich-text mt-8 border-t border-white/10 pt-8" dangerouslySetInnerHTML={{ __html: html }} />
 
       {related.length > 0 && (
         <div className="mt-14">
-          <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-navy-900">
-            <Tag className="h-5 w-5 text-sky-600" /> Related Stories
+          <h2 className="flex items-center gap-2 font-display text-xl font-semibold text-gold-300">
+            <Tag className="h-5 w-5" /> Related Stories
           </h2>
-          <ul className="mt-4 divide-y divide-border rounded-lg border">
+          <ul className="mt-4 divide-y divide-white/10 rounded-lg border border-white/10">
             {related.map((r) => (
               <li key={r.slug}>
                 <Link
                   href={`/news/${r.slug}`}
-                  className="flex items-center justify-between gap-4 p-4 transition-colors hover:bg-muted/50"
+                  className="flex items-center justify-between gap-4 p-4 transition-colors hover:bg-white/5"
                 >
-                  <span className="font-medium text-navy-900 hover:text-sky-700">{r.title}</span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{formatDate(r.publishedAt)}</span>
+                  <span className="font-medium text-white hover:text-gold-300">{r.title}</span>
+                  <span className="shrink-0 text-xs text-navy-400">{formatDate(r.publishedAt)}</span>
                 </Link>
               </li>
             ))}

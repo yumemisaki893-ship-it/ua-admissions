@@ -1,24 +1,59 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/site-config";
 
-export function Logo({ className, light = false }: { className?: string; light?: boolean }) {
+export function Logo({
+  className,
+  light = false,
+  iconOnly = false,
+}: {
+  className?: string;
+  light?: boolean;
+  iconOnly?: boolean;
+}) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2.5", className)} aria-label="University of Antique - Home">
+    <Link href="/" className={cn("flex items-center gap-3", className)} aria-label="University of Antique - Home">
       <span
         className={cn(
-          "flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-sky-700 text-white shadow-md",
+          "relative inline-flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full ring-2",
+          light ? "ring-gold-300/70" : "ring-crimson-800/60",
         )}
       >
-        <span className="font-display text-sm font-bold leading-none">UA</span>
+        <Image
+          src="/ua/ua-logo.png"
+          alt="University of Antique seal"
+          width={44}
+          height={44}
+          priority
+          className="h-full w-full object-cover"
+        />
       </span>
-      <span className="flex flex-col leading-tight">
-        <span className={cn("font-display text-base font-semibold tracking-tight", light ? "text-white" : "text-navy-900")}>
-          University of Antique
+      {!iconOnly && (
+        <span className="flex flex-col leading-tight">
+          <span
+            className={cn(
+              "text-[11px] font-semibold uppercase tracking-[0.18em]",
+              light ? "text-gold-300" : "text-gold-600",
+            )}
+          >
+            Republic of the Philippines
+          </span>
+          <span
+            className={cn(
+              "font-display text-base font-semibold tracking-tight",
+              light ? "text-white" : "text-navy-900",
+            )}
+          >
+            University of Antique
+          </span>
+          <span
+            className={cn("text-[10px] uppercase tracking-[0.22em]", light ? "text-navy-200" : "text-muted-foreground")}
+          >
+            {siteConfig.tagline}
+          </span>
         </span>
-        <span className={cn("text-[11px] uppercase tracking-widest", light ? "text-sky-200" : "text-sky-600")}>
-          Building the Future of Antique
-        </span>
-      </span>
+      )}
     </Link>
   );
 }

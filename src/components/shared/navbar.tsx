@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ChevronDown, Menu, UserRound, GraduationCap } from "lucide-react";
+import { ChevronDown, ExternalLink, Menu, UserRound, GraduationCap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -22,9 +22,9 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <header className="sticky top-0 z-40 border-b border-crimson-900/40 bg-navy-950/95 backdrop-blur supports-[backdrop-filter]:bg-navy-950/85">
       <nav aria-label="Main navigation" className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <Logo />
+        <Logo light />
 
         {/* Desktop nav */}
         <ul className="hidden items-center gap-1 lg:flex">
@@ -35,20 +35,31 @@ export function Navbar() {
                   <DropdownMenuTrigger asChild>
                     <button
                       className={cn(
-                        "inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                        pathname.startsWith(item.href) && "text-sky-700",
+                        "inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-navy-100 transition-colors hover:bg-crimson-700/40 hover:text-white",
+                        pathname.startsWith(item.href) && "text-gold-300",
                       )}
                     >
                       {item.label}
                       <ChevronDown className="h-3.5 w-3.5 opacity-60" />
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="min-w-56">
+                  <DropdownMenuContent align="start" className="min-w-56 border-crimson-900/40 bg-navy-900">
                     {item.children.map((child) => (
-                      <DropdownMenuItem key={child.href + child.label} asChild>
-                        <Link href={child.href} className="cursor-pointer">
-                          {child.label}
-                        </Link>
+                      <DropdownMenuItem
+                        key={child.href + child.label}
+                        asChild
+                        className="text-navy-100 focus:bg-crimson-700/40 focus:text-white"
+                      >
+                        {child.external ? (
+                          <a href={child.href} target="_blank" rel="noopener noreferrer" className="cursor-pointer">
+                            <ExternalLink className="mr-2 h-3.5 w-3.5 opacity-60" />
+                            {child.label}
+                          </a>
+                        ) : (
+                          <Link href={child.href} className="cursor-pointer">
+                            {child.label}
+                          </Link>
+                        )}
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
@@ -59,8 +70,8 @@ export function Navbar() {
                 <Link
                   href={item.href}
                   className={cn(
-                    "inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                    pathname.startsWith(item.href) && "text-sky-700",
+                    "inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-navy-100 transition-colors hover:bg-white/10 hover:text-white",
+                    pathname.startsWith(item.href) && "text-gold-300",
                   )}
                 >
                   {item.label}
@@ -71,12 +82,21 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <Button variant="outline" size="sm" asChild>
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-white/20 text-navy-100 hover:border-gold-300 hover:bg-gold-300 hover:text-navy-950"
+            asChild
+          >
             <Link href="/login">
               <UserRound className="mr-1 h-4 w-4" /> Student Portal
             </Link>
           </Button>
-          <Button size="sm" asChild>
+          <Button
+            size="sm"
+            className="bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950"
+            asChild
+          >
             <Link href="/register">
               <GraduationCap className="mr-1 h-4 w-4" /> Apply Now
             </Link>
@@ -85,18 +105,18 @@ export function Navbar() {
 
         {/* Mobile menu */}
         <div className="flex items-center gap-2 lg:hidden">
-          <Button variant="outline" size="icon" asChild aria-label="Student portal">
+          <Button variant="outline" size="icon" className="border-white/20 text-navy-100" asChild aria-label="Student portal">
             <Link href="/login">
               <UserRound className="h-4 w-4" />
             </Link>
           </Button>
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="text-navy-100 hover:bg-white/10" aria-label="Open menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-80">
+            <SheetContent side="right" className="w-80 bg-navy-950">
               <SheetTitle className="sr-only">Navigation menu</SheetTitle>
               <div className="mt-4 flex flex-col gap-1">
                 {siteConfig.nav.map((item) => (
@@ -105,35 +125,36 @@ export function Navbar() {
                       href={item.href}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "rounded-md px-3 py-2.5 text-sm font-medium hover:bg-accent",
-                        pathname.startsWith(item.href) && "text-sky-700",
+                        "rounded-md px-3 py-2.5 text-sm font-medium text-navy-100 hover:bg-white/10 hover:text-white",
+                        pathname.startsWith(item.href) && "text-gold-300",
                       )}
                     >
                       {item.label}
                     </Link>
                     {item.children && (
-                      <div className="ml-3 flex flex-col border-l border-border pl-3">
+                      <div className="ml-3 flex flex-col border-l border-white/10 pl-3">
                         {item.children.map((child) => (
                           <Link
                             key={child.href + child.label}
                             href={child.href}
                             onClick={() => setOpen(false)}
-                            className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+                            className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm text-navy-300 hover:bg-white/10 hover:text-white"
                           >
                             {child.label}
+                            {child.external && <ExternalLink className="h-3 w-3 opacity-60" />}
                           </Link>
                         ))}
                       </div>
                     )}
                   </div>
                 ))}
-                <div className="mt-4 flex flex-col gap-2 border-t border-border pt-4">
-                  <Button asChild>
+                <div className="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4">
+                  <Button className="bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950" asChild>
                     <Link href="/register" onClick={() => setOpen(false)}>
                       <GraduationCap className="mr-1 h-4 w-4" /> Apply Now
                     </Link>
                   </Button>
-                  <Button variant="outline" asChild>
+                  <Button variant="outline" className="border-white/20 text-navy-100 hover:bg-white/10" asChild>
                     <Link href="/login" onClick={() => setOpen(false)}>
                       <UserRound className="mr-1 h-4 w-4" /> Student Portal
                     </Link>

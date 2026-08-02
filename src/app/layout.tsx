@@ -32,6 +32,10 @@ export const metadata: Metadata = {
     "college admission",
     "Philippines",
   ],
+  icons: {
+    icon: [{ url: "/ua/ua-logo.png", sizes: "240x240", type: "image/png" }],
+    apple: [{ url: "/ua/ua-logo.png", sizes: "240x240", type: "image/png" }],
+  },
   openGraph: {
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
@@ -46,7 +50,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0284c7",
+  themeColor: "#9d0505",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

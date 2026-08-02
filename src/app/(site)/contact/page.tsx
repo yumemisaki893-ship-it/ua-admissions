@@ -21,11 +21,11 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="border-b bg-gradient-to-br from-sky-800 to-navy-900 py-16 text-center">
+      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Get in Touch</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Get in Touch</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">Contact Us</h1>
-          <p className="mt-4 text-sky-100">
+          <p className="mt-4 text-navy-100">
             Questions about admissions, enrollment, or campus life? We are here to help.
           </p>
         </div>
@@ -34,16 +34,16 @@ export default function ContactPage() {
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {contactCards.map((card) => (
-            <Card key={card.label}>
+            <Card key={card.label} className="border-white/10 bg-navy-900/60">
               <CardContent className="flex items-start gap-4 p-6">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-sky-700 ring-1 ring-sky-200">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
                   <card.icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-navy-400">
                     {card.label}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-navy-900">{card.value}</p>
+                  <p className="mt-1 text-sm font-medium text-white">{card.value}</p>
                 </div>
               </CardContent>
             </Card>
@@ -76,12 +76,12 @@ export default function ContactPage() {
                 allowFullScreen
               />
             </div>
-            <Card className="bg-navy-950">
+            <Card className="border border-gold-300/20 bg-navy-900/80">
               <CardContent className="p-6 text-sm leading-relaxed text-navy-200">
-                <p className="font-display text-base font-semibold text-white">Office of Admissions</p>
+                <p className="font-display text-base font-semibold text-gold-300">Office of Admissions</p>
                 <p className="mt-2">
                   For application-related concerns, email{" "}
-                  <span className="text-sky-400">admissions@universityofantique.edu.ph</span> or visit the
+                  <span className="text-gold-300">admissions@universityofantique.edu.ph</span> or visit the
                   Admissions Office at the Main Campus, Sibalom, Antique.
                 </p>
               </CardContent>

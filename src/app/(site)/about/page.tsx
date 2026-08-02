@@ -1,4 +1,5 @@
 import { Landmark, Target, ScrollText, Music, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 
 import { SectionHeading } from "@/components/shared/section-heading";
 import { Card, CardContent } from "@/components/ui/card";
@@ -28,13 +29,13 @@ export default async function AboutPage() {
 
   return (
     <>
-      <section className="border-b bg-gradient-to-br from-sky-800 to-navy-900 py-16 text-center">
+      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">About the University</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">About the University</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
             A Legacy of Excellence Since 1954
           </h1>
-          <p className="mt-4 text-sky-100">
+          <p className="mt-4 text-navy-100">
             From a modest school of arts and trades to a Level IV state university serving the province of Antique.
           </p>
         </div>
@@ -65,25 +66,25 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section id="vision-mission" className="scroll-mt-24 bg-muted/40 py-16">
+      <section id="vision-mission" className="scroll-mt-24 border-y border-white/10 bg-navy-900/40 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading eyebrow="Direction" title="Vision, Mission & Quality Policy" />
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Card className="border-t-4 border-t-sky-500">
+            <Card className="border-t-4 border-t-gold-300 border-white/10 bg-navy-900/60">
               <CardContent className="space-y-4 p-8">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-200">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
                   <Target className="h-6 w-6" />
                 </span>
-                <h3 className="font-display text-xl font-semibold text-navy-900">Vision</h3>
+                <h3 className="font-display text-xl font-semibold text-white">Vision</h3>
                 <div className="rich-text" dangerouslySetInnerHTML={{ __html: vision }} />
               </CardContent>
             </Card>
-            <Card className="border-t-4 border-t-navy-800">
+            <Card className="border-t-4 border-t-white/60 border-white/10 bg-navy-900/60">
               <CardContent className="space-y-4 p-8">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy-50 text-navy-800 ring-1 ring-navy-100">
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
                   <Landmark className="h-6 w-6" />
                 </span>
-                <h3 className="font-display text-xl font-semibold text-navy-900">Mission</h3>
+                <h3 className="font-display text-xl font-semibold text-white">Mission</h3>
                 <div className="rich-text" dangerouslySetInnerHTML={{ __html: mission }} />
               </CardContent>
             </Card>
@@ -102,23 +103,23 @@ export default async function AboutPage() {
             />
             <div className="mt-8 space-y-4">
               {[
-                { label: "Motto", value: "Building the Future of Antique" },
-                { label: "Colors", value: "Sky Blue, White, and Dark Navy" },
+                { label: "Motto", value: "Transforming Lives & Building Communities" },
+                { label: "Colors", value: "Crimson, Gold, and Dark Navy" },
                 { label: "Main Campus", value: siteConfig.address },
               ].map((row) => (
                 <div key={row.label} className="flex items-start gap-3 text-sm">
-                  <ScrollText className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" />
+                  <ScrollText className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" />
                   <p>
-                    <strong className="text-navy-900">{row.label}:</strong>{" "}
-                    <span className="text-muted-foreground">{row.value}</span>
+                    <strong className="text-white">{row.label}:</strong>{" "}
+                    <span className="text-navy-300">{row.value}</span>
                   </p>
                 </div>
               ))}
             </div>
           </div>
-          <Card className="bg-navy-950">
+          <Card className="bg-navy-900 border-white/10">
             <CardContent className="p-8">
-              <div className="flex items-center gap-3 text-sky-400">
+              <div className="flex items-center gap-3 text-gold-300">
                 <Music className="h-6 w-6" />
                 <h3 className="font-display text-lg font-semibold text-white">UA Hymn</h3>
               </div>
@@ -130,20 +131,21 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      <section id="seal" className="bg-muted/40 py-16">
+      <section id="seal" className="border-y border-white/10 bg-navy-900/40 py-16">
         <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
           <SectionHeading eyebrow="Symbol" title="The University Seal" />
           <div className="mx-auto mt-10 flex max-w-md flex-col items-center gap-6">
-            <div className="flex h-44 w-44 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-navy-900 shadow-xl ring-8 ring-white">
-              <div className="flex h-36 w-36 flex-col items-center justify-center rounded-full border-2 border-white/40 text-center">
-                <span className="font-display text-2xl font-bold text-white">UA</span>
-                <span className="px-4 text-[9px] uppercase leading-tight tracking-widest text-sky-100">
-                  University of Antique
-                </span>
-              </div>
+            <div className="flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-gold-300 to-crimson-800 shadow-xl ring-8 ring-white/10">
+              <Image
+                src="/ua/ua-seal.png"
+                alt="The University of Antique official seal"
+                width={176}
+                height={176}
+                className="h-full w-full object-cover"
+              />
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <ShieldCheck className="h-4 w-4 text-sky-600" />
+            <div className="flex items-center gap-2 text-sm text-navy-300">
+              <ShieldCheck className="h-4 w-4 text-gold-300" />
               <span dangerouslySetInnerHTML={{ __html: sealDesc }} />
             </div>
           </div>
@@ -166,13 +168,13 @@ export default async function AboutPage() {
             { name: "Colleges & Graduate School", role: "Academic units offering degree programs" },
             { name: "Registrar, Admissions, Student Services, Library, ICT", role: "Support services for students and faculty" },
           ].map((unit, i) => (
-            <div key={unit.name} className="flex items-start gap-4 rounded-lg border bg-card p-4 shadow-sm">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-100 font-mono text-xs font-bold text-sky-700">
+            <div key={unit.name} className="flex items-start gap-4 rounded-lg border border-white/10 bg-navy-900/60 p-4 shadow-sm">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-crimson-700/30 font-mono text-xs font-bold text-gold-300">
                 {i + 1}
               </span>
               <div>
-                <p className="font-medium text-navy-900">{unit.name}</p>
-                <p className="text-sm text-muted-foreground">{unit.role}</p>
+                <p className="font-medium text-white">{unit.name}</p>
+                <p className="text-sm text-navy-300">{unit.role}</p>
               </div>
             </div>
           ))}

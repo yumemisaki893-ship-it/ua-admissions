@@ -272,6 +272,167 @@ const colleges = [
 
 const news = [
   {
+    title: "UA Receives Citation of Merit for Excellence in Disaster Resilience",
+    slug: "ua-receives-citation-of-merit-for-excellence-in-disaster-resilience",
+    category: NewsCategory.NEWS,
+    excerpt:
+      "The Province of Antique and the Office of the Provincial Disaster Risk Reduction and Management Officer (OPDRRMO) Antique conferred a Citation of Merit to the University of Antique during the awarding ceremony.",
+    imageUrl: "/ua/news/resilience-citation.png",
+    publishedAt: new Date("2026-07-29T15:55:54+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "The Province of Antique and the Office of the Provincial Disaster Risk Reduction and Management Officer (OPDRRMO) Antique conferred a Citation of Merit to the University of Antique during the ceremony held in recognition of the University's outstanding contribution to disaster risk reduction and management.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "UA Joins SWD L-Net Partnership",
+    slug: "ua-joins-swd-l-net-partnership",
+    category: NewsCategory.NEWS,
+    excerpt:
+      "The University of Antique, under the leadership of University President Dr. Godelyn G. Hisole, formally joined the Social Welfare and Development Learning Network (SWD L-Net) through the signing of a memorandum of partnership.",
+    imageUrl: "/ua/news/swd-lnet.jpg",
+    publishedAt: new Date("2026-07-27T13:51:33+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "The University of Antique, under the leadership of University President Dr. Godelyn G. Hisole, formally joined the Social Welfare and Development Learning Network (SWD L-Net) through the signing of a memorandum of partnership, strengthening its commitment to community empowerment and social development.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "UA Educators Win Best Paper Awards at EDSUM 2026",
+    slug: "ua-educators-win-best-paper-awards-at-edsum-2026",
+    category: NewsCategory.NEWS,
+    excerpt:
+      "Congratulations to our faculty members, Dr. Isah Lou G. Nocal and Dr. Sheila D. Delgado, for bagging the Best Paper Award in their respective category during the Education Summit 2026 (EDSUM 2026).",
+    imageUrl: "/ua/news/edsum-best-paper.jpg",
+    publishedAt: new Date("2026-07-27T10:00:00+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Congratulations to our faculty members, Dr. Isah Lou G. Nocal and Dr. Sheila D. Delgado, for bagging the Best Paper Award in their respective category during the Education Summit 2026 (EDSUM 2026). The University commends their exemplary contribution to research and education.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "UA Joins DSWD in Releasing Livelihood Grant to Patnongon SLPA",
+    slug: "ua-joins-dswd-in-releasing-livelihood-grant-to-patnongon-slpa",
+    category: NewsCategory.NEWS,
+    excerpt:
+      "Strengthening its commitment to community empowerment through meaningful partnerships, the University of Antique joined the Department of Social Welfare and Development in releasing a livelihood grant to a Sustainable Livelihood Program Association in Patnongon.",
+    imageUrl: "/ua/news/dswd-slpa.jpg",
+    publishedAt: new Date("2026-07-24T10:00:00+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Strengthening its commitment to community empowerment through meaningful partnerships, the University of Antique (UA) joined the Department of Social Welfare and Development – Sustainable Livelihood Program in releasing a livelihood grant to the Patnongon SLPA.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "UA Celebrates Reappointment of Dr. Shirley Agrupis as CHED Chairperson",
+    slug: "ua-celebrates-reappointment-of-dr-shirley-agrupis-as-ched-chairperson",
+    category: NewsCategory.NEWS,
+    excerpt:
+      "Congratulations, Dr. Shirley C. Agrupis, on your Reappointment as CHED Chairperson! The entire University of Antique joins the Commission on Higher Education in celebrating your reappointment.",
+    imageUrl: "/ua/news/ched-chair.png",
+    publishedAt: new Date("2026-07-23T10:00:00+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "Congratulations, Dr. Shirley C. Agrupis, on your Reappointment as CHED Chairperson! The entire University of Antique joins the Commission on Higher Education in celebrating your reappointment.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "Enrollment Schedule for S.Y. 2026–2027",
+    slug: "enrollment-schedule-sy-2026-2027",
+    category: NewsCategory.ANNOUNCEMENT,
+    excerpt:
+      "August is about to slip in… and so is enrollment season! Here is the Enrollment Schedule for S.Y. 2026–2027 for continuing students.",
+    imageUrl: "/ua/news/enrollment.png",
+    publishedAt: new Date("2026-07-29T15:35:32+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "August is about to slip in… and so is enrollment season! Kasubay, get ready to embark on another exciting school year. Here is the Enrollment Schedule for S.Y. 2026–2027. Continuing students, please take note of the schedule released by the University.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    title: "WE ARE HIRING! — Administrative Officer V",
+    slug: "we-are-hiring-admin-officer-v",
+    category: NewsCategory.ANNOUNCEMENT,
+    excerpt:
+      "University of Antique – Main Campus in Sibalom is in need of an Administrative Officer V (SG 18). Interested and qualified applicants, which include persons with disability (PWD), may apply.",
+    imageUrl: "/ua/news/hiring.png",
+    publishedAt: new Date("2026-06-30T10:00:00+08:00"),
+    content: {
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [
+            {
+              type: "text",
+              text: "University of Antique – Main Campus in Sibalom is in need of an Administrative Officer V (SG 18). Interested and qualified applicants, which include persons with disability (PWD) and members of indigenous communities, are encouraged to apply.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     title: "University of Antique opens applications for AY 2026-2027",
     slug: "ua-opens-applications-2026",
     category: NewsCategory.ANNOUNCEMENT,
@@ -342,36 +503,6 @@ const news = [
             {
               type: "text",
               text: "The grand parade will be held on campus on the opening day, followed by the annual Mr. and Ms. UA pageant and the Inter-College Cheerleading Competition.",
-            },
-          ],
-        },
-      ],
-    },
-  },
-  {
-    title: "COED students win national robotics tilt",
-    slug: "coed-robotics-national-champions",
-    category: NewsCategory.NEWS,
-    excerpt:
-      "A team of Information Technology students from the College of Engineering and Design bagged first place in the National Robotics Competition.",
-    content: {
-      type: "doc",
-      content: [
-        {
-          type: "paragraph",
-          content: [
-            {
-              type: "text",
-              text: "A four-member team from the BS Information Technology program of the College of Engineering and Design emerged as champions of the 2025 National Robotics Competition held in Manila.",
-            },
-          ],
-        },
-        {
-          type: "paragraph",
-          content: [
-            {
-              type: "text",
-              text: "The team's line-following robot, built from locally sourced parts, beat 40 other entries from across the country.",
             },
           ],
         },
@@ -489,7 +620,8 @@ async function main() {
           content: item.content,
           category: item.category,
           published: true,
-          publishedAt: new Date(),
+          publishedAt: item.publishedAt ?? new Date(),
+          imageUrl: item.imageUrl ?? null,
         },
       });
     }

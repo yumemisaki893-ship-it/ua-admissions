@@ -14,13 +14,13 @@ export default async function AcademicsPage() {
 
   return (
     <>
-      <section className="border-b bg-gradient-to-br from-sky-800 to-navy-900 py-16 text-center">
+      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Academics</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Academics</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">
             Colleges & Degree Programs
           </h1>
-          <p className="mt-4 text-sky-100">
+          <p className="mt-4 text-navy-100">
             {colleges.length} colleges · {totalCourses} degree programs · one shared commitment to excellence.
           </p>
         </div>
@@ -31,12 +31,12 @@ export default async function AcademicsPage() {
           <section key={college.id} id={college.slug} className="scroll-mt-24">
             <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <span className="font-mono text-sm font-semibold text-sky-600">{college.code}</span>
-                <h2 className="mt-1 font-display text-2xl font-semibold text-navy-900 sm:text-3xl">
+                <span className="font-mono text-sm font-semibold text-gold-300">{college.code}</span>
+                <h2 className="mt-1 font-display text-2xl font-semibold text-white sm:text-3xl">
                   {college.name}
                 </h2>
                 {college.description && (
-                  <p className="mt-2 max-w-2xl text-muted-foreground">{college.description}</p>
+                  <p className="mt-2 max-w-2xl text-navy-300">{college.description}</p>
                 )}
               </div>
             </div>
@@ -72,27 +72,27 @@ export default async function AcademicsPage() {
           </div>
         )}
 
-        <section id="graduate-school" className="scroll-mt-24 rounded-2xl bg-navy-950 p-8 sm:p-12">
+        <section id="graduate-school" className="scroll-mt-24 rounded-2xl border border-gold-300/20 bg-gradient-to-br from-crimson-900/60 via-navy-900 to-navy-950 p-8 sm:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_1fr]">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-400">Graduate School</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Graduate School</p>
               <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">
                 Advance your education with masteral & doctoral programs
               </h2>
-              <p className="text-navy-300">
+              <p className="text-navy-200">
                 The UA Graduate School offers advanced degrees in education, management, public administration,
                 and more — designed for working professionals.
               </p>
             </div>
-            <Card className="bg-white/5 ring-1 ring-white/10">
+            <Card className="border-white/10 bg-navy-950/60 ring-1 ring-white/10">
               <CardContent className="space-y-4 p-8 text-sm text-navy-200">
                 <p>
-                  <strong className="text-white">Admission tip:</strong> Graduate school applicants should
+                  <strong className="text-gold-300">Admission tip:</strong> Graduate school applicants should
                   prepare their Transcript of Records (TOR), diploma, and recommendation letters.
                 </p>
                 <p>
                   For inquiries, contact the Graduate School Office or email{" "}
-                  <span className="text-sky-400">gradschool@universityofantique.edu.ph</span>.
+                  <span className="text-gold-300">gradschool@universityofantique.edu.ph</span>.
                 </p>
               </CardContent>
             </Card>

@@ -38,11 +38,11 @@ export default async function NewsPage({
 
   return (
     <>
-      <section className="border-b bg-gradient-to-br from-sky-800 to-navy-900 py-16 text-center">
+      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Stay Informed</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Stay Informed</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">News & Events</h1>
-          <p className="mt-4 text-sky-100">
+          <p className="mt-4 text-navy-100">
             Press releases, announcements, and updates from across the University of Antique.
           </p>
         </div>

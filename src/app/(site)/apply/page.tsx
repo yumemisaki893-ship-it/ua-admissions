@@ -42,21 +42,21 @@ export default function ApplyPage() {
 
   return (
     <>
-      <section className="border-b bg-gradient-to-br from-sky-800 to-navy-900 py-16 text-center">
+      <section className="border-b border-gold-300/20 bg-gradient-to-br from-crimson-900 via-navy-950 to-navy-950 py-16 text-center">
         <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-300">Admission</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Admission</p>
           <h1 className="mt-3 font-display text-4xl font-semibold text-white sm:text-5xl">How to Apply</h1>
-          <p className="mt-4 text-sky-100">
+          <p className="mt-4 text-navy-100">
             Your journey to becoming a University of Antique student starts here — entirely online.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button size="lg" asChild>
+            <Button size="lg" className="bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950" asChild>
               <Link href="/register">Start Your Application</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white/25 text-white hover:bg-white/10 hover:text-white"
+              className="border-white/25 text-white hover:bg-gold-300 hover:text-navy-950"
               asChild
             >
               <Link href="/login">Track Your Application</Link>
@@ -74,11 +74,11 @@ export default function ApplyPage() {
         <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {steps.map((step) => (
             <li key={step.num}>
-              <Card className="h-full">
+              <Card className="h-full border-white/10 bg-navy-900/60">
                 <CardContent className="p-6">
-                  <span className="font-display text-4xl font-bold text-sky-200">{step.num}</span>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-navy-900">{step.title}</h3>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{step.desc}</p>
+                  <span className="font-display text-4xl font-bold text-gold-300/40">{step.num}</span>
+                  <h3 className="mt-3 font-display text-lg font-semibold text-white">{step.title}</h3>
+                  <p className="mt-1.5 text-sm text-navy-300">{step.desc}</p>
                 </CardContent>
               </Card>
             </li>
@@ -86,7 +86,7 @@ export default function ApplyPage() {
         </ol>
       </section>
 
-      <section id="requirements" className="scroll-mt-24 bg-muted/40 py-16">
+      <section id="requirements" className="scroll-mt-24 border-y border-white/10 bg-navy-900/40 py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Prepare These"
@@ -95,20 +95,20 @@ export default function ApplyPage() {
           />
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {requirements.map((req) => (
-              <Card key={req.title}>
+              <Card key={req.title} className="border-white/10 bg-navy-900/60">
                 <CardContent className="flex items-start gap-4 p-6">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-sky-50 text-sky-700 ring-1 ring-sky-200">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-crimson-700/30 text-gold-300 ring-1 ring-crimson-700/50">
                     <req.icon className="h-5 w-5" />
                   </span>
                   <div>
-                    <h3 className="font-display font-semibold text-navy-900">{req.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{req.note}</p>
+                    <h3 className="font-display font-semibold text-white">{req.title}</h3>
+                    <p className="mt-1 text-sm text-navy-300">{req.note}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="mt-8 flex items-center gap-3 rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-800">
+          <div className="mt-8 flex items-center gap-3 rounded-lg border border-gold-300/30 bg-gold-300/10 p-4 text-sm text-gold-200">
             <Info className="h-5 w-5 shrink-0" />
             Files must be in <strong>PDF, PNG, or JPEG</strong> format and no larger than{" "}
             <strong>5 MB</strong> each. Accepted file types are strictly enforced.
@@ -132,33 +132,33 @@ export default function ApplyPage() {
                 { icon: ClipboardList, text: "Your payment is verified automatically after checkout" },
               ].map((item) => (
                 <li key={item.text} className="flex items-start gap-3 text-sm">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 ring-1 ring-emerald-200">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gold-300/15 text-gold-300 ring-1 ring-gold-300/30">
                     <item.icon className="h-5 w-5" />
                   </span>
-                  <p className="pt-1.5 text-muted-foreground">{item.text}</p>
+                  <p className="pt-1.5 text-navy-300">{item.text}</p>
                 </li>
               ))}
             </ul>
           </div>
-          <Card className="overflow-hidden">
-            <div className="bg-gradient-to-br from-sky-600 to-navy-900 p-8 text-center text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-200">Application Fee</p>
+          <Card className="border-white/10 overflow-hidden bg-navy-900/60">
+            <div className="bg-gradient-to-br from-crimson-800 to-navy-950 p-8 text-center text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Application Fee</p>
               <p className="mt-3 font-display text-5xl font-semibold">PHP {fee.toLocaleString()}</p>
-              <p className="mt-2 text-sm text-sky-100">Non-refundable · Payable online</p>
+              <p className="mt-2 text-sm text-navy-100">Non-refundable · Payable online</p>
             </div>
             <CardContent className="p-8">
               <div className="space-y-3 text-sm">
                 {["GCash", "Maya", "Credit / Debit Card"].map((m) => (
-                  <div key={m} className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-                    <span className="font-medium text-navy-900">{m}</span>
+                  <div key={m} className="flex items-center justify-between rounded-lg border border-white/10 bg-navy-950/60 px-4 py-3">
+                    <span className="font-medium text-white">{m}</span>
                     <Badge variant="success">Available</Badge>
                   </div>
                 ))}
               </div>
-              <Button size="lg" className="mt-6 w-full" asChild>
+              <Button size="lg" className="mt-6 w-full bg-crimson-700 text-white hover:bg-gold-300 hover:text-navy-950" asChild>
                 <Link href="/register">Proceed with Application</Link>
               </Button>
-              <p className="mt-3 text-center text-xs text-muted-foreground">
+              <p className="mt-3 text-center text-xs text-navy-400">
                 For fee concerns, contact {siteConfig.email}
               </p>
             </CardContent>

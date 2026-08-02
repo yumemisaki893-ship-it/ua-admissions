@@ -14,6 +14,7 @@ enum Role {
   SUPER_ADMIN
   REGISTRAR
   ADMISSIONS_OFFICER
+  ICTU
   STUDENT
 }
 
@@ -45,14 +46,36 @@ model User {
   image        String?
   role         Role     @default(STUDENT)
   isVerified   Boolean  @default(false)
+  isActive     Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
   studentProfile StudentProfile?
   applications   Application[]
   notifications  Notification[]
+  auditLogs      AuditLog[]
 
   @@index([role])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  userName  String?
+  userRole  String?
+  action    String
+  entity    String?
+  entityId  String?
+  details   Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([action])
+  @@index([createdAt])
 }
 
 model StudentProfile {

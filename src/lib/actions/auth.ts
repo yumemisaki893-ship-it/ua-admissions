@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { registerSchema } from "@/lib/validations";
 import { auth, signIn } from "@/lib/auth";
+import { recordAudit } from "@/lib/audit";
 
 export async function registerUser(input: unknown) {
   const parsed = registerSchema.safeParse(input);
@@ -38,11 +39,26 @@ export async function loginWithCredentials(input: unknown) {
     .safeParse(input);
   if (!parsed.success) return { error: "Invalid email or password." };
 
+  const user = await prisma.user.findUnique({
+    where: { email: parsed.data.email.toLowerCase().trim() },
+  });
+  if (!user?.passwordHash) return { error: "Invalid email or password." };
+  if (user.isActive === false) {
+    return { error: "This account has been deactivated. Please contact the ICTU office." };
+  }
+
+  await recordAudit({
+    action: "AUTH_LOGIN",
+    entity: "user",
+    entityId: user.id,
+    details: { email: user.email, method: "credentials", role: user.role },
+  });
+
   try {
     await signIn("credentials", {
       email: parsed.data.email,
       password: parsed.data.password,
-      redirectTo: "/portal/dashboard",
+      redirectTo: user.role === "STUDENT" ? "/portal/dashboard" : "/admin",
     });
   } catch (error) {
     if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
@@ -50,7 +66,7 @@ export async function loginWithCredentials(input: unknown) {
     }
     return { error: "Invalid email or password." };
   }
-  return { ok: true };
+  return { ok: true, redirectTo: user.role === "STUDENT" ? "/portal/dashboard" : "/admin" };
 }
 
 export async function getCurrentUser() {

@@ -12,6 +12,7 @@ import {
   Settings,
   ShieldCheck,
   Link2,
+  Fingerprint,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -24,7 +25,13 @@ export const adminLinks = [
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];
 
-export function AdminSidebar({ role }: { role: string }) {
+export const ictuLinks = [
+  { href: "/admin", label: "Oversight", icon: LayoutDashboard },
+  { href: "/admin/ictu/registrars", label: "Registrars", icon: Users },
+  { href: "/admin/ictu/audit", label: "Audit Trail", icon: Fingerprint },
+];
+
+export function AdminSidebar({ role, links }: { role: string; links: { href: string; label: string; icon: typeof LayoutDashboard }[] }) {
   const pathname = usePathname();
   const listRef = React.useRef<HTMLDivElement>(null);
   const [pill, setPill] = React.useState<{ top: number; height: number } | null>(null);
@@ -60,9 +67,9 @@ export function AdminSidebar({ role }: { role: string }) {
         style={pill ? { top: pill.top, height: pill.height } : undefined}
       />
       <p className="relative px-3 pb-2 text-[11px] font-semibold uppercase tracking-widest text-slate-400">
-        Administration
+        {role === "ICTU" ? "ICTU Oversight" : "Administration"}
       </p>
-      {adminLinks.map((link) => (
+      {links.map((link) => (
         <Link
           key={link.href}
           href={link.href}

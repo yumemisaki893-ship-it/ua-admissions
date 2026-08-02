@@ -5,6 +5,8 @@ const prisma = new PrismaClient();
 
 const adminEmail = process.env.SEED_ADMIN_EMAIL ?? "admin@universityofantique.edu.ph";
 const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? "Admin12345!";
+const ictuEmail = process.env.SEED_ICTU_EMAIL ?? "ictu@universityofantique.edu.ph";
+const ictuPassword = process.env.SEED_ICTU_PASSWORD ?? "Ictu12345!";
 
 const colleges = [
   {
@@ -568,6 +570,21 @@ async function main() {
       },
     });
     console.log(`Created admin user: ${adminEmail}`);
+  }
+
+  const ictuExists = await prisma.user.findUnique({ where: { email: ictuEmail } });
+  if (!ictuExists) {
+    await prisma.user.create({
+      data: {
+        email: ictuEmail,
+        passwordHash: await bcrypt.hash(ictuPassword, 12),
+        name: "ICTU Administrator",
+        role: Role.ICTU,
+        isVerified: true,
+        isActive: true,
+      },
+    });
+    console.log(`Created ICTU user: ${ictuEmail}`);
   }
 
   for (const college of colleges) {

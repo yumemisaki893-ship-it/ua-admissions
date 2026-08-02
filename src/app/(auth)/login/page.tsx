@@ -38,7 +38,7 @@ export default function LoginPage() {
     if (result?.error) {
       toast.error("Sign in failed", { description: result.error });
     } else {
-      router.push("/portal/dashboard");
+      router.push(result.redirectTo ?? "/portal/dashboard");
     }
   }
 
@@ -46,8 +46,10 @@ export default function LoginPage() {
     <Suspense fallback={null}>
       <Card className="animate-scale-in border-slate-200 bg-white shadow-2xl shadow-red-900/10">
         <CardHeader className="text-center">
-          <CardTitle className="font-display text-2xl text-slate-900">Student Portal Sign In</CardTitle>
-          <CardDescription className="text-slate-500">Track your application or continue where you left off.</CardDescription>
+          <CardTitle className="font-display text-2xl text-slate-900">Sign In</CardTitle>
+          <CardDescription className="text-slate-500">
+            Access your student portal or the university admin console.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>

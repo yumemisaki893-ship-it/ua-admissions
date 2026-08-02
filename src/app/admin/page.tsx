@@ -6,10 +6,15 @@ import { Badge } from "@/components/ui/badge";
 import { prisma } from "@/lib/prisma";
 import { formatCurrency } from "@/lib/utils";
 import { StatusChart } from "@/components/admin/status-chart";
+import { auth } from "@/lib/auth";
+import { IctuDashboard } from "@/components/admin/ictu/ictu-dashboard";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboardPage() {
+  const session = await auth();
+  if (session?.user?.role === "ICTU") return <IctuDashboard />;
+
   const [totalApplicants, pending, underReview, accepted, rejected, revenue, recent] = await Promise.all([
     prisma.application.count({ where: { status: { not: "DRAFT" } } }),
     prisma.application.count({ where: { status: "PENDING" } }),

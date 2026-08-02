@@ -4,11 +4,11 @@ import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import { Logo } from "@/components/shared/logo";
-import { AdminSidebar, adminLinks } from "@/components/admin/admin-sidebar";
+import { AdminSidebar, adminLinks, ictuLinks } from "@/components/admin/admin-sidebar";
 
 export const dynamic = "force-dynamic";
 
-const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER"];
+const ADMIN_ROLES = ["SUPER_ADMIN", "REGISTRAR", "ADMISSIONS_OFFICER", "ICTU"];
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
@@ -16,6 +16,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   if (!session?.user) redirect("/login");
   if (!role || !ADMIN_ROLES.includes(role)) redirect("/portal/dashboard");
+
+  const isIctu = role === "ICTU";
+  const navLinks = isIctu ? ictuLinks : adminLinks;
 
   const initials = (session.user.name ?? "A")
     .split(" ")
@@ -31,7 +34,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <div className="flex h-16 items-center border-b border-slate-100 px-5">
           <Logo compact />
         </div>
-        <AdminSidebar role={role} />
+        <AdminSidebar role={role} links={navLinks} />
       </aside>
 
       <div className="flex-1 lg:pl-60">
@@ -41,7 +44,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <Logo compact />
           </div>
           <p className="hidden text-sm font-medium text-slate-500 lg:block">
-            University of Antique · Admin Console
+            University of Antique · {isIctu ? "ICTU Oversight Console" : "Admin Console"}
           </p>
           <div className="flex items-center gap-3">
             <Avatar className="h-9 w-9">
@@ -61,7 +64,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           className="flex overflow-x-auto border-b border-slate-200 bg-white lg:hidden"
           aria-label="Admin mobile navigation"
         >
-          {adminLinks.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}

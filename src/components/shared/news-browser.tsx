@@ -80,7 +80,7 @@ export function NewsBrowser({ items, initialCategory }: { items: NewsItem[]; ini
         <div
           role="tablist"
           aria-label="Filter news by category"
-          className="inline-flex w-full items-center gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm lg:w-auto"
+          className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm sm:grid-cols-4 lg:w-auto lg:grid-cols-4 xl:flex xl:w-auto"
         >
           {TABS.map((tab) => {
             const count = tab.value === "ALL" ? items.length : (counts.get(tab.value) ?? 0);
@@ -92,17 +92,17 @@ export function NewsBrowser({ items, initialCategory }: { items: NewsItem[]; ini
                 aria-selected={isActive}
                 onClick={() => setCategory(tab.value)}
                 className={cn(
-                  "inline-flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all",
+                  "inline-flex min-w-0 items-center justify-center gap-1.5 rounded-lg px-2 py-2 text-sm font-medium transition-all sm:gap-2 sm:px-4 xl:justify-start",
                   isActive
                     ? "bg-crimson-700 text-white shadow-md shadow-crimson-900/25"
                     : "text-slate-600 hover:bg-slate-100 hover:text-crimson-700",
                 )}
               >
-                <tab.icon className="h-4 w-4" />
-                {tab.label}
+                <tab.icon className="h-4 w-4 shrink-0" />
+                <span className="truncate">{tab.label}</span>
                 <span
                   className={cn(
-                    "rounded-full px-2 py-0.5 text-[11px] font-semibold tabular-nums",
+                    "rounded-full px-1.5 py-0.5 text-[11px] font-semibold tabular-nums sm:px-2",
                     isActive ? "bg-yellow-300 text-crimson-900" : "bg-slate-100 text-slate-500",
                   )}
                 >

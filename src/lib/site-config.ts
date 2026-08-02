@@ -82,6 +82,7 @@ export const siteConfig = {
         { label: "History", href: "/about#history", description: "From the Antique School of Arts and Trades to a state university." },
         { label: "The UA Hymn", href: "/about#hymn", description: "The official anthem of the University of Antique." },
         { label: "University Seal", href: "/about#seal", description: "The symbols and story behind the UA seal." },
+        { label: "Alumni", href: "/alumni", description: "Alumni stories, benefits, and how to stay connected." },
         { label: "Transparency Seal", href: "https://antiquespride.edu.ph/ua-transparency-seal/", external: true, description: "Open access to official documents and finances." },
         { label: "Privacy Policy", href: "https://www.antiquespride.edu.ph/privacy-policy/", external: true, description: "How the University protects your data." },
       ],
@@ -93,6 +94,7 @@ export const siteConfig = {
         { label: "Program Offerings", href: "/academics", description: "All degree programs across colleges." },
         { label: "Colleges", href: "/academics", description: "Six colleges delivering UA programs." },
         { label: "Graduate School", href: "/academics#graduate-school", description: "Advanced degrees and research." },
+        { label: "Research & Extension", href: "/research", description: "Research areas, extension programs, and partnerships." },
       ],
     },
     {
@@ -102,6 +104,7 @@ export const siteConfig = {
         { label: "How to Apply", href: "/apply", description: "Step-by-step online application guide." },
         { label: "Requirements", href: "/apply#requirements", description: "Documents needed for enrollment." },
         { label: "Application Fee", href: "/apply#fee", description: "Fee details and payment channels." },
+        { label: "FAQs", href: "/faq", description: "Common questions about admission, fees, and the portal." },
         { label: "Admission Portal", href: "https://sims.antiquespride.edu.ph/aims/application/", external: true, description: "Apply through the official AIMS portal." },
         { label: "Check Application Status", href: "/login", description: "Track your application in the portal." },
       ],
@@ -126,7 +129,11 @@ export const siteConfig = {
         { label: "Hamtic Campus", href: "https://hc.antiquespride.edu.ph", external: true, description: "Hamtic, Antique." },
       ],
     },
-    { label: "News & Events", href: "/news" },
+    { label: "News & Events", href: "/news", children: [
+      { label: "News", href: "/news", description: "Press releases and university updates." },
+      { label: "Events", href: "/events", description: "Campus calendar and featured activities." },
+      { label: "FAQs", href: "/faq", description: "Help center for students and applicants." },
+    ] },
     { label: "Contact Us", href: "/contact" },
   ],
 } satisfies {

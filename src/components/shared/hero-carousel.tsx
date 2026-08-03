@@ -65,7 +65,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
         <CarouselContent>
           {slides.map((slide, index) => (
             <CarouselItem key={slide.id}>
-              <div className="relative flex min-h-[440px] items-center overflow-hidden sm:min-h-[540px]">
+              <div className="relative flex h-[100svh] min-h-[560px] items-center overflow-hidden">
                 {slide.imageUrl && !slide.poster ? (
                   <Image
                     src={slide.imageUrl}
@@ -78,7 +78,12 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
                 ) : (
                   <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient ?? fallbackGradients[index % fallbackGradients.length]}`} />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-crimson-950/95 via-crimson-950/70 to-crimson-950/30" />
+                {(!slide.imageUrl || slide.poster) && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-crimson-950/95 via-crimson-950/70 to-crimson-950/30" />
+                )}
+                {slide.imageUrl && !slide.poster && (
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/50 to-transparent" />
+                )}
 
                 {slide.poster && slide.imageUrl && (
                   <div className="absolute inset-y-0 right-0 z-10 hidden w-2/5 items-center justify-center pr-10 lg:flex lg:pr-14">

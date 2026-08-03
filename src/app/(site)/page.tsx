@@ -219,47 +219,71 @@ export default async function HomePage() {
             </Reveal>
           </div>
 
-          {/* Quick links — glassy sharp cards */}
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {quickLinkKeys.map((key, i) => {
-              const group = siteConfig.quickLinks[key];
-              const Icon = quickLinkIcons[i];
-              return (
-                <Reveal key={key} delay={i * 80}>
-                  <div className="group relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-red-900/10">
-                    <span className="pointer-events-none absolute -right-6 -top-6 h-20 w-20 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200/60 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
-                    <div className="relative flex items-center justify-between gap-2">
-                      <IconTile icon={Icon} size="h-10 w-10" />
-                      <span className="rounded-full bg-crimson-700 px-2.5 py-0.5 font-mono text-[11px] font-bold text-white shadow-sm">
-                        {group.items.length}
+          {/* Portal & e-services — bold access cards */}
+          <div className="mt-12">
+            <Reveal>
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
+                    Student Portals &amp; E-Services
+                  </p>
+                  <h2 className="mt-2 font-display text-2xl font-semibold text-slate-900 sm:text-3xl">
+                    One-click access to UA systems
+                  </h2>
+                </div>
+                <p className="max-w-sm text-sm text-slate-500">
+                  Sign in to the Admission Portal, AIMS, LMS, HRIS and more — your gateway to University services.
+                </p>
+              </div>
+            </Reveal>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {quickLinkKeys.map((key, i) => {
+                const group = siteConfig.quickLinks[key];
+                const Icon = quickLinkIcons[i];
+                return (
+                  <Reveal key={key} delay={i * 80}>
+                    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-red-900/10">
+                      <span className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200/60 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                      <div className="relative flex items-center gap-3">
+                        <IconTile icon={Icon} size="h-11 w-11" />
+                        <div>
+                          <h3 className="font-display text-lg font-bold text-slate-900">{group.title}</h3>
+                          <p className="text-xs text-slate-400">{group.description}</p>
+                        </div>
+                      </div>
+                      <ul className="relative mt-5 space-y-2.5">
+                        {group.items.map((item, j) => (
+                          <li key={item.label}>
+                            <a
+                              href={externalLinks[`quick-${slugify(item.label)}`] ?? item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={cn(
+                                "flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold transition-all duration-200",
+                                j === 0
+                                  ? "border-crimson-700/20 bg-gradient-to-r from-crimson-700 to-crimson-900 text-white shadow-md shadow-crimson-900/20 hover:from-crimson-800 hover:to-crimson-950 hover:shadow-lg"
+                                  : "border-slate-200 bg-slate-50 text-slate-800 hover:border-amber-300 hover:bg-amber-50 hover:text-crimson-800",
+                              )}
+                            >
+                              <span className="truncate">{item.label}</span>
+                              <ArrowRight
+                                className={cn(
+                                  "h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5",
+                                  j === 0 ? "text-yellow-300" : "text-amber-500",
+                                )}
+                              />
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      <span className="relative mt-auto border-t border-slate-100 pt-3 text-xs text-slate-400">
+                        Powered by the UA Student Services
                       </span>
                     </div>
-                    <h2 className="relative mt-4 font-display text-base font-semibold text-slate-900">
-                      {group.title}
-                    </h2>
-                    <p className="relative mt-1 text-xs text-slate-400">{group.description}</p>
-                    <ul className="relative mt-3 space-y-1">
-                      {group.items.slice(0, 3).map((item) => (
-                        <li key={item.label}>
-                          <a
-                            href={externalLinks[`quick-${slugify(item.label)}`] ?? item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-sm text-slate-600 transition-colors hover:text-crimson-700"
-                          >
-                            <ExternalLink className="h-3 w-3 shrink-0 text-amber-500" />
-                            <span className="truncate">{item.label}</span>
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                    <span className="relative mt-3 inline-flex items-center gap-1 text-xs font-semibold text-crimson-700 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100">
-                      Explore <ArrowRight className="h-3 w-3" />
-                    </span>
-                  </div>
-                </Reveal>
-              );
-            })}
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

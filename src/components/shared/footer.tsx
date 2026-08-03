@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, Landmark, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Landmark } from "lucide-react";
 
 import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { FacebookIcon, YoutubeIcon, XIcon } from "@/components/shared/social-icons";
@@ -74,8 +74,24 @@ export async function Footer() {
               </a>
             ))}
           </div>
-          <ul className="flex flex-wrap gap-2 pt-1">
-            {siteConfig.transparencySeals.slice(0, 3).map((seal) => {
+          <ul className="grid grid-cols-3 gap-3 pt-1">
+            {[
+              {
+                label: "Transparency Seal",
+                href: "https://antiquespride.edu.ph/ua-transparency-seal/",
+                src: "/ua/seals/transparency-seal.png",
+              },
+              {
+                label: "FOI",
+                href: "/ua-transparency-seal",
+                src: "/ua/seals/foi.png",
+              },
+              {
+                label: "Privacy Policy",
+                href: "/privacy-policy",
+                src: "/ua/seals/privacy-policy.png",
+              },
+            ].map((seal) => {
               const href = seal.href.startsWith("http")
                 ? resolveLink(links, `seal-${slugify(seal.label)}`, seal.href)
                 : seal.href;
@@ -84,10 +100,16 @@ export async function Footer() {
                   <a
                     href={href}
                     {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="inline-flex items-center gap-1 rounded-full border border-slate-200 px-2.5 py-1 text-[11px] text-slate-500 transition-colors hover:border-amber-400 hover:text-crimson-700"
+                    title={seal.label}
+                    className="flex aspect-square items-center justify-center rounded-xl border border-slate-200 bg-white p-2 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md"
                   >
-                    <ShieldCheck className="h-3 w-3 text-amber-500" />
-                    {seal.label}
+                    <Image
+                      src={seal.src}
+                      alt={seal.label}
+                      width={256}
+                      height={256}
+                      className="h-full w-full object-contain"
+                    />
                   </a>
                 </li>
               );

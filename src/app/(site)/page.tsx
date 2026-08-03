@@ -261,7 +261,7 @@ export default async function HomePage() {
                               className={cn(
                                 "flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold transition-all duration-200",
                                 j === 0
-                                  ? "border-crimson-700/20 bg-gradient-to-r from-crimson-700 to-crimson-900 text-white shadow-md shadow-crimson-900/20 hover:from-crimson-800 hover:to-crimson-950 hover:shadow-lg"
+                                  ? "border-amber-300 bg-white text-crimson-700 shadow-sm group-hover:border-crimson-700/20 group-hover:bg-gradient-to-r group-hover:from-crimson-700 group-hover:to-crimson-900 group-hover:text-white group-hover:shadow-md group-hover:shadow-crimson-900/20 hover:from-crimson-800 hover:to-crimson-950 hover:shadow-lg"
                                   : "border-slate-200 bg-slate-50 text-slate-800 hover:border-amber-300 hover:bg-amber-50 hover:text-crimson-800",
                               )}
                             >
@@ -269,7 +269,7 @@ export default async function HomePage() {
                               <ArrowRight
                                 className={cn(
                                   "h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5",
-                                  j === 0 ? "text-yellow-300" : "text-amber-500",
+                                  j === 0 ? "text-amber-500 group-hover:text-yellow-300" : "text-amber-500",
                                 )}
                               />
                             </a>

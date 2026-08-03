@@ -212,18 +212,35 @@ export async function Footer() {
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className={`flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
-              >
-                <s.icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socialLinks.map((s) =>
+              s.label === "YouTube" ? (
+                <Link
+                  key={s.label}
+                  href="/"
+                  aria-label="University of Antique"
+                  className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md"
+                >
+                  <Image
+                    src="/ua/ua-logo.png"
+                    alt="University of Antique seal"
+                    width={36}
+                    height={36}
+                    className="h-full w-full object-contain"
+                  />
+                </Link>
+              ) : (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className={`flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
+                >
+                  <s.icon className="h-4 w-4" />
+                </a>
+              ),
+            )}
           </div>
           <p>
             <Link

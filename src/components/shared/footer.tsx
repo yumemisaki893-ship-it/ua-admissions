@@ -6,7 +6,7 @@ import { NewsletterForm } from "@/components/shared/newsletter-form";
 import { FacebookIcon, YoutubeIcon, XIcon } from "@/components/shared/social-icons";
 import { siteConfig } from "@/lib/site-config";
 import { getExternalLinks, resolveLink } from "@/lib/external-links";
-import { slugify } from "@/lib/utils";
+import { slugify, cn } from "@/lib/utils";
 
 export async function Footer() {
   const links = await getExternalLinks();
@@ -80,16 +80,19 @@ export async function Footer() {
                 label: "Transparency Seal",
                 href: "https://antiquespride.edu.ph/ua-transparency-seal/",
                 src: "/ua/seals/transparency-seal.png",
+                box: "aspect-square",
               },
               {
                 label: "FOI",
                 href: "/ua-transparency-seal",
                 src: "/ua/seals/foi.png",
+                box: "aspect-square",
               },
               {
                 label: "Privacy Policy",
                 href: "/privacy-policy",
                 src: "/ua/seals/privacy-policy.png",
+                box: "aspect-[512/936]",
               },
             ].map((seal) => {
               const href = seal.href.startsWith("http")
@@ -101,13 +104,15 @@ export async function Footer() {
                     href={href}
                     {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     title={seal.label}
-                    className="flex aspect-square items-center justify-center rounded-xl border border-slate-200 bg-white p-2 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md"
+                    className={cn(
+                      `flex items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md ${seal.box}`,
+                    )}
                   >
                     <Image
                       src={seal.src}
                       alt={seal.label}
                       width={256}
-                      height={256}
+                      height={seal.box === "aspect-square" ? 256 : 468}
                       className="h-full w-full object-contain"
                     />
                   </a>

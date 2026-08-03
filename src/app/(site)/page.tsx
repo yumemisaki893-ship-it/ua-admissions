@@ -557,18 +557,21 @@ export default async function HomePage() {
                 href: "https://antiquespride.edu.ph/ua-transparency-seal/",
                 src: "/ua/seals/transparency-seal.png",
                 alt: "Transparency Seal",
+                box: "h-32 w-32",
               },
               {
                 label: "Freedom of Information",
                 href: "/ua-transparency-seal",
                 src: "/ua/seals/foi.png",
                 alt: "Freedom of Information logo",
+                box: "h-32 w-32",
               },
               {
                 label: "Privacy Policy",
                 href: "/privacy-policy",
                 src: "/ua/seals/privacy-policy.png",
                 alt: "Privacy Policy logo",
+                box: "aspect-[512/936] w-32",
               },
             ].map((seal) => (
               <a
@@ -577,12 +580,12 @@ export default async function HomePage() {
                 {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="group flex w-52 flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
               >
-                <span className="flex h-32 w-32 items-center justify-center">
+                <span className={cn("flex items-center justify-center", seal.box)}>
                   <Image
                     src={seal.src}
                     alt={seal.alt}
                     width={512}
-                    height={512}
+                    height={936}
                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 </span>

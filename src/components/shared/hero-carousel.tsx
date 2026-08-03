@@ -66,38 +66,23 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
           {slides.map((slide, index) => (
             <CarouselItem key={slide.id}>
               <div className="relative flex h-[100svh] min-h-[560px] items-center overflow-hidden">
-                {slide.imageUrl && !slide.poster ? (
+                {slide.imageUrl ? (
                   <Image
                     src={slide.imageUrl}
                     alt={slide.title}
                     fill
                     priority={index === 0}
                     sizes="100vw"
-                    className="object-cover"
+                    className={slide.poster ? "object-contain bg-crimson-950" : "object-cover"}
                   />
                 ) : (
                   <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient ?? fallbackGradients[index % fallbackGradients.length]}`} />
                 )}
-                {(!slide.imageUrl || slide.poster) && (
+                {!slide.imageUrl && (
                   <div className="absolute inset-0 bg-gradient-to-r from-crimson-950/95 via-crimson-950/70 to-crimson-950/30" />
                 )}
-                {slide.imageUrl && !slide.poster && (
+                {slide.imageUrl && (
                   <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/50 to-transparent" />
-                )}
-
-                {slide.poster && slide.imageUrl && (
-                  <div className="absolute inset-y-0 right-0 z-10 hidden w-2/5 items-center justify-center pr-10 lg:flex lg:pr-14">
-                    <div className="max-h-[75%] overflow-hidden rounded-2xl border border-white/15 bg-white/10 p-3 shadow-2xl shadow-crimson-950/40 backdrop-blur-md">
-                      <Image
-                        src={slide.imageUrl}
-                        alt={slide.title}
-                        width={900}
-                        height={1100}
-                        sizes="(max-width: 1536px) 40vw, 40vw"
-                        className="max-h-[50vh] w-auto object-contain"
-                      />
-                    </div>
-                  </div>
                 )}
 
                 {/* Glass content panel */}

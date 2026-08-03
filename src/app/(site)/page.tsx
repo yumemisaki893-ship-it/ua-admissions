@@ -257,26 +257,16 @@ export default async function HomePage() {
                         </div>
                       </div>
                       <ul className="relative mt-5 flex flex-1 flex-col gap-2.5">
-                        {group.items.map((item, j) => (
+                        {group.items.map((item) => (
                           <li key={item.label}>
                             <a
                               href={externalLinks[`quick-${slugify(item.label)}`] ?? item.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className={cn(
-                                "group/btn flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2",
-                                j === 0
-                                  ? "border-amber-300 bg-amber-50 text-crimson-800 hover:border-crimson-700 hover:bg-crimson-700 hover:text-white hover:shadow-md hover:shadow-crimson-900/20"
-                                  : "border-slate-200 bg-white text-slate-700 hover:border-amber-300 hover:bg-amber-50 hover:text-crimson-800",
-                              )}
+                              className="group/btn flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold outline-none transition-all duration-200 hover:border-crimson-700 hover:bg-crimson-700 hover:text-white hover:shadow-md hover:shadow-crimson-900/20 focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2"
                             >
                               <span className="truncate">{item.label}</span>
-                              <ArrowRight
-                                className={cn(
-                                  "h-4 w-4 shrink-0 text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5",
-                                  j === 0 && "group-hover/btn:text-yellow-300",
-                                )}
-                              />
+                              <ArrowRight className="h-4 w-4 shrink-0 text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:text-yellow-300" />
                             </a>
                           </li>
                         ))}

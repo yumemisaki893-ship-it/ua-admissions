@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   GraduationCap,
   ArrowRight,
@@ -190,13 +191,16 @@ export default async function HomePage() {
 
       {/* Welcome + quick links */}
       <section className="relative overflow-hidden bg-white">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 15% 20%, #dfae19 0, transparent 35%), radial-gradient(circle at 85% 75%, #9d0505 0, transparent 35%)",
-          }}
+        <Image
+          src="/ua/no-5.jpg"
+          alt=""
+          fill
+          priority
+          aria-hidden
+          className="pointer-events-none object-cover blur-[2px] scale-105"
+          sizes="100vw"
         />
+        <div className="pointer-events-none absolute inset-0 bg-white/85" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-10">
             <Reveal className="shrink-0">

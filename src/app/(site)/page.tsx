@@ -571,14 +571,14 @@ export default async function HomePage() {
                 href: "/privacy-policy",
                 src: "/ua/seals/privacy-policy.png",
                 alt: "Privacy Policy logo",
-                box: "aspect-[512/934] w-32",
+                box: "aspect-[512/934] w-[8.53rem]",
               },
             ].map((seal) => (
               <a
                 key={seal.label}
                 href={seal.href}
                 {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="group flex w-52 flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
+                className="group flex w-52 flex-col items-center gap-3 rounded-2xl bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
               >
                 <span className={cn("flex items-center justify-center", seal.box)}>
                   <Image

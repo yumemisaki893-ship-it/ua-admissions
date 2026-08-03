@@ -73,7 +73,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
                     fill
                     priority={index === 0}
                     sizes="100vw"
-                    className={slide.poster ? "object-contain bg-crimson-950" : "object-cover"}
+                    className="object-cover"
                   />
                 ) : (
                   <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient ?? fallbackGradients[index % fallbackGradients.length]}`} />

@@ -92,7 +92,7 @@ export async function Footer() {
                 label: "Privacy Policy",
                 href: "/privacy-policy",
                 src: "/ua/seals/privacy-policy.png",
-                box: "aspect-[512/936]",
+                box: "aspect-[512/934]",
               },
             ].map((seal) => {
               const href = seal.href.startsWith("http")
@@ -112,7 +112,7 @@ export async function Footer() {
                       src={seal.src}
                       alt={seal.label}
                       width={256}
-                      height={seal.box === "aspect-square" ? 256 : 468}
+                      height={seal.box === "aspect-square" ? 256 : 467}
                       className="h-full w-full object-contain"
                     />
                   </a>

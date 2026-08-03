@@ -242,16 +242,21 @@ export default async function HomePage() {
                 const Icon = quickLinkIcons[i];
                 return (
                   <Reveal key={key} delay={i * 80}>
-                    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-amber-300 hover:shadow-xl hover:shadow-red-900/10">
-                      <span className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-gradient-to-br from-yellow-100 to-amber-200/60 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-red-900/10">
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-crimson-700 via-crimson-700/60 to-amber-400 opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                      />
                       <div className="relative flex items-center gap-3">
-                        <IconTile icon={Icon} size="h-11 w-11" />
-                        <div>
-                          <h3 className="font-display text-lg font-bold text-slate-900">{group.title}</h3>
-                          <p className="text-xs text-slate-400">{group.description}</p>
+                        <IconTile icon={Icon} size="h-12 w-12" />
+                        <div className="min-w-0">
+                          <h3 className="truncate font-display text-base font-bold text-slate-900">
+                            {group.title}
+                          </h3>
+                          <p className="truncate text-xs text-slate-500">{group.description}</p>
                         </div>
                       </div>
-                      <ul className="relative mt-5 space-y-2.5">
+                      <ul className="relative mt-5 flex flex-1 flex-col gap-2.5">
                         {group.items.map((item, j) => (
                           <li key={item.label}>
                             <a
@@ -259,24 +264,24 @@ export default async function HomePage() {
                               target="_blank"
                               rel="noopener noreferrer"
                               className={cn(
-                                "flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold transition-all duration-200",
+                                "group/btn flex items-center justify-between gap-2 rounded-xl border px-3.5 py-2.5 text-sm font-bold outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-amber-300 focus-visible:ring-offset-2",
                                 j === 0
-                                  ? "border-amber-300 bg-white text-crimson-700 shadow-sm group-hover:border-crimson-700/20 group-hover:bg-gradient-to-r group-hover:from-crimson-700 group-hover:to-crimson-900 group-hover:text-white group-hover:shadow-md group-hover:shadow-crimson-900/20 hover:from-crimson-800 hover:to-crimson-950 hover:shadow-lg"
-                                  : "border-slate-200 bg-slate-50 text-slate-800 hover:border-amber-300 hover:bg-amber-50 hover:text-crimson-800",
+                                  ? "border-amber-300 bg-amber-50 text-crimson-800 hover:border-crimson-700 hover:bg-crimson-700 hover:text-white hover:shadow-md hover:shadow-crimson-900/20"
+                                  : "border-slate-200 bg-white text-slate-700 hover:border-amber-300 hover:bg-amber-50 hover:text-crimson-800",
                               )}
                             >
                               <span className="truncate">{item.label}</span>
                               <ArrowRight
                                 className={cn(
-                                  "h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5",
-                                  j === 0 ? "text-amber-500 group-hover:text-yellow-300" : "text-amber-500",
+                                  "h-4 w-4 shrink-0 text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5",
+                                  j === 0 && "group-hover/btn:text-yellow-300",
                                 )}
                               />
                             </a>
                           </li>
                         ))}
                       </ul>
-                      <span className="relative mt-auto border-t border-slate-100 pt-3 text-xs text-slate-400">
+                      <span className="relative mt-5 border-t border-slate-100 pt-3 text-xs text-slate-400">
                         Powered by the UA Student Services
                       </span>
                     </div>

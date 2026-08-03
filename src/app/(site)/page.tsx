@@ -550,17 +550,45 @@ export default async function HomePage() {
           <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-crimson-700">
             Transparency &amp; Accountability
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            {siteConfig.transparencySeals.map((seal) => (
+          <div className="mt-8 flex flex-wrap items-stretch justify-center gap-5">
+            {[
+              {
+                label: "Transparency Seal",
+                href: "https://antiquespride.edu.ph/ua-transparency-seal/",
+                src: "/ua/seals/transparency-seal.webp",
+                alt: "Transparency Seal",
+              },
+              {
+                label: "Freedom of Information",
+                href: "/ua-transparency-seal",
+                src: "/ua/seals/foi.png",
+                alt: "Freedom of Information logo",
+              },
+              {
+                label: "Privacy Policy",
+                href: "/privacy-policy",
+                src: "/ua/seals/privacy-policy.png",
+                alt: "Privacy Policy logo",
+              },
+            ].map((seal) => (
               <a
                 key={seal.label}
                 href={seal.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-600 shadow-sm transition-all hover:-translate-y-0.5 hover:border-amber-400 hover:shadow-md hover:text-crimson-700"
+                {...(seal.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="group flex w-48 flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg hover:shadow-red-900/10"
               >
-                <ShieldCheck className="h-4 w-4 text-amber-500" />
-                {seal.label}
+                <span className="flex h-28 w-28 items-center justify-center">
+                  <Image
+                    src={seal.src}
+                    alt={seal.alt}
+                    width={224}
+                    height={224}
+                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  />
+                </span>
+                <span className="text-sm font-semibold text-slate-700 transition-colors group-hover:text-crimson-800">
+                  {seal.label}
+                </span>
               </a>
             ))}
           </div>

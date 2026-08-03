@@ -1,8 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Globe, AtSign, Video, Mail, Phone, MapPin, Landmark, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Landmark, ShieldCheck } from "lucide-react";
 
 import { NewsletterForm } from "@/components/shared/newsletter-form";
+import { FacebookIcon, YoutubeIcon, XIcon } from "@/components/shared/social-icons";
 import { siteConfig } from "@/lib/site-config";
 import { getExternalLinks, resolveLink } from "@/lib/external-links";
 import { slugify } from "@/lib/utils";
@@ -11,9 +12,24 @@ export async function Footer() {
   const links = await getExternalLinks();
 
   const socialLinks = [
-    { label: "Facebook", href: resolveLink(links, "social-facebook", siteConfig.socials.facebook), icon: Globe },
-    { label: "YouTube", href: resolveLink(links, "social-youtube", siteConfig.socials.youtube), icon: Video },
-    { label: "X (Twitter)", href: resolveLink(links, "social-twitter", siteConfig.socials.twitter), icon: AtSign },
+    {
+      label: "Facebook",
+      href: resolveLink(links, "social-facebook", siteConfig.socials.facebook),
+      icon: FacebookIcon,
+      hover: "hover:bg-[#1877F2]",
+    },
+    {
+      label: "YouTube",
+      href: resolveLink(links, "social-youtube", siteConfig.socials.youtube),
+      icon: YoutubeIcon,
+      hover: "hover:bg-[#FF0000]",
+    },
+    {
+      label: "X (Twitter)",
+      href: resolveLink(links, "social-twitter", siteConfig.socials.twitter),
+      icon: XIcon,
+      hover: "hover:bg-black",
+    },
   ];
 
   return (
@@ -52,7 +68,7 @@ export async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:bg-yellow-300 hover:text-slate-900"
+                className={`rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
               >
                 <s.icon className="h-4 w-4" />
               </a>

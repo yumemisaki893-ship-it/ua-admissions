@@ -571,7 +571,7 @@ export default async function HomePage() {
                 href: "/privacy-policy",
                 src: "/ua/seals/privacy-policy.png",
                 alt: "Privacy Policy logo",
-                box: "aspect-[512/934] w-[8.53rem]",
+                box: "h-32 w-32",
               },
             ].map((seal) => (
               <a
@@ -585,7 +585,7 @@ export default async function HomePage() {
                     src={seal.src}
                     alt={seal.alt}
                     width={512}
-                    height={934}
+                    height={512}
                     className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
                   />
                 </span>

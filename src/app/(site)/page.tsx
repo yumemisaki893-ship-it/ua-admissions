@@ -271,9 +271,6 @@ export default async function HomePage() {
                           </li>
                         ))}
                       </ul>
-                      <span className="relative mt-5 border-t border-slate-100 pt-3 text-xs text-slate-400">
-                        Powered by the UA Student Services
-                      </span>
                     </div>
                   </Reveal>
                 );

@@ -61,18 +61,35 @@ export async function Footer() {
         <div className="space-y-4">
           <p className="text-sm leading-relaxed text-slate-500">{siteConfig.description}</p>
           <div className="flex gap-3">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
-                className={`rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
-              >
-                <s.icon className="h-4 w-4" />
-              </a>
-            ))}
+            {socialLinks.map((s) =>
+              s.label === "YouTube" ? (
+                <Link
+                  key={s.label}
+                  href="/"
+                  aria-label="University of Antique"
+                  className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-slate-200 bg-white transition-all hover:-translate-y-0.5 hover:border-amber-300 hover:shadow-md"
+                >
+                  <Image
+                    src="/ua/ua-logo.png"
+                    alt="University of Antique seal"
+                    width={32}
+                    height={32}
+                    className="h-full w-full object-contain"
+                  />
+                </Link>
+              ) : (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className={`rounded-full bg-slate-100 p-2 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
+                >
+                  <s.icon className="h-4 w-4" />
+                </a>
+              ),
+            )}
           </div>
           <ul className="grid grid-cols-3 gap-3 pt-1">
             {[

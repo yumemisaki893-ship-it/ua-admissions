@@ -65,7 +65,7 @@ export function HeroCarousel({ slides }: { slides: Slide[] }) {
         <CarouselContent>
           {slides.map((slide, index) => (
             <CarouselItem key={slide.id}>
-              <div className="relative flex h-[100svh] min-h-[560px] items-center overflow-hidden">
+              <div className="relative flex aspect-[16/9] min-h-[560px] items-center overflow-hidden">
                 {slide.imageUrl ? (
                   <Image
                     src={slide.imageUrl}

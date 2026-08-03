@@ -182,10 +182,24 @@ export async function Footer() {
       </div>
 
       <div className="border-t border-slate-200">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-xs text-slate-400 sm:px-6 lg:px-8 md:flex-row">
           <p>
             © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
+          <div className="flex items-center gap-3">
+            {socialLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className={`flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:-translate-y-0.5 hover:text-white ${s.hover}`}
+              >
+                <s.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
           <p>
             <Link
               href={siteConfig.url}

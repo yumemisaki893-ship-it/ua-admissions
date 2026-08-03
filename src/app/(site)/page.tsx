@@ -197,10 +197,10 @@ export default async function HomePage() {
           fill
           priority
           aria-hidden
-          className="pointer-events-none object-cover blur-[2px] scale-105"
+          className="pointer-events-none object-cover blur-[2px] brightness-[0.85] scale-105"
           sizes="100vw"
         />
-        <div className="pointer-events-none absolute inset-0 bg-white/85" />
+        <div className="pointer-events-none absolute inset-0 bg-white/90" />
         <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-10">
             <Reveal className="shrink-0">

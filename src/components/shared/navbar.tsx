@@ -54,7 +54,7 @@ export function Navbar({ links = {} }: { links?: Record<string, string> }) {
       <nav
         aria-label="Main navigation"
         className={cn(
-          "border-b bg-white/95 backdrop-blur transition-all duration-300 supports-[backdrop-filter]:bg-white/90",
+          "border-b bg-white transition-all duration-300",
           scrolled ? "border-slate-200 shadow-md shadow-slate-900/5" : "border-slate-200/70",
         )}
       >
@@ -96,7 +96,7 @@ export function Navbar({ links = {} }: { links?: Record<string, string> }) {
                     <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-all duration-300 group-hover:rotate-180 group-hover:opacity-100 group-hover:-translate-y-px" />
                   </button>
                   <div className="invisible absolute left-0 top-full z-50 -translate-y-1 pt-2 opacity-0 transition-all duration-200 ease-out group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                    <div className="w-[340px] rounded-xl border border-slate-200 bg-white/95 p-2 shadow-xl shadow-slate-900/10 backdrop-blur">
+                    <div className="w-[340px] rounded-xl border border-slate-200 bg-white p-2 shadow-xl shadow-slate-900/10">
                       <div className="grid grid-cols-1">
                         {item.children.map((child) => (
                           <div
